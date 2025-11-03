@@ -1,6 +1,7 @@
 ---
 import "../styles/global.css";
 import Navbar from "../components/navbar.astro";
+import { ViewTransitions } from "astro:transitions"
 ---
 
 <!doctype html>
@@ -19,6 +20,8 @@ import Navbar from "../components/navbar.astro";
     />
     <link href="https://v1.fontapi.ir/css/SFProDisplay" rel="stylesheet" />
     <link rel="stylesheet" href="../styles/global.css" />
+
+	<ViewTransitions />
   </head>
   <body>
 	<Navbar></Navbar>
