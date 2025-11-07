@@ -304,6 +304,27 @@
     <iframe src="" frameborder="0" id="iframe"></iframe>
 
     <script>
+        // redirect based on backend choice
+        window.onload = () => {
+                if (localStorage.getItem("breeze_backend") === "scramjet") {
+                    console.log("nothing happened")
+                } else if (localStorage.getItem("breeze_backend").includes("ultraviolet") && window.location.href.includes("?i=")) {
+                    console.log("something is happening!!!!")
+                    const params = new URLSearchParams(window.location.search)
+                    const urlparam = params.get("i")
+                    console.log(urlparam)
+                    setTimeout(() => {
+                        window.location.href = "/pages/ultraviolet.html?i=" + urlparam
+                        console.log("attempted redirect")
+                    }, 500)
+                } else {
+                    window.location.href = "/pages/ultraviolet.html"
+                    console.log("attempted redirect")
+                }
+            }
+    </script>
+
+    <script>
         const se = localStorage.getItem("breeze_se") || "https://search.brave.com/search?q="
         const bar = document.getElementById("urlbar")
 
@@ -441,7 +462,13 @@
                     const frame = scramjet.createFrame();
                     frame.frame.id = "sj-frame";
                     document.body.appendChild(frame.frame);
-                    frame.go(urlToSearch)
+                    async function navFromParams() {
+                        if (!await connection.getTransport()) {
+                            connection.setTransport("/libcurl/index.mjs", [{ websocket: wispUrl }])
+                        }
+                        frame.go(urlToSearch)
+                    }
+                    navFromParams()
                 }, 500)
                 console.log("search params exist!")
             }
@@ -455,7 +482,6 @@
                 const frame = document.getElementById("sj-frame")
                 frame.src = frame.src
             }
-
     </script>
 
 </body>

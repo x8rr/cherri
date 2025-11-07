@@ -329,6 +329,27 @@
     </script>
 
     <script>
+        // redirect based on backend choice
+        window.onload = () => {
+            if (localStorage.getItem("breeze_backend") === "ultraviolet") {
+                console.log("nothing happened")
+            } else if (localStorage.getItem("breeze_backend").includes("scramjet") && window.location.href.includes("?i=")) {
+                console.log("something is happening!!!!")
+                const params = new URLSearchParams(window.location.search)
+                const urlparam = params.get("i")
+                console.log(urlparam)
+                setTimeout(() => {
+                    window.location.href = "/pages/scramjet.html?i=" + urlparam
+                    console.log("attempted redirect")
+                }, 500)
+            } else {
+                window.location.href = "/pages/scramjet.html"
+                console.log("attempted redirect")
+            }
+        }
+    </script>
+
+    <script>
         let tabFrame
 
         // actual uv handling
@@ -597,7 +618,13 @@
         
         if (urlToSearch) {
             setTimeout(() => {
-                nav(urlToSearch)
+                async function navFromParams() {
+                    if (!await connection.getTransport()) {
+                        connection.setTransport("/libcurl/index.mjs", [{ websocket: wispUrl }])
+                    }
+                    nav(urlToSearch)
+                }
+                navFromParams()
             }, 500)
             console.log("search params exist!")
         }
