@@ -13,6 +13,14 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
         rel="stylesheet">
+        <script>
+            // use specifically a SCRAMJET sw so that it works lol
+            if ("serviceWorker" in navigator) {
+                window.addEventListener("load", () => {
+                    navigator.serviceWorker.register("/sw.js")
+                })
+            }
+        </script>
 </head>
 
 <body>
@@ -342,15 +350,6 @@
             bar.placeholder = "Search with Brave or enter a URL here"
         }
     </script>
-
-    <script>
-        // register sw
-        if ("serviceWorker" in navigator) {
-            window.addEventListener("load", () => {
-                navigator.serviceWorker.register("/uv/sw.js")
-            })
-        }
-    </script>
     <script>
         "use strict";
             /**
@@ -371,7 +370,7 @@
                 try {
                     // input is a valid URL when http:// is added to the start:
                     // eg: example.com, https://example.com/test?q=param
-                    const url = new URL(`http://${input}`);
+                    const url = new URL(`https://${input}`);
                     // only if the hostname has a TLD/subdomain
                     if (url.hostname.includes(".")) return url.toString();
                 } catch (err) {
@@ -417,7 +416,10 @@
         form.addEventListener("submit", async (event) => {
                 event.preventDefault();
 
-                const url = search(address.value, searchEngine.value);
+                if (!address) return
+                
+                const url = search(document.getElementById("urlbar").value, searchEngine.value);
+                console.log("recieved submission:", url)
 
                 let w = wispUrl
                 if ((await connection.getTransport()) !== "/libcurl/index.mjs") {
