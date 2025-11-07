@@ -1,12 +1,5 @@
-## the content in this doc is outdated except for the checklist
-
 # breeze.
-an indev ubg project made in astro because:
-1. i haven't used astro in so long and needed to exercise my skills
-2. i needed a clean ubg site to use
-3. i kinda wanted some movies on my school chromebook
-4. i have nothing else to work on
-5. i got mad at nautilusos because something wouldnt work, so what better to do than use typescript instead of js
+an indev ubg project, made to be clean and easy to use
 
 ## roadmap and things i wanna add
 - [ ] games (ofc)
@@ -24,42 +17,64 @@ an indev ubg project made in astro because:
 - [ ] lots more social stuff lol
 
 ## deployment
-you can deploy this to netlify out-of-the-box, but to deploy to vercel, you need to install the `@astrojs/vercel` package and switch the adapter in `astro.config.mjs`. for local deployment, take a look at the instructions below:
+you can deploy this site to basically any deployment site ever because it's written in plain html and stuff so you can also deploy it locally!!1!!1
 
----
+anyway
 
-#### easiest method
-i've included a beautifully composed start command that automatically installs the dependencies, audits and funds them, then starts an astro server. to run it, type in the following:
+now for deployment
+
+#### method 1: using the deploy buttons
+[![Deploy to Heroku](https://binbashbanana.github.io/deploy-buttons/buttons/remade/heroku.svg)](https://heroku.com/deploy/?template=https://github.com/x8rr/breeze)
+[![Run on Replit](https://binbashbanana.github.io/deploy-buttons/buttons/remade/replit.svg)](https://replit.com/github/x8rr/breeze)
+[![Remix on Glitch](https://binbashbanana.github.io/deploy-buttons/buttons/remade/glitch.svg)](https://glitch.com/edit/#!/import/github/x8rr/breeze)
+[![Deploy to Amplify Console](https://binbashbanana.github.io/deploy-buttons/buttons/remade/amplifyconsole.svg)](https://console.aws.amazon.com/amplify/home#/deploy?repo=https://github.com/x8rr/breeze)
+[![Run on Google Cloud](https://binbashbanana.github.io/deploy-buttons/buttons/remade/googlecloud.svg)](https://deploy.cloud.run/?git_repo=https://github.com/x8rr/breeze)
+[![Deploy to Oracle Cloud](https://binbashbanana.github.io/deploy-buttons/buttons/remade/oraclecloud.svg)](https://cloud.oracle.com/resourcemanager/stacks/create?zipUrl=https://github.com/x8rr/breeze/archive/refs/heads/main.zip)
+[![Deploy on Railway](https://binbashbanana.github.io/deploy-buttons/buttons/remade/railway.svg)](https://railway.app/new/template?template=https://github.com/x8rr/breeze)
+[![Deploy to Vercel](https://binbashbanana.github.io/deploy-buttons/buttons/remade/vercel.svg)](https://vercel.com/new/clone?repository-url=https://github.com/x8rr/breeze)
+[![Deploy to Netlify](https://binbashbanana.github.io/deploy-buttons/buttons/remade/netlify.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/x8rr/breeze)
+[![Deploy to Koyeb](https://binbashbanana.github.io/deploy-buttons/buttons/remade/koyeb.svg)](https://app.koyeb.com/deploy?type=git&repository=github.com/x8rr/breeze&branch=Main&name=breeze)
+[![Deploy to Render](https://binbashbanana.github.io/deploy-buttons/buttons/remade/render.svg)](https://render.com/deploy?repo=https://github.com/x8rr/breeze)
+[![Deploy to Cyclic](https://binbashbanana.github.io/deploy-buttons/buttons/remade/cyclic.svg)](https://app.cyclic.sh/api/app/deploy/x8rr/breeze)
+
+#### method 2: deploying locally
+
+to get started, run the following command:
 
 ```sh
-npm run istart
-```
-
-keep in mind you can use your own package manager.
-
----
-
-#### step 1: clone
-run the following command in your terminal (make sure you have git before you do this)
-```bash
 git clone https://github.com/x8rr/breeze.git
 ```
 
-#### step 2: install
-now open up that folder and run the following command. keep in mind you can use your package manager of choice. i use bun
-```bash
-bun i
+now cd into the directory or just open it up
+
+```sh
+cd breeze
 ```
 
-#### step 3: start the server
-finally, you can start your server by doing one of the following
-```bash
-astro dev # use astro to start a dev server
-vite # use vite to start a server
-bun start # use your package manager to start a server
+and finally start up a nice cool server
+
+```sh
+python3 -m http.server # cool python http server
+netlify dev # to emulate a netlify prod environment
 ```
 
-thats it really, super easy deployment.
+#### method 3: deploying to firebase
+
+if you wanna deploy to firebase, make sure you have an account and a project you wanna use
+
+to start, install firebase cli if you don't have it already
+
+```sh
+npm i -g firebase-tools
+```
+
+now initialize a pages project
+
+```sh
+firebase init hosting
+```
+
+follow the steps in the cli and deploy!
 
 ## if you fork...
 please star the project :P
