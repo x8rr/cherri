@@ -59,9 +59,9 @@ nav ul li {
     background: rgb(14, 14, 14);
     border: 0px solid rgba(255, 255, 255, 0.171);
     border-radius: 100px;
-    width: 45px;
+    width: 40px;
     aspect-ratio: 1;
-    height: 45px;
+    height: 40px;
     transition: 0.15s;
     float: left;
 }
@@ -69,7 +69,7 @@ nav ul li {
 nav ul li:hover {
     transform: scale(1.05);
     background: rgb(30, 30, 30);
-    cursor: default;
+    cursor: pointer;
 }
 
 nav ul li.divider {
@@ -91,14 +91,14 @@ nav ul li a {
     text-decoration: none;
     display: flex;
     align-items: center;
-    cursor: default;
+    cursor: pointer;
 }
 
 nav ul li a i {
     position: relative;
     left: 50%;
-    transform: translate(-50%, 85%);
-    cursor: default;
+    transform: translate(-50%, 75%);
+    cursor: pointer;
 }
 
 li.toright {
