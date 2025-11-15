@@ -3,34 +3,46 @@ body {
     margin: 0;
     width: 100%;
     height: 100%;
-    background: radial-gradient(at bottom, #000d1b 1%, #050b13 100%);
     color: white;
+    background-color: black;
+}
+
+.grid {
+    background:
+            linear-gradient(to right, rgba(255, 255, 255, 0.041) 1px, transparent 1px),
+            linear-gradient(to bottom, rgba(255, 255, 255, 0.042) 1px, transparent 1px);
+    mask-image: radial-gradient(white 15%, transparent);
+    position: fixed;
+    width: 100%;
+    height: 100vh;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    background-size: 15px 15px;
+}
+
+@font-face {
+    font-family: lexend;
+    src: url("/assets/fonts/lexend.ttf");
 }
 
 * {
-    font-family: SF Pro Display;
+    font-family: lexend;
 }
 
 nav {
-    background: linear-gradient(to right, rgb(4, 6, 8), rgb(15, 19, 27), rgb(15, 19, 27), rgb(4, 6, 8));
+    background: transparent;
     z-index: 5;
-    border-radius: 0 0 30px 30px;
-    border: 1px solid rgba(255, 255, 255, 0.25);
-    width: 110px;
-    margin-top: -35px;
+    border-radius: 30px;
+    border: none;
+    width: 99%;
+    margin-top: 10px;
     opacity: 1;
-    transform: scale(1);
-    transition: all 0.5s cubic-bezier(0.34, 1, 0.64, 1);
     position: fixed;
     left: 50%;
     padding: 5px;
-    transform: translateX(-50%) scale(0.95);
+    transform: translateX(-50%);
     overflow: hidden;
-}
-
-nav:hover {
-    width: 735px;
-    margin-top: -3px;
 }
 
 nav ul {
@@ -44,17 +56,20 @@ nav ul {
 
 nav ul li {
     margin: 5px;
-    background: rgba(255, 255, 255, 0.02);
-    border: 1px solid rgba(255, 255, 255, 0.171);
+    background: rgb(14, 14, 14);
+    border: 0px solid rgba(255, 255, 255, 0.171);
     border-radius: 100px;
-    padding: 5px 15px;
+    width: 45px;
+    aspect-ratio: 1;
+    height: 45px;
     transition: 0.15s;
+    float: left;
 }
 
 nav ul li:hover {
     transform: scale(1.05);
-    background: rgba(255, 255, 255, 0.2);
-    cursor: pointer;
+    background: rgb(30, 30, 30);
+    cursor: default;
 }
 
 nav ul li.divider {
@@ -64,6 +79,7 @@ nav ul li.divider {
     position: relative;
     transform: translateY(40%);
     padding: 0;
+    display: none;
 }
 
 nav ul li.divider:hover {
@@ -75,11 +91,19 @@ nav ul li a {
     text-decoration: none;
     display: flex;
     align-items: center;
+    cursor: default;
 }
 
 nav ul li a i {
-    width: 16px;
-    height: 16px;
+    position: relative;
+    left: 50%;
+    transform: translate(-50%, 85%);
+    cursor: default;
+}
+
+li.toright {
+    position: absolute;
+    right: 10px;
 }
 
 #contentFrame {
@@ -155,6 +179,321 @@ nav ul li.disabled {
     pointer-events: none;
 }
 
-.toast {
-    z-index: 60;
+.home-gradient {
+    background: linear-gradient(to bottom right, white, black);
+    background-clip: text;
+    color: transparent;
+}
+
+#homesearch {
+    background: transparent;
+    height: 50px;
+    padding: 10px 20px;
+    width: 400px;
+    border-radius: 20px;
+    color: white;
+    font-size: 14px;
+    font-family: Arial;
+    transition: 0.2s;
+}
+
+#homesearch:focus {
+    outline: none;
+}
+
+.searchathome {
+    background: rgb(10 10 10);
+    border-radius: 20px;
+    transition: 0.15s;
+}
+
+.searchathome i {
+    margin-right: -3%;
+    margin-left: 2%;
+}
+
+.searchathome:has(#homesearch:focus) {
+    background: rgb(20 20 20);
+}
+
+.hcontainer {
+    display: flex;
+    flex-direction: row;
+}
+
+.settings-container {
+    background: rgb(10 10 10);
+    border-radius: 25px;
+    color: white;
+    width: 48%;
+    height: 50vh;
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 50;
+    transition: 0.25s;
+    padding: 15px;
+    transform-origin: center center;
+    filter: drop-shadow(0 0 15px black);
+}
+
+.settings-sidebar {
+    width: 25%;
+    padding: 2px;
+    position: relative;
+    left: 0;
+    margin: 4px;
+    top: 0;
+}
+
+.settings-section {
+    padding: 10px;
+    background: transparent;
+    border-radius: 15px;
+    cursor: pointer;
+    transition: 0.2s;
+    margin: 2px;
+}
+
+.settings-section.active {
+    background: #1d1d1d;
+}
+
+.settings-section:hover {
+    background: #3d3d3d;
+}
+
+.vflex {
+    display: flex;
+    flex-direction: column ;
+}
+
+.settings-section i {
+    margin-right: 6px;
+}
+
+.settings-content-container {
+    width: 67%;
+    position: absolute;
+    right: 0;
+    top: 6.1%;
+    margin: 4px;
+    margin-left: 18px;
+    left: 26%;
+}
+
+.settings-content-container h2 {
+    font-size: 24px;
+    margin-bottom: 7px;
+}
+
+.settings-content-container p {
+    color: gray;
+    font-size: 14px;
+    font-weight: 350;
+    margin-bottom: 7px;
+}
+
+.settings-page {
+    display: none;
+}
+
+.settings-page.settings-active {
+    display: block;
+}
+
+p a {
+    text-decoration: underline;
+    color: white;
+    text-underline-offset: 2px;
+    text-decoration-thickness: 1px;
+    transition: 0.2s;
+}
+
+p a:hover {
+    color: lightgray;
+}
+
+.settings-hidden {
+    transform: translate(-50%, -50%) scale(.95);
+    opacity: 0;
+    pointer-events: none;
+    transform-origin: center center;
+}
+
+.settings-shown {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+    pointer-events: all;
+    transform-origin: center center;
+}
+
+.blurOverlay {
+    z-index: 1;
+    width: 100%;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    backdrop-filter: blur(2px);
+    pointer-events: none;
+}
+
+.browser-container {
+    background: rgb(10 10 10);
+    width: 100%;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 6;
+    transition: 0.2s;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.browser-frame {
+    width: 99.25%;
+    height: 88.75vh;
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    border: 1px rgba(255, 255, 255, 0.123) solid;
+    display: none;
+    z-index: 1000;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.browser-frame.active {
+    display: block;
+    opacity: 1;
+}
+
+.browser-controls {
+    height: 200px;
+    position: fixed;
+    width: 100%;
+    left: 0;
+}
+
+.tabs {
+    height: 100px;
+    margin-bottom: -45px;
+    width: 100%;
+    margin-left: 5px;
+    margin-right: 5px;
+    top: 0;
+    left: 0;
+    display: flex;
+}
+
+.browser-buttons {
+    height: 100px;
+    width: 100%;
+    flex: 1;
+    justify-content: center;
+    display: flex;
+}
+
+.browser-buttons button {
+    margin-right: 2px;
+    margin-left: 2px;
+    height: 35px;
+    width: 35px;
+    aspect-ratio: 1;
+    padding: 0px;
+    margin-top: 2px;
+    font-size: 15px;
+    border-radius: 50%;
+    transition: 0.2s;
+    cursor: pointer;
+}
+
+.browser-buttons button:hover {
+    background: #3d3d3d;
+}
+
+.browser-buttons input {
+    background: rgb(15 15 15);
+    border-radius: 20px;
+    height: 40px;
+    padding: 5px 20px;
+    width: 78vw;
+    transition: 0.2s;
+    margin-left: 10px;
+    margin-right: 10px;
+    color: white;
+    font-family: arial;
+    outline: none;
+    font-size: 14px;
+}
+
+.browser-buttons input:focus {
+    background: rgb(25 25 25);
+    outline: none;
+}
+
+.tab {
+    background: rgb(20 20 20);
+    width: 15%;
+    flex: 0.125;
+    padding: 10px 20px;
+    border-radius: 15px;
+    margin: 5px;
+    transition: 0.2s;
+    height: 43px;
+}
+
+.tab span {
+    overflow: hidden;
+    width: 80%;
+    margin-right: -50px;
+    mask-image: linear-gradient(to right, black 70%, transparent 100%);
+}
+
+.tab:hover {
+    background: #2d2d2d;
+}
+
+.tab.active {
+    background: rgb(40 40 40);
+}
+
+.tab img {
+    width: 24px;
+    height: 24px;
+    margin-right: 5px;
+    margin-left: -5px;
+}
+
+.tab .close-btn {
+    font-size: 20px;
+    position: relative;
+    left: 30%;
+    top: 10%;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.tab .close-btn:hover {
+    color: rgb(255, 111, 111);
+}
+
+.newtab {
+    background: rgb(20 20 20);
+    height: 35px;
+    width: 35px;
+    border-radius: 50%;
+    margin-top: 9px;
+    transition: 0.2s;
+    cursor: pointer;
+}
+
+.newtab:hover {
+    background: #3d3d3d;
 }

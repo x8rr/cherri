@@ -7,39 +7,86 @@
     <title>breeze | movies</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/alpinejs/3.10.3/cdn.min.js" defer></script>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="/styles/index.css">
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <link rel="preconnect" href="https://fdn.fontcdn.ir">
     <link rel="preconnect" href="https://v1.fontapi.ir">
     <link href="https://v1.fontapi.ir/css/SFProDisplay" rel="stylesheet">
+    <link rel="shortcut icon" href="/assets/fav.png" type="image/x-icon">
 </head>
 
-<body class="bg-gray-900 text-white min-h-screen p-8" x-data="app()">
+<style>
+    @font-face {
+        font-family: font;
+        src: url("/assets/fonts/lexenddeca.ttf");
+    }
+
+    * {
+        font-family: font;
+    }
+
+    button {
+        font-family: arial !important;
+    }
+
+    body, html {
+        background: black;
+    }
+
+    input {
+        background: rgb(15 15 15) !important;
+        font-size: 14px !important;
+        font-family: Arial !important;
+        padding: 10px 20px !important;
+    }
+
+    input:focus {
+        outline: none;
+        background: rgb(25, 25, 25) !important;
+    }
+
+    .switcher {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        font-family: arial;
+    }
+
+    ::-webkit-scrollbar {
+        scrollbar-width: thin;
+    }
+</style>
+
+<body class="text-white min-h-screen p-8" x-data="app()">
     <div class="container mx-auto">
+        <h1 class="text-center text-4xl">breeze | movies</h1>
+        <br>
         <div class="mb-8 flex flex-col md:flex-row gap-4 transition-all duration-200 items-center justify-between">
-            <div>
-                <button @click="currentTab = 'movies'" :class="currentTab === 'movies' ? 'bg-slate-400' : 'bg-gray-700'"
-                    class="px-4 py-2 rounded-l-full transition-all">
-                    movies
-                </button>
-                <button @click="currentTab = 'shows'" :class="currentTab === 'shows' ? 'bg-slate-400' : 'bg-gray-700'"
-                    class="px-4 py-2 rounded-r-full transition-all">
-                    tv and shows
-                </button>
-            </div>
-            <div class="w-full md:w-64">
-                <input type="text" x-model="searchQuery" @input="searchContent()" placeholder="search for any movie/show..."
-                    class="transition-all w-full bg-gray-800 text-white rounded-full px-4 py-2 focus:outline-none focus:ring-2 focus:ring-slate-400">
-            </div>
+                <input type="text" x-model="searchQuery" @input="searchContent()" placeholder="what are we watching today?"
+                    class="transition-all w-1/2  left-1/2 translate-x-[25%] text-white rounded-2xl px-4 py-2">
         </div>
+
+        <div class="switcher">
+            <button @click="currentTab = 'movies'" :class="currentTab === 'movies' ? 'bg-white text-black' : 'bg-[#1d1d1d]'"
+                class="px-4 py-2 rounded-2xl transition-all">
+                movies
+            </button>
+            <button @click="currentTab = 'shows'" :class="currentTab === 'shows' ? 'bg-white text-black' : 'bg-[#1d1d1d]'"
+                class="px-4 py-2 rounded-2xl transition-all">
+                tv and shows
+            </button>
+        </div>
+
+        <br><br><br>
 
         <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 gap-4">
             <template x-for="item in content" :key="item.id">
                 <a :href="'watch.html?id=' + item.id + '&type=' + (currentTab === 'movies' ? 'movie' : 'tv')"
-                    class="bg-gray-800 rounded-3xl overflow-hidden hover:scale-105 transition-transform block">
+                    class="bg-gray-800 rounded-3xl overflow-hidden hover:scale-[102%] transition-transform block relative group">
                     <img :src="'https://image.tmdb.org/t/p/w500' + item.poster_path" :alt="item.title || item.name"
-                        class="w-full aspect-[2/1]  object-cover h-full hover:h-3/4 hover:blur-none transition-all duration-200">
-                    <div class="p-3 z-30 bg-transparent">
-                        <h3 class="text-sm font-semibold truncate bg-transparent" x-text="item.title || item.name"></h3>
+                        class="w-full aspect-[3/2] object-cover transition-all duration-200">
+                    <div
+                        class="absolute inset-0 bg-black/0 group-hover:bg-black/50 hover:backdrop-blur-[2px] transition-all duration-200 flex items-end p-3 opacity-0 group-hover:opacity-100">
+                        <h3 class="text-sm font-semibold text-white" x-text="item.title || item.name"></h3>
                     </div>
                 </a>
             </template>
@@ -47,11 +94,11 @@
 
         <div class="mt-8 flex justify-center space-x-4">
             <button @click="currentPage > 1 && changePage(currentPage - 1)" :disabled="currentPage === 1"
-                class="bg-gray-800 px-6 py-2 rounded-full disabled:opacity-50">
+                class="bg-[#0d0d0d] px-6 py-2 rounded-2xl disabled:opacity-50">
                 Previous
             </button>
-            <span class="px-6 py-2">Page <span x-text="currentPage"></span></span>
-            <button @click="changePage(currentPage + 1)" class="rounded-full bg-gray-800 px-6 py-2 rounded">
+            <span class="px-6 py-2" style="font-family: arial;">Page <span x-text="currentPage" style="font-family: arial;"></span></span>
+            <button @click="changePage(currentPage + 1)" class="rounded-2xl bg-[#0d0d0d] px-6 py-2 rounded">
                 Next
             </button>
         </div>

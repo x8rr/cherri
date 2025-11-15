@@ -19,50 +19,21 @@
 </head>
 
 <body>
-    <nav>
-        <ul>
-            <li><a onclick="navTo('home')" href="#" data-page="home">
-                    <i class="lucide" data-lucide="wind" style="margin-right: 6px;"></i>
-                    Home
-                </a></li>
-            <li class="divider"></li>
-            <li class="disabled"><a href="#" onclick="navTo('games')" data-page="games">
-                    <i class="lucide" data-lucide="gamepad-2"></i>
-                </a></li>
-            <li><a href="#" onclick="navTo('apps')" data-page="apps">
-                    <i class="lucide" data-lucide="layout-grid"></i>
-                </a></li>
-            <li><a href="#" onclick="navTo('search')" data-page="search">
-                    <i class="lucide" data-lucide="globe" style="margin-right: 6px;"></i>
-                    Search
-                </a></li>
-            <li><a onclick="navTo('movies')" href="#" data-page="movies">
-                    <i class="lucide" data-lucide="clapperboard"></i>
-                </a></li>
-            <li class="divider"></li>
-            <li class="disabled"><a href="#" onclick="navTo('chat')" data-page="chat">
-                    <i class="lucide" data-lucide="message-square-text" style="margin-right: 6px;"></i>
-                    Messages
-                </a></li>
-            <li class="divider"></li>
-            <li class="disabled"><a href="#" onclick="navTo('settings')">
-                    <i class="lucide" data-lucide="settings"></i>
-                </a></li>
-            <li><a href="#" data-page="info" onclick="navTo('info')">
-                    <i class="lucide" data-lucide="info"></i>
-                </a></li>
-        </ul>
-    </nav>
+    
 
     <div id="homeContent">
-        <h1 class="text-8xl text-white font-black">404</h1>
+        <h1 class="text-8xl text-white font-bold">404</h1>
         <p>not found.</p>
         <br>
         <a href="/" class="opacity-50 underline underline-offset-3 hover:opacity-100 transition-all">back home</a>
     </div>
 
+    <div class="grid"></div>
+
     <div class="toast-container fixed right-4 top-4 w-1/4">
     </div>
+
+    <p class="fixed left-1/2 bottom-2 translate-x-[-50%] text-sm text-white/25"><i><i class="fas fa-lightbulb"></i>&nbsp;&nbsp;this page might be in the works!</i></p>
 
     <!-- DEV TOAST BUTTONS
     <div class="fixed flex justify-center left-1/2 bottom-5 translate-x-[-50%] h-fit w-1/2">
@@ -83,7 +54,15 @@
             if ("serviceWorker" in navigator) {
                 await navigator.serviceWorker.register("/uv/sw.js").then(() => {
                     console.log(
-                        "%cbreeze." + "%c sw registered!",
+                        "%cbreeze." + "%c uv sw registered!",
+                        "color: white; background: linear-gradient(to bottom right, #040c16, #000000); border-radius: 5px; font-weight: bold; padding: 6px; font-family: sans-serif;",
+                        "color: white; background: transparent; border-radius: 0px; padding: 0px;"
+                    );
+                });
+
+                await navigator.serviceWorker.register("/sw.js").then(() => {
+                    console.log(
+                        "%cbreeze." + "%c sj sw registered!",
                         "color: white; background: linear-gradient(to bottom right, #040c16, #000000); border-radius: 5px; font-weight: bold; padding: 6px; font-family: sans-serif;",
                         "color: white; background: transparent; border-radius: 0px; padding: 0px;"
                     );

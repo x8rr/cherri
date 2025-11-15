@@ -300,24 +300,6 @@
 
     <iframe src="" frameborder="0" id="iframe"></iframe>
 
-    <script>
-        const se = localStorage.getItem("breeze_se") || "https://search.brave.com/search?q="
-        const bar = document.getElementById("urlbar")
-
-        if (se === "https://duckduckgo.com/search?q=") {
-            bar.placeholder = "Search with Duck Duck Go or enter a URL here"
-        } else if (se === "https://google.com/search?q=") {
-            bar.placeholder = "Search with Google or enter a URL here"
-        } else if (se === "https://bing.com/search?q=") {
-            bar.placeholder = "Search with Bing or enter a URL here"
-        } else if (se === "https://startpage.com/search?q=") {
-            bar.placeholder = "Search with Startpage or enter a URL here"
-        } else if (se === "https://qwant.com/search?q=") {
-            bar.placeholder = "Search with Qwant or enter a URL here"
-        } else {
-            bar.placeholder = "Search with Brave or enter a URL here"
-        }
-    </script>
 
     <script>
         // register sw
@@ -331,9 +313,9 @@
     <script>
         // redirect based on backend choice
         window.onload = () => {
-            if (localStorage.getItem("breeze_backend") === "ultraviolet") {
+            if (localStorage.getItem("breeze_backend") === "Ultraviolet" || localStorage.getItem("breeze_backend") === "ultraviolet") {
                 console.log("nothing happened")
-            } else if (localStorage.getItem("breeze_backend").includes("scramjet") && window.location.href.includes("?i=")) {
+            } else if (localStorage.getItem("breeze_backend").includes("Scramjet") || localStorage.getItem("breeze_backend").includes("scramjet") && window.location.href.includes("?i=")) {
                 console.log("something is happening!!!!")
                 const params = new URLSearchParams(window.location.search)
                 const urlparam = params.get("i")
@@ -350,6 +332,28 @@
     </script>
 
     <script>
+
+        let searchE
+            const se = localStorage.getItem("breeze_searchEngine") || "DuckDuckGo"
+            const bar = document.getElementById("urlbar")
+
+            if (se === "DuckDuckGo") {
+                bar.placeholder = "Search with Duck Duck Go or enter a URL here"
+                searchE = "https://duckduckgo.com/search?q="
+            } else if (se === "Bing") {
+                bar.placeholder = "Search with Google or enter a URL here"
+                searchE = "https://bing.com/search?q="
+            } else if (se === "Google") {
+                bar.placeholder = "Search with Bing or enter a URL here"
+                searchE = "https://google.com/search?q="
+            } else if (se === "Startpage") {
+                bar.placeholder = "Search with Startpage or enter a URL here"
+                searchE = "https://startpage.com/search?q="
+            } else if (se === "https://qwant.com/search?q=") {
+                bar.placeholder = "Search with Qwant or enter a URL here"
+            } else {
+                bar.placeholder = "Search with Brave or enter a URL here"
+            }
         let tabFrame
 
         // actual uv handling
@@ -478,8 +482,8 @@
             let url = i.trim()
 
             if (!url.includes(".") || url.includes(" ")) {
-                const se = localStorage.getItem("breeze_se") || "https://search.brave.com/search?q="
-                url = se + encodeURIComponent(url)
+                const se = localStorage.getItem("breeze_searchEngine") || "https://search.brave.com/search?q="
+                url = searchE + encodeURIComponent(url)
             } else {
                 if (!url.startsWith("http://") && !url.startsWith("https://")) {
                     url = "https://" + url

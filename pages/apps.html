@@ -19,11 +19,15 @@
 </head>
 
 <style>
+    ::-webkit-scrollbar {
+        width: 0;
+    }
 </style>
 
 <body>
-    <br><br><br><br>
-    <input onkeyup="searchApps(this.value)" type="text" placeholder="search through the apps..." id="apps-search" class="h-fit p-2 px-5 w-2/6 bg-slate-900 border border-white/20 absolute left-1/2 translate-x-[-50%] rounded-full transition-all focus:ring-2 focus:ring-slate-400 focus:outline-none focus:bg-slate-800">
+    <br>
+    <h1 class="text-center text-4xl mb-6 mt-1">apps</h1>
+    <input onkeyup="searchApps(this.value)" type="text" style="font-family: Arial;" placeholder="search through the apps..." id="apps-search" class="h-fit p-2 px-5 w-2/6 bg-[#0d0d0d] border-none absolute left-1/2 translate-x-[-50%] rounded-2xl transition-all focus:bg-[#1d1d1d] focus:outline-none ">
     <br><br><br>
     <div class="apps-container flex flex-wrap w-7/8 absolute left-1/2 translate-x-[-50%] justify-center">
     </div>
@@ -52,10 +56,10 @@
                     const newTitleContainer = document.createElement("div")
                     const newTitle = document.createElement("span")
 
-                    newAppContainer.classList.add("cursor-pointer", "h-36", "overflow-hidden", "w-57", "bg-gray-800", "rounded-3xl", "m-2", "hover:scale-105", "transition-all", "app")
+                    newAppContainer.classList.add("cursor-pointer", "h-36", "relative", "group", "overflow-hidden", "w-57", "bg-gray-800", "rounded-3xl", "m-2", "hover:scale-105", "transition-all", "app")
                     newAnchor.href = `/pages/ultraviolet.html?i=${item.url}`
-                    newImage.classList.add("object-cover", "app-img", "hover:h-3/4", "h-full", "transition-all", "aspect-2/1", "w-full")
-                    newTitleContainer.classList.add("app-title-cont", "h-1/4", "pt-1.5", "px-5")
+                    newImage.classList.add("object-cover", "hover:h-3/4", "h-full", "transition-all", "w-full")
+                    newTitleContainer.classList.add("absolute","hover:backdrop-blur-[2px]","inset-0","bg-black/0","group-hover:bg-black/60","transition-all","duration-200","flex","items-end","p-5","opacity-0","group-hover:opacity-100")
                     newTitle.classList.add("font-medium")
                     newTitle.textContent = item.name
                     newImage.src = item.img

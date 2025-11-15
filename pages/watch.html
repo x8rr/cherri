@@ -7,26 +7,70 @@
     <title>breeze | watch</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/alpinejs/3.10.3/cdn.min.js" defer></script>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="/styles/index.css">
     <link rel="preconnect" href="https://fdn.fontcdn.ir">
     <link rel="preconnect" href="https://v1.fontapi.ir">
     <link href="https://v1.fontapi.ir/css/SFProDisplay" rel="stylesheet">
+    <link rel="stylesheet" href="/fa/css/all-pro.css">
+    <link rel="shortcut icon" href="/assets/fav.png" type="image/x-icon">
 </head>
 
-<body class="bg-gray-900 text-white min-h-screen p-8" x-data="app()">
+<style>
+    @font-face {
+        font-family: font;
+        src: url("/assets/fonts/lexenddeca.ttf");
+    }
+
+    * {
+        font-family: font;
+    }
+
+    button {
+        font-family: arial !important;
+    }
+
+    body,
+    html {
+        background: black;
+    }
+
+    input {
+        background: rgb(15 15 15) !important;
+        font-size: 14px !important;
+        font-family: Arial !important;
+        padding: 10px 20px !important;
+    }
+
+    input:focus {
+        outline: none;
+        background: rgb(25, 25, 25) !important;
+    }
+
+    .switcher {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        font-family: arial;
+    }
+
+    span {
+        font-family: Arial;
+    }
+</style>
+
+<body class=" text-white min-h-screen p-8" x-data="app()">
     <div class="container mx-auto max-w-6xl">
-        <a href="/pages/movies.html" class="inline-block mb-6 text-slate-400 transition-all hover:text-slate-300">← Back to Browse</a>
+        <a href="/pages/movies.html" class="inline-block mb-6 text-white-400 transition-all hover:text-gray-300">← Back to Browse</a>
 
         <div x-show="content">
             <h1 class="text-4xl font-bold mb-4" x-text="content?.title || content?.name"></h1>
 
-            <div class="mb-6 flex items-center space-x-4 text-gray-300">
+            <div class="mb-6 ml-[-1.4%] flex items-center space-x-4 text-gray-300">
                 <span x-show="content?.release_date" x-text="new Date(content.release_date).getFullYear()"></span>
                 <span x-show="content?.first_air_date" x-text="new Date(content.first_air_date).getFullYear()"></span>
-                <span x-show="content?.vote_average">⭐ <span x-text="content.vote_average.toFixed(1)"></span></span>
+                <span x-show="content?.vote_average"><i class="fas fa-star"></i> <span x-text="content.vote_average.toFixed(1)"></span></span>
             </div>
 
-            <div class="bg-gray-800 rounded-3xl overflow-hidden mb-6">
+            <div class="bg-[#1d1d1d] rounded-3xl overflow-hidden mb-6">
                 <div class="relative pt-[56.25%]">
                     <iframe :src="currentVideoUrl" class="absolute top-0 left-0 w-full h-full" frameborder="0"
                         allowfullscreen>
@@ -35,14 +79,14 @@
             </div>
 
             <template x-if="isShow">
-                <div class="bg-gray-800 rounded-3xl p-6 mb-6">
+                <div class="bg-[#0d0d0d] rounded-3xl p-6 mb-6">
                     <h3 class="text-xl font-semibold mb-4">Episodes</h3>
 
-                    <div class="flex items-center space-x-2 mb-4 overflow-x-auto">
+                    <div class="flex items-center space-x-2 mb-4 flex-wrap">
                         <template x-for="season in seasons" :key="season">
                             <button @click="selectedSeason = season; updateEpisodes()"
-                                class="px-4 py-2 rounded-3xl whitespace-nowrap"
-                                :class="selectedSeason === season ? 'bg-slate-600' : 'bg-gray-700 hover:bg-gray-600'">
+                                class="px-4 py-2 m-1 rounded-2xl whitespace-nowrap"
+                                :class="selectedSeason === season ? 'bg-white text-black' : 'bg-[#1d1d1d] hover:bg-[#2d2d2d]'">
                                 Season <span x-text="season"></span>
                             </button>
                         </template>
@@ -51,13 +95,13 @@
                     <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
                         <template x-for="episode in seasonData?.episodes" :key="episode.episode_number">
                             <div @click="selectedEpisode = episode.episode_number; loadEpisode()"
-                                class="bg-gray-700 rounded-3xl overflow-hidden cursor-pointer hover:bg-gray-600"
-                                :class="selectedEpisode === episode.episode_number ? 'ring-2 ring-slate-500' : ''">
+                                class="bg-[#1d1d1d] rounded-3xl overflow-hidden transition-all cursor-pointer hover:bg-[#2d2d2d]"
+                                :class="selectedEpisode === episode.episode_number ? 'ring-2 ring-white/50' : ''">
                                 <div class="relative aspect-video">
                                     <img :src="episode.still_path 
                                               ? 'https://image.tmdb.org/t/p/w300' + episode.still_path
                                               : 'https://via.placeholder.com/300x169'"
-                                        class="w-full h-full object-cover">
+                                        class="w-full h-full aspect-3/2 object-cover">
                                     <div
                                         class="absolute bottom-0 left-0 right-0 p-2 bg-gradient-to-t from-black to-transparent">
                                         <span class="text-sm font-medium">Episode <span
@@ -73,19 +117,19 @@
                 </div>
             </template>
 
-            <div class="bg-gray-800 rounded-3xl p-6 mb-6">
+            <div class="bg-[#0d0d0d] rounded-3xl p-6 mb-6">
                 <h3 class="text-xl font-semibold mb-4">Sources</h3>
                 <div class="flex flex-wrap gap-2">
                     <template x-for="source in availableSources" :key="source.id">
-                        <button @click="selectedSource = source.id; updateVideoUrl()" class="transition-all px-4 py-2 rounded-full"
-                            :class="selectedSource === source.id ? 'bg-slate-400' : 'bg-gray-700 hover:bg-gray-600'"
+                        <button @click="selectedSource = source.id; updateVideoUrl()" class="transition-all px-4 py-2 rounded-2xl"
+                            :class="selectedSource === source.id ? 'bg-white text-black' : 'bg-[#1d1d1d] hover:bg-[#2d2d2d]'"
                             x-text="source.name">
                         </button>
                     </template>
                 </div>
             </div>
 
-            <div class="bg-gray-800 rounded-3xl p-6">
+            <div class="bg-[#0d0d0d] rounded-3xl p-6">
                 <h3 class="text-xl font-semibold mb-4">Overview</h3>
                 <p class="text-gray-300" x-text="content?.overview"></p>
             </div>
