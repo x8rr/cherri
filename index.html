@@ -28,39 +28,67 @@
         const { createClient } = supabase
 
         window.supabase = createClient(
-            "https://snizpdqspqqarfovuoll.supabase.co",
-            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNuaXpwZHFzcHFxYXJmb3Z1b2xsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjMyNTcwODgsImV4cCI6MjA3ODgzMzA4OH0.5Hz6lM-Z_2ytbYMOrd2lHOSXCnZ4JgawP2mXGgbT2vM"
-        );
+    "https://snizpdqspqqarfovuoll.supabase.co",
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNuaXpwZHFzcHFxYXJmb3Z1b2xsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjMyNTcwODgsImV4cCI6MjA3ODgzMzA4OH0.5Hz6lM-Z_2ytbYMOrd2lHOSXCnZ4JgawP2mXGgbT2vM",
+    {
+        auth: {
+            autoRefreshToken: true,
+            persistSession: true,
+            detectSessionInUrl: true
+        }
+    }
+);
 
     </script>
     <script>
         async function signUp(u, p) {
-            const { data, error } = await window.supabase.auth.signUp({
-                email: `${u}@breezeaccounts.lol`,
-                password: p,
-            });
-            if (error) throw error;
-            return data;
-        }
+                try {
+                    const { data, error } = await window.supabase.auth.signUp({
+                        email: `${u}@breezeaccounts.lol`,
+                        password: p,
+                    });
+                    if (error) throw error;
+                    return data;
+                } catch (error) {
+                    console.error('Sign up error:', error);
+                    throw error;
+                }
+            }
 
-        async function signIn(u, p) {
-            const { data, error } = await window.supabase.auth.signInWithPassword({
-                email: `${u}@breezeaccounts.lol`,
-                password: p,
-            });
-            if (error) throw error;
-            return data;
-        }
+            async function signIn(u, p) {
+                try {
+                    const { data, error } = await window.supabase.auth.signInWithPassword({
+                        email: `${u}@breezeaccounts.lol`,
+                        password: p,
+                    });
+                    if (error) throw error;
+                    return data;
+                } catch (error) {
+                    console.error('Sign in error:', error);
+                    throw error;
+                }
+            }
 
-        async function signOut() {
-            const { error } = await window.supabase.auth.signOut();
-            if (error) throw error;
-        }
+            async function signOut() {
+                try {
+                    const { error } = await window.supabase.auth.signOut();
+                    if (error) throw error;
+                } catch (error) {
+                    console.error('Sign out error:', error);
+                    throw error;
+                }
+            }
 
-        async function getUser() {
-            const { data: { user } } = await window.supabase.auth.getUser();
-            return user;
-        }
+            async function getUser() {
+                try {
+                    const { data: { session }, error } = await window.supabase.auth.getSession();
+                    if (error) throw error;
+                    return session?.user || null;
+                } catch (error) {
+                    console.error('Get user error:', error);
+                    return null;
+                }
+            }
     </script>
     <script>
         newTab()
@@ -124,84 +152,110 @@
     <script>
         let authMode = "signin";
 
-        async function checkAuth() {
-                const user = await getUser();
-                if (user) {
-                    document.querySelector("#auth-section i").classList.replace("fa-user", "fa-user-check");
-                    document.getElementById("signout-btn").style.display = "block";
+            async function checkAuth() {
+                try {
+                    const user = await getUser();
+                    if (user) {
+                        document.querySelector("#auth-section i").classList.replace("fa-user", "fa-user-check");
+                        document.getElementById("signout-btn").style.display = "block";
+
+                        const authBtn = document.querySelector("#auth-section a");
+                        authBtn.setAttribute("onclick", "toggleDashboard()");
+
+                        showToast("success", `Logged in as ${user.email.split("@")[0]}`, "fas fa-check-circle");
+                    }
+                } catch (error) {
+                    console.error('Auth check error:', error);
+                }
+            }
+
+            function toggleAuth() {
+                const authHolder = document.querySelector(".auth-container");
+                if (authHolder.classList.contains("settings-hidden")) {
+                    if (document.querySelector(".apps-wrapper").classList.contains("settings-shown")) {
+                        toggleApps();
+                    }
+                    if (document.querySelector(".settings-container").classList.contains("settings-shown")) {
+                        toggleSettings();
+                    }
+                    const newBlurOverlay = document.createElement("div");
+                    newBlurOverlay.classList.add("blurOverlay");
+                    document.body.appendChild(newBlurOverlay);
+                    authHolder.classList.remove("settings-hidden");
+                    authHolder.classList.add("settings-shown");
+                } else {
+                    authHolder.classList.remove("settings-shown");
+                    authHolder.classList.add("settings-hidden");
+                    document.querySelector(".blurOverlay")?.remove();
+                }
+            }
+
+            function toggleAuthMode() {
+                authMode = authMode === "signin" ? "signup" : "signin";
+                document.getElementById("auth-title").textContent = authMode === "signin" ? "Sign In" : "Sign Up";
+                document.getElementById("auth-toggle").textContent = authMode === "signin" ? "Need an account? Sign up" : "Have an account? Sign in";
+            }
+
+            async function handleAuth() {
+                const username = document.getElementById("auth-username").value;
+                const password = document.getElementById("auth-password").value;
+
+                if (!username || !password) {
+                    showToast("error", "Please fill in all fields", "fas fa-times-circle");
+                    return;
+                }
+
+                try {
+                    if (authMode === "signup") {
+                        await signUp(username, password);
+                        showToast("success", "Account created! Please sign in.", "fas fa-check-circle");
+                        toggleAuthMode();
+                    } else {
+                        await signIn(username, password);
+                        showToast("success", "Logged in!", "fas fa-check-circle");
+                        toggleAuth();
+                        await checkAuth();
+                        document.getElementById("auth-username").value = "";
+                        document.getElementById("auth-password").value = "";
+                    }
+                } catch (e) {
+                    if (e.message.includes('fetch')) {
+                        showToast("error", "Network error. Check your connection.", "fas fa-times-circle");
+                    } else {
+                        showToast("error", e.message, "fas fa-times-circle");
+                    }
+                }
+            }
+
+            async function handleSignOut() {
+                try {
+                    await signOut();
+                    showToast("success", "Signed out. Reloading...", "fas fa-check-circle");
+                    document.querySelector("#auth-section i").classList.replace("fa-user-check", "fa-user");
+                    document.getElementById("signout-btn").style.display = "none";
 
                     const authBtn = document.querySelector("#auth-section a");
-                    authBtn.setAttribute("onclick", "toggleDashboard()");
+                    authBtn.setAttribute("onclick", "toggleAuth()");
 
-                    showToast("success", `Logged in as ${user.email.split("@")[0]}`, "fas fa-check-circle");
+                    setTimeout(() => {
+                        window.location.reload();
+                    }, 1000);
+                } catch (error) {
+                    showToast("error", "Sign out failed", "fas fa-times-circle");
                 }
             }
 
-        function toggleAuth() {
-            const authHolder = document.querySelector(".auth-container");
-            if (authHolder.classList.contains("settings-hidden")) {
-                if (document.querySelector(".apps-wrapper").classList.contains("settings-shown")) {
-                    toggleApps();
+            window.addEventListener("load", async () => {
+                await new Promise(resolve => setTimeout(resolve, 500));
+                await checkAuth();
+            });
+
+            window.supabase.auth.onAuthStateChange((event, session) => {
+                console.log('Auth state changed:', event, session);
+                if (event === 'SIGNED_IN') {
+                    checkAuth();
                 }
-                if (document.querySelector(".settings-container").classList.contains("settings-shown")) {
-                    toggleSettings();
-                }
-                const newBlurOverlay = document.createElement("div");
-                newBlurOverlay.classList.add("blurOverlay");
-                document.body.appendChild(newBlurOverlay);
-                authHolder.classList.remove("settings-hidden");
-                authHolder.classList.add("settings-shown");
-            } else {
-                authHolder.classList.remove("settings-shown");
-                authHolder.classList.add("settings-hidden");
-                document.querySelector(".blurOverlay")?.remove();
-            }
-        }
-
-        function toggleAuthMode() {
-            authMode = authMode === "signin" ? "signup" : "signin";
-            document.getElementById("auth-title").textContent = authMode === "signin" ? "Sign In" : "Sign Up";
-            document.getElementById("auth-toggle").textContent = authMode === "signin" ? "Need an account? Sign up" : "Have an account? Sign in";
-        }
-
-        async function handleAuth() {
-            const username = document.getElementById("auth-username").value;
-            const password = document.getElementById("auth-password").value;
-
-            if (!username || !password) {
-                showToast("error", "Please fill in all fields", "fas fa-times-circle");
-                return;
-            }
-
-            try {
-                if (authMode === "signup") {
-                    await signUp(username, password);
-                    showToast("success", "Account created!", "fas fa-check-circle");
-                } else {
-                    await signIn(username, password);
-                    showToast("success", "Logged in!", "fas fa-check-circle");
-                }
-                toggleAuth();
-                checkAuth();
-                document.getElementById("auth-username").value = "";
-                document.getElementById("auth-password").value = "";
-            } catch (e) {
-                showToast("error", e.message, "fas fa-times-circle");
-            }
-        }
-
-        async function handleSignOut() {
-            await signOut();
-            showToast("success", "Signed out. Reloading...", "fas fa-check-circle");
-            document.querySelector("#auth-section i").classList.replace("fa-user-check", "fa-user");
-            document.getElementById("signout-btn").style.display = "none";
-            window.location.reload()
-            toggleAuth();
-        }
-
-        window.addEventListener("load", () => {
-            setTimeout(checkAuth, 500);
-        });
+            });
     </script>
     </body>
 
