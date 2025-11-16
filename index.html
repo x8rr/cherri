@@ -39,43 +39,6 @@
                 }
             );
 
-            // FORCE RESET CORRUPTED SESSION
-            (async function resetAuth() {
-                console.log('Resetting authentication state...');
-
-                // Clear all auth-related storage
-                const authKeys = [
-                    'supabase.auth.token',
-                    'breeze-supabase-auth',
-                    'sb-snizpdqspqqarfovuoll-auth-token'
-                ];
-
-                authKeys.forEach(key => {
-                    localStorage.removeItem(key);
-                    sessionStorage.removeItem(key);
-                });
-
-                // Force sign out to clear any server session
-                try {
-                    await window.supabase.auth.signOut();
-                } catch (e) {
-                    console.log('Force signout completed');
-                }
-
-                // Clear any existing session
-                await window.supabase.auth.setSession(null);
-
-                console.log('Auth reset complete - users will need to sign in again');
-
-                // Update UI to show logged out state
-                setTimeout(() => {
-                    document.querySelector("#auth-section i")?.classList.replace("fa-user-check", "fa-user");
-                    document.getElementById("signout-btn").style.display = "none";
-                    const authBtn = document.querySelector("#auth-section a");
-                    authBtn.setAttribute("onclick", "toggleAuth()");
-                }, 100);
-            })();
-
     </script>
     <script>
         async function signUp(u, p) {
@@ -1055,6 +1018,32 @@
             console.log(stats.sitesVisited)
 
             localStorage.setItem(`breeze_stats_${user.id}`, JSON.stringify(stats))
+
+            setTimeout(pushSites(), 2000)
+        }
+
+        async function pushSites() {
+            const user = await getUser()
+            
+            if (!user) {
+                return
+            }
+
+            const stats = JSON.parse(localStorage.getItem(`breeze_stats_${user.id}`))
+
+            if (!stats.sitesVisited) return
+
+            console.log(stats.sitesVisited)
+
+            const { error } = await window.supabase.auth.updateUser({
+                data: { sitesVisited: stats.sitesVisited }
+            });
+
+            if (error) {
+                showToast("error", error.message, "fas fa-times-circle")
+                console.log("there was an error updated sites visited: " + error.message)
+                throw error
+            }
         }
 
         async function updateTimeBrowsing() {
@@ -1252,8 +1241,8 @@
             const minutes = Math.floor(stats.timeSpent % 3600 / 60);
             document.getElementById("time-spent").textContent = `${hours}h ${minutes}m`;
             console.log(`Total Time: ${hours}h, ${minutes}m`)
-            document.getElementById("sites-visited").textContent = stats.sitesVisited;
-            console.log(`Total sites visited: ${stats.sitesVisited}`)
+            document.getElementById("sites-visited").textContent = user.user_metadata?.sitesVisited;
+            console.log(`Total sites visited: ${user.user_metadata?.sitesVisited}`)
 
             const activityList = document.getElementById("recent-activity");
             if (stats.activity && stats.activity.length > 0) {
