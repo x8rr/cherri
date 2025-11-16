@@ -22,6 +22,240 @@
     <link rel="stylesheet" href="/assets/css/dropdown.css">
     <script src="https://cdn.jsdelivr.net/npm/eruda"></script>
     <script src="/assets/js/splash.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script>
+        const { createClient } = supabase
+
+        window.supabase = createClient(
+            "https://snizpdqspqqarfovuoll.supabase.co",
+            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNuaXpwZHFzcHFxYXJmb3Z1b2xsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjMyNTcwODgsImV4cCI6MjA3ODgzMzA4OH0.5Hz6lM-Z_2ytbYMOrd2lHOSXCnZ4JgawP2mXGgbT2vM"
+        );
+
+    </script>
+    <script>
+        async function signUp(u, p) {
+            const { data, error } = await window.supabase.auth.signUp({
+                email: `${u}@breezeacounts.lol`,
+                password: p,
+            });
+            if (error) throw error;
+            return data;
+        }
+
+        async function signIn(u, p) {
+            const { data, error } = await window.supabase.auth.signInWithPassword({
+                email: `${u}@breezeacounts.lol`,
+                password: p,
+            });
+            if (error) throw error;
+            return data;
+        }
+
+        async function signOut() {
+            const { error } = await window.supabase.auth.signOut();
+            if (error) throw error;
+        }
+
+        async function getUser() {
+            const { data: { user } } = await window.supabase.auth.getUser();
+            return user;
+        }
+    </script>
+    <script>
+        newTab()
+    </script>
+    <script>
+        async function registerSW() {
+            if ("serviceWorker" in navigator) {
+                await navigator.serviceWorker.register("/uv/sw.js").then(() => {
+                    console.log(
+                        "%cbreeze." + "%c UV sw registered!",
+                        "color: white; background: linear-gradient(to bottom right, #040c16, #000000); border-radius: 5px; font-weight: bold; padding: 6px; font-family: sans-serif;",
+                        "color: white; background: transparent; border-radius: 0px; padding: 0px;"
+                    );
+                    setTimeout(() => {
+                        showToast("success", "Ultraviolet worker initialized!", "fas fa-check-circle")
+                        console.log("shown toast")
+                    }, 1000)
+                }).catch(e => {
+                    console.log("Error registering service worker (UV): " + e)
+                    showToast("error", "Failed to register service worker", "fas fa-times-circle")
+                });
+
+                await navigator.serviceWorker.register("/sw.js").then(() => {
+                    console.log(
+                        "%cbreeze." + "%c SJ sw registered!",
+                        "color: white; background: linear-gradient(to bottom right, #040c16, #000000); border-radius: 5px; font-weight: bold; padding: 6px; font-family: sans-serif;",
+                        "color: white; background: transparent; border-radius: 0px; padding: 0px;"
+                    );
+                    setTimeout(() => {
+                        showToast("success", "Scramjet worker initialized", "fas fa-check-circle")
+                        console.log("shown toast")
+                    }, 1000)
+                }).catch(e => {
+                    console.log("Error registering service worker (SJ): " + e)
+                    showToast("error", "Failed to register service worker", "fas fa-times-circle")
+                });
+            }
+        }
+
+        window.addEventListener("load", () => {
+            registerSW();
+            lucide.createIcons();
+        });
+
+        const contentFrame = document.getElementById('contentFrame');
+        const homeContent = document.getElementById('homeContent');
+        const navLinks = document.querySelectorAll('nav a[data-page]');
+
+        function navTo(l) {
+            if (l === "home") {
+                contentFrame.style.display = "none"
+                homeContent.style.display = "block"
+            } else {
+                homeContent.style.display = "none"
+                contentFrame.style.display = "block"
+                contentFrame.src = `/pages/${l}.html`
+            }
+        }
+
+        function toast(icon, msg) {
+            const container = document.querySelector(".toast-container")
+            const newToast = document.createElement("div")
+            const newToastIcon = document.createElement("i")
+            newToastIcon.classList.add("toast-icon", "lucide", "fas", "fa-icon-lol")
+            const newToastMsg = document.createElement("span")
+            newToastMsg.classList.add("toast-msg")
+            newToast.classList.add("toast", "bg-slate-900", "transition-all", "relative", "duration-300", "shadow-black/30", "shadow-lg", "p-4", "h-fit", "w-1/1", "flex", "rounded-full", "m-3", "border", "border-white/10")
+            newToast.style.right = "-120%"
+            container.appendChild(newToast)
+            newToast.appendChild(newToastIcon)
+            newToast.appendChild(newToastMsg)
+
+            switch (icon) {
+                case "success":
+                    if (newToastIcon && newToastMsg) {
+                        newToastIcon.classList.add("fa-circle-check")
+                        newToastMsg.textContent = msg
+                    }
+                    break
+                case "info":
+                    newToastIcon.classList.add("fa-circle-info")
+                    newToastMsg.textContent = msg
+                    break;
+                case "error":
+                    newToastIcon.classList.add("fa-circle-xmark")
+                    newToastMsg.textContent = msg
+                case "warn":
+                    newToastIcon.classList.add("fa-warning")
+                    newToastMsg.textContent = msg
+                case "log":
+                    newToastIcon.classList.add("fa-memo-circle-info")
+                    newToastMsg.textContent = msg
+            }
+
+            setTimeout(() => {
+                newToast.style.right = "4%"
+            }, 25)
+
+            setTimeout(() => {
+                newToast.style.right = "-120%"
+            }, 4000)
+
+            setTimeout(() => {
+                newToast.remove()
+            }, 4325)
+        }
+
+        function showToast(type, message, icon) {
+            toast(type, message)
+        }
+    </script>
+
+    <script>
+        let authMode = "signin";
+
+        async function checkAuth() {
+                const user = await getUser();
+                if (user) {
+                    document.querySelector("#auth-section i").classList.replace("fa-user", "fa-user-check");
+                    document.getElementById("signout-btn").style.display = "block";
+
+                    const authBtn = document.querySelector("#auth-section a");
+                    authBtn.setAttribute("onclick", "toggleDashboard()");
+
+                    showToast("success", `Logged in as ${user.email.split("@")[0]}`, "fas fa-check-circle");
+                }
+            }
+
+        function toggleAuth() {
+            const authHolder = document.querySelector(".auth-container");
+            if (authHolder.classList.contains("settings-hidden")) {
+                if (document.querySelector(".apps-wrapper").classList.contains("settings-shown")) {
+                    toggleApps();
+                }
+                if (document.querySelector(".settings-container").classList.contains("settings-shown")) {
+                    toggleSettings();
+                }
+                const newBlurOverlay = document.createElement("div");
+                newBlurOverlay.classList.add("blurOverlay");
+                document.body.appendChild(newBlurOverlay);
+                authHolder.classList.remove("settings-hidden");
+                authHolder.classList.add("settings-shown");
+            } else {
+                authHolder.classList.remove("settings-shown");
+                authHolder.classList.add("settings-hidden");
+                document.querySelector(".blurOverlay")?.remove();
+            }
+        }
+
+        function toggleAuthMode() {
+            authMode = authMode === "signin" ? "signup" : "signin";
+            document.getElementById("auth-title").textContent = authMode === "signin" ? "Sign In" : "Sign Up";
+            document.getElementById("auth-toggle").textContent = authMode === "signin" ? "Need an account? Sign up" : "Have an account? Sign in";
+        }
+
+        async function handleAuth() {
+            const username = document.getElementById("auth-username").value;
+            const password = document.getElementById("auth-password").value;
+
+            if (!username || !password) {
+                showToast("error", "Please fill in all fields", "fas fa-times-circle");
+                return;
+            }
+
+            try {
+                if (authMode === "signup") {
+                    await signUp(username, password);
+                    showToast("success", "Account created!", "fas fa-check-circle");
+                } else {
+                    await signIn(username, password);
+                    showToast("success", "Logged in!", "fas fa-check-circle");
+                }
+                toggleAuth();
+                checkAuth();
+                document.getElementById("auth-username").value = "";
+                document.getElementById("auth-password").value = "";
+            } catch (e) {
+                showToast("error", e.message, "fas fa-times-circle");
+            }
+        }
+
+        async function handleSignOut() {
+            await signOut();
+            showToast("success", "Signed out", "fas fa-check-circle");
+            document.querySelector("#auth-section i").classList.replace("fa-user-check", "fa-user");
+            document.getElementById("signout-btn").style.display = "none";
+            toggleAuth();
+        }
+
+        window.addEventListener("load", () => {
+            setTimeout(checkAuth, 500);
+        });
+    </script>
+    </body>
+
+</html>
 </head>
 
 <body>
@@ -57,6 +291,11 @@
                     <i class="fas fa-users"></i>
                 </a>
             </li>
+            <li class="toright" style="margin-right: 60px;" id="auth-section">
+                <a onclick="toggleAuth()" href="#" data-page="auth">
+                    <i class="fas fa-user"></i>
+                </a>
+            </li>
             <li class="toright">
                 <a onclick="toggleSettings()" href="#" data-page="settings">
                     <i class="fas fa-cog"></i>
@@ -85,6 +324,104 @@
     <div class="toast-container"></div>
 
     <iframe id="contentFrame"></iframe>
+
+    <div class="auth-container settings-hidden">
+        <div class="container">
+            <h2 id="auth-title">Sign In</h2>
+            <input type="text" id="auth-username" placeholder="username" class="auth-input">
+            <input type="password" id="auth-password" placeholder="password" class="auth-input">
+            <button onclick="handleAuth()" class="auth-button">Submit</button>
+            <p onclick="toggleAuthMode()" class="auth-toggle-text">
+                <span id="auth-toggle">Need an account? Sign up</span>
+            </p>
+            <button onclick="handleSignOut()" id="signout-btn" class="auth-button signout-button">Sign Out</button>
+        </div>
+    </div>
+
+    <style>
+        .auth-container {
+            background: rgb(10 10 10);
+            border-radius: 25px;
+            color: white;
+            width: 400px;
+            height: auto;
+            position: fixed;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 50;
+            transition: 0.25s;
+            padding: 30px;
+            transform-origin: center center;
+            filter: drop-shadow(0 0 15px black);
+        }
+
+        .auth-container h2 {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: white;
+        }
+
+        .auth-input {
+            width: 100%;
+            padding: 12px 16px;
+            margin-bottom: 15px;
+            background: #1d1d1d;
+            border: 1px solid #333;
+            border-radius: 12px;
+            color: white;
+            font-size: 14px;
+            font-family: lexend;
+            transition: 0.2s;
+            box-sizing: border-box;
+        }
+
+        .auth-input:focus {
+            outline: none;
+            background: #2d2d2d;
+            border-color: #555;
+        }
+
+        .auth-button {
+            width: 100%;
+            padding: 12px;
+            background: rgb(40 40 40);
+            border: none;
+            border-radius: 12px;
+            color: white;
+            font-size: 14px;
+            font-family: lexend;
+            cursor: pointer;
+            transition: 0.2s;
+            margin-bottom: 10px;
+        }
+
+        .auth-button:hover {
+            background: rgb(50 50 50);
+        }
+
+        .auth-toggle-text {
+            color: #888;
+            font-size: 14px;
+            text-align: center;
+            cursor: pointer;
+            transition: 0.2s;
+            margin-bottom: 15px;
+        }
+
+        .auth-toggle-text:hover {
+            color: #aaa;
+        }
+
+        .signout-button {
+            display: none;
+            background: rgb(60 20 20);
+        }
+
+        .signout-button:hover {
+            background: rgb(80 30 30);
+        }
+    </style>
 
     <div class="settings-container settings-hidden">
         <div class="container">
@@ -176,7 +513,7 @@
             <p class="absolute bottom-4 text-[#3d3d3d] font-medium text-sm">breeze <span
                     class="opacity-50 bg-[#4d4d4d] p-1 rounded-lg text-black"><a
                         href="https://github.com/x8rr/breeze/releases" target="_blank" class="text-black"
-                        style="text-decoration: none;">v0.0.1 beta 3</a></span></p>
+                        style="text-decoration: none;">v0.0.1 beta 4</a></span></p>
         </div>
     </div>
 
@@ -218,9 +555,85 @@
             placeholder="search through the apps..." id="apps-search"
             class="h-fit p-4 px-5 w-[475px] bg-[#0f0f0f] border-none absolute left-1/2 translate-x-[-50%] rounded-2xl transition-all focus:bg-[#1d1d1d] focus:outline-none ">
         <br><br><br>
-        <div class="apps-container h-[83%] overflow-y-scroll w-[475px] flex flex-wrap w-7/8 absolute left-1/2 translate-x-[-50%] justify-center">
+        <div
+            class="apps-container h-[83%] overflow-y-scroll w-[475px] flex flex-wrap w-7/8 absolute left-1/2 translate-x-[-50%] justify-center">
         </div>
     </div>
+
+    <div class="dashboard-container settings-hidden">
+        <div class="dashboard-content">
+            <div class="dashboard-header">
+                <div class="profile-section">
+                    <div class="pfp-wrapper">
+                        <img id="dashboard-pfp" src="/assets/fav.png" alt="Profile Picture">
+                        <button class="pfp-edit-btn" onclick="document.getElementById('pfp-upload').click()">
+                            <i class="fas fa-camera"></i>
+                        </button>
+                    </div>
+                    <div class="user-info">
+                        <h1 id="dashboard-username">Username</h1>
+                        <p id="dashboard-email">email@breezeacounts.lol</p>
+                    </div>
+                </div>
+                <button class="close-dashboard" onclick="toggleDashboard()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+    
+            <div class="dashboard-stats">
+                <div class="stat-card">
+                    <i class="fas fa-clock"></i>
+                    <div>
+                        <h3 id="time-spent">0h 0m</h3>
+                        <p>Time without grass</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-link"></i>
+                    <div>
+                        <h3 id="sites-visited">0</h3>
+                        <p>Sites Visited</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-calendar"></i>
+                    <div>
+                        <h3 id="account-age">0d</h3>
+                        <p>Account Age</p>
+                    </div>
+                </div>
+            </div>
+    
+            <div style="display: none;" class="dashboard-section">
+                <h2>Recent Activity</h2>
+                <div id="recent-activity" class="activity-list">
+                    <p class="empty-state">Activity coming soon!</p>
+                </div>
+            </div>
+    
+            <div class="dashboard-section">
+                <h2>Settings</h2>
+                <div class="settings-list">
+                    <div class="setting-item">
+                        <div>
+                            <h3>Username</h3>
+                            <p>Change your display name</p>
+                        </div>
+                        <button onclick="changeUsername()">Edit</button>
+                    </div>
+                    <div class="setting-item">
+                        <div>
+                            <h3>Password</h3>
+                            <p>Update your password</p>
+                        </div>
+                        <button onclick="changePassword()">Change</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <input type="file" id="pfp-upload" accept="image/*" style="display: none;">
 
     <script src="/assets/js/dropdown.js"></script>
 
@@ -266,7 +679,7 @@
         function searchApps(term) {
             const apps = document.querySelectorAll(".app")
             apps.forEach((app) => {
-                if (!app.querySelector("h1").textContent.toLowerCase().includes(term.toLowerCase())) { // oh wow thats a lot of functions
+                if (!app.querySelector("h1").textContent.toLowerCase().includes(term.toLowerCase())) {
                     app.style.display = "none"
                 } else {
                     app.style.display = "flex"
@@ -332,6 +745,72 @@
                 frame.classList.remove("active")
             })
         })
+    </script>
+    <script defer>
+        const settingsHolder = document.querySelector(".settings-container")
+        const settingsViewframe = document.querySelector(".settings-content-container")
+
+        const appsHolder = document.querySelector(".apps-wrapper")
+
+        const general = document.querySelector("#settings-general")
+        const cloaking = document.querySelector("#settings-cloaking")
+        const proxy = document.querySelector("#settings-proxy")
+        const cookes = document.querySelector("#settings-cookies")
+        const info = document.querySelector("#settings-info")
+
+        const allPages = document.querySelectorAll(".settings-page")
+        const allButtons = document.querySelectorAll(".settings-section")
+
+        function switchSettingsPage(target) {
+            allPages.forEach(page => {
+                page?.classList.remove("settings-active")
+                document.querySelector(`#settings-${target}`)?.classList.add("settings-active")
+            })
+        }
+
+        allButtons.forEach(button => {
+            button.addEventListener("click", () => {
+                allButtons.forEach(btn => {
+                    btn.style.background = ""
+                    button.style.background = "#1d1d1d"
+                })
+            })
+        })
+
+        function toggleSettings() {
+            if (settingsHolder.classList.contains("settings-hidden")) {
+                if (appsHolder.classList.contains("settings-shown")) {
+                    toggleApps()
+                }
+                const newBlurOverlay = document.createElement("div")
+                newBlurOverlay.classList.add("blurOverlay")
+                document.body.appendChild(newBlurOverlay)
+                settingsHolder.classList.remove("settings-hidden")
+                settingsHolder.classList.add("settings-shown")
+            } else {
+                settingsHolder.classList.remove("settings-shown")
+                settingsHolder.classList.add("settings-hidden")
+                const newBlurOverlay = document.querySelector(".blurOverlay")
+                newBlurOverlay.remove()
+            }
+        }
+        function toggleApps() {
+            if (appsHolder.classList.contains("settings-hidden")) {
+                if (settingsHolder.classList.contains("settings-shown")) {
+                    toggleSettings()
+                }
+                const newBlurOverlay = document.createElement("div")
+                newBlurOverlay.classList.add("blurOverlay")
+                document.body.appendChild(newBlurOverlay)
+                appsHolder.classList.remove("settings-hidden")
+                appsHolder.classList.add("settings-shown")
+            } else {
+                appsHolder.classList.remove("settings-shown")
+                appsHolder.classList.add("settings-hidden")
+                const newBlurOverlay = document.querySelector(".blurOverlay")
+                newBlurOverlay.remove()
+            }
+        }
     </script>
     <script>
         let searchE
@@ -513,6 +992,34 @@
             }
         }
 
+        async function updateSitesVisited() {
+            const user = await getUser()
+
+            const stats = JSON.parse(localStorage.getItem(`breeze_stats_${user.id}`)) || {
+                timeSpent: 0,
+                sitesVisited: 0,
+                activity: []
+            }
+
+            stats.sitesVisited++
+            
+            console.log(stats.sitesVisited)
+
+            localStorage.setItem(`breeze_stats_${user.id}`, JSON.stringify(stats))
+        }
+
+        async function updateTimeBrowsing() {
+            const user = await getUser()
+
+            const stats = JSON.parse(localStorage.getItem(`breeze_stats_${user.id}`)) || {
+                timeSpent: 0,
+                sitesVisited: 0,
+                activity: []
+            }
+
+            stats.timeSpent++
+        }
+
         async function go(u) {
             if (!await connection.getTransport()) {
                 connection.setTransport("/libcurl/index.mjs", [{ websocket: wispUrl }])
@@ -550,6 +1057,8 @@
                             const titleEl = tabEl.querySelector("span")
                             if (titleEl) titleEl.textContent = title
                         }
+
+                        updateSitesVisited()
 
                         updateUrlFromIframe(viewframe)
                     } catch (e) {
@@ -642,213 +1151,177 @@
             }
         }
 
-    </script>
+        let userStats = {
+                timeSpent: 0,
+                sitesVisited: 0,
+                recentActivity: []
+            };
 
-    <script>
-        const settingsHolder = document.querySelector(".settings-container")
-        const settingsViewframe = document.querySelector(".settings-content-container")
-
-        const appsHolder = document.querySelector(".apps-wrapper")
-
-        const general = document.querySelector("#settings-general")
-        const cloaking = document.querySelector("#settings-cloaking")
-        const proxy = document.querySelector("#settings-proxy")
-        const cookes = document.querySelector("#settings-cookies")
-        const info = document.querySelector("#settings-info")
-
-        const allPages = document.querySelectorAll(".settings-page")
-        const allButtons = document.querySelectorAll(".settings-section")
-
-        function switchSettingsPage(target) {
-            allPages.forEach(page => {
-                page?.classList.remove("settings-active")
-                document.querySelector(`#settings-${target}`)?.classList.add("settings-active")
-            })
-        }
-
-        allButtons.forEach(button => {
-            button.addEventListener("click", () => {
-                allButtons.forEach(btn => {
-                    btn.style.background = ""
-                    button.style.background = "#1d1d1d"
-                })
-            })
-        })
-
-        function toggleSettings() {
-            if (settingsHolder.classList.contains("settings-hidden")) {
-                if (appsHolder.classList.contains("settings-shown")) {
-                    toggleApps()
-                }
-                const newBlurOverlay = document.createElement("div")
-                newBlurOverlay.classList.add("blurOverlay")
-                document.body.appendChild(newBlurOverlay)
-                settingsHolder.classList.remove("settings-hidden")
-                settingsHolder.classList.add("settings-shown")
-            } else {
-                settingsHolder.classList.remove("settings-shown")
-                settingsHolder.classList.add("settings-hidden")
-                const newBlurOverlay = document.querySelector(".blurOverlay")
-                newBlurOverlay.remove()
-            }
-        }
-        function toggleApps() {
-                if (appsHolder.classList.contains("settings-hidden")) {
-                    if (settingsHolder.classList.contains("settings-shown")) {
-                        toggleSettings()
+            function toggleDashboard() {
+                const dashboard = document.querySelector(".dashboard-container");
+                if (dashboard.classList.contains("settings-hidden")) {
+                    if (document.querySelector(".apps-wrapper").classList.contains("settings-shown")) {
+                        toggleApps();
                     }
-                    const newBlurOverlay = document.createElement("div")
-                    newBlurOverlay.classList.add("blurOverlay")
-                    document.body.appendChild(newBlurOverlay)
-                    appsHolder.classList.remove("settings-hidden")
-                    appsHolder.classList.add("settings-shown")
+                    if (document.querySelector(".settings-container").classList.contains("settings-shown")) {
+                        toggleSettings();
+                    }
+                    if (document.querySelector(".auth-container").classList.contains("settings-shown")) {
+                        toggleAuth();
+                    }
+                    const newBlurOverlay = document.createElement("div");
+                    newBlurOverlay.classList.add("blurOverlay");
+                    document.body.appendChild(newBlurOverlay);
+                    dashboard.classList.remove("settings-hidden");
+                    dashboard.classList.add("settings-shown");
+                    loadDashboard();
                 } else {
-                    appsHolder.classList.remove("settings-shown")
-                    appsHolder.classList.add("settings-hidden")
-                    const newBlurOverlay = document.querySelector(".blurOverlay")
-                    newBlurOverlay.remove()
-                }
-            }
-    </script>
-    <script>
-        newTab()
-    </script>
-    <script>
-        async function registerSW() {
-            if ("serviceWorker" in navigator) {
-                await navigator.serviceWorker.register("/uv/sw.js").then(() => {
-                    console.log(
-                        "%cbreeze." + "%c UV sw registered!",
-                        "color: white; background: linear-gradient(to bottom right, #040c16, #000000); border-radius: 5px; font-weight: bold; padding: 6px; font-family: sans-serif;",
-                        "color: white; background: transparent; border-radius: 0px; padding: 0px;"
-                    );
-                    setTimeout(() => {
-                        showToast("success", "Ultraviolet worker initialized!", "fas fa-check-circle")
-                        console.log("shown toast")
-                    }, 1000)
-                }).catch(e => {
-                    console.log("Error registering service worker (UV): " + e)
-                    showToast("error", "Failed to register service worker", "fas fa-times-circle")
-                });
-
-                await navigator.serviceWorker.register("/sw.js").then(() => {
-                    console.log(
-                        "%cbreeze." + "%c SJ sw registered!",
-                        "color: white; background: linear-gradient(to bottom right, #040c16, #000000); border-radius: 5px; font-weight: bold; padding: 6px; font-family: sans-serif;",
-                        "color: white; background: transparent; border-radius: 0px; padding: 0px;"
-                    );
-                    setTimeout(() => {
-                        showToast("success", "Scramjet worker initialized", "fas fa-check-circle")
-                        console.log("shown toast")
-                    }, 1000)
-                }).catch(e => {
-                    console.log("Error registering service worker (SJ): " + e)
-                    showToast("error", "Failed to register service worker", "fas fa-times-circle")
-                });
-            }
-        }
-
-        window.addEventListener("load", () => {
-            registerSW();
-            lucide.createIcons();
-        });
-
-        const contentFrame = document.getElementById('contentFrame');
-        const homeContent = document.getElementById('homeContent');
-        const navLinks = document.querySelectorAll('nav a[data-page]');
-
-        function navTo(l) {
-            if (l === "home") {
-                contentFrame.style.display = "none"
-                homeContent.style.display = "block"
-            } else {
-                homeContent.style.display = "none"
-                contentFrame.style.display = "block"
-                contentFrame.src = `/pages/${l}.html`
-            }
-        }
-
-        const homesearch = document.getElementById("homesearch");
-
-        function rSearch(input) {
-            let url = input;
-            if (!url.includes(".") || url.includes(" ")) {
-                url = "https://search.brave.com/search?q=" + url;
-            } else {
-                if (!url.startsWith("http://") && !url.startsWith("https://")) {
-                    url = "https://" + url;
+                    dashboard.classList.remove("settings-shown");
+                    dashboard.classList.add("settings-hidden");
+                    document.querySelector(".blurOverlay")?.remove();
                 }
             }
 
-            const b = document.querySelector(".browser-container")
-            const frames = document.querySelectorAll(".viewframe")
+            async function loadDashboard() {
+                const user = await getUser();
+                if (!user) return;
 
-            b.style.opacity = 1
-            b.style.pointerEvents = "all"
+                document.getElementById("dashboard-username").textContent = user.user_metadata?.username || user.email.split("@")[0];
+                document.getElementById("dashboard-email").textContent = user.email;
 
-            frames.forEach(frame => {
-                frame.style.opacity = 1
-                frame.style.pointerEvents = "all"
-            })
+                if (user.user_metadata?.avatar_url) {
+                    document.getElementById("dashboard-pfp").src = user.user_metadata.avatar_url;
+                }
 
-            nav(url)
-            switchTab(aTab)
-        }
+                const accountAge = Math.floor((Date.now() - new Date(user.created_at).getTime()) / (1000 * 60 * 60 * 24));
+                document.getElementById("account-age").textContent = `${accountAge}d`;
+                console.log(`Current account age: ${accountAge}`)
 
-        homesearch?.addEventListener("keydown", (e) => {
-            if (e.key === "Enter") {
-                rSearch(homesearch?.value.trim());
+                const stats = JSON.parse(localStorage.getItem(`breeze_stats_${user.id}`));
+
+                const hours = Math.floor(stats.timeSpent / 3600);
+                const minutes = Math.floor(stats.timeSpent % 3600 / 60);
+                document.getElementById("time-spent").textContent = `${hours}h ${minutes}m`;
+                console.log(`Total Time: ${hours}h, ${minutes}m`)
+                document.getElementById("sites-visited").textContent = stats.sitesVisited;
+                console.log(`Total sites visited: ${stats.sitesVisited}`)
+
+                const activityList = document.getElementById("recent-activity");
+                if (stats.activity && stats.activity.length > 0) {
+                    activityList.innerHTML = stats.activity.slice(-10).reverse().map(item => `
+            <div class="activity-item">
+                <p>${item.url}</p>
+                <span>${new Date(item.time).toLocaleTimeString()}</span>
+            </div>
+        `).join('');
+                }
             }
-        });
 
-        function toast(icon, msg) {
-            const container = document.querySelector(".toast-container")
-            const newToast = document.createElement("div")
-            const newToastIcon = document.createElement("i")
-            newToastIcon.classList.add("toast-icon", "lucide", "fas", "fa-icon-lol")
-            const newToastMsg = document.createElement("span")
-            newToastMsg.classList.add("toast-msg")
-            newToast.classList.add("toast", "bg-slate-900", "transition-all", "relative", "duration-300", "shadow-black/30", "shadow-lg", "p-4", "h-fit", "w-1/1", "flex", "rounded-full", "m-3", "border", "border-white/10")
-            newToast.style.right = "-120%"
-            container.appendChild(newToast)
-            newToast.appendChild(newToastIcon)
-            newToast.appendChild(newToastMsg)
+            document.getElementById('pfp-upload').addEventListener('change', async (e) => {
+                const file = e.target.files[0];
+                if (!file) return;
 
-            switch (icon) {
-                case "success":
-                    if (newToastIcon && newToastMsg) {
-                        newToastIcon.classList.add("fa-circle-check")
-                        newToastMsg.textContent = msg
+                const reader = new FileReader();
+                reader.onload = async (event) => {
+                    const base64 = event.target.result;
+
+                    try {
+                        const { error } = await window.supabase.auth.updateUser({
+                            data: { avatar_url: base64 }
+                        });
+
+                        if (error) throw error;
+
+                        document.getElementById("dashboard-pfp").src = base64;
+                        showToast("success", "Profile picture updated!", "fas fa-check-circle");
+                    } catch (e) {
+                        showToast("error", e.message, "fas fa-times-circle");
                     }
-                    break
-                case "info":
-                    newToastIcon.classList.add("fa-circle-info")
-                    newToastMsg.textContent = msg
-                    break;
-                case "error":
-                    newToastIcon.classList.add("fa-circle-xmark")
-                    newToastMsg.textContent = msg
-                case "warn":
-                    newToastIcon.classList.add("fa-warning")
-                    newToastMsg.textContent = msg
-                case "log":
-                    newToastIcon.classList.add("fa-memo-circle-info")
-                    newToastMsg.textContent = msg
+                };
+                reader.readAsDataURL(file);
+            });
+
+            async function changeUsername() {
+                const newUsername = prompt("Enter new username:");
+                if (!newUsername) return;
+
+                try {
+                    const { error } = await window.supabase.auth.updateUser({
+                        data: { username: newUsername }
+                    });
+
+                    if (error) throw error;
+
+                    document.getElementById("dashboard-username").textContent = newUsername;
+                    showToast("success", "Username updated!", "fas fa-check-circle");
+                } catch (e) {
+                    showToast("error", e.message, "fas fa-times-circle");
+                }
             }
 
-            setTimeout(() => {
-                newToast.style.right = "4%"
-            }, 25)
+            async function changePassword() {
+                const newPassword = prompt("Enter new password:");
+                if (!newPassword) return;
 
-            setTimeout(() => {
-                newToast.style.right = "-120%"
-            }, 4000)
+                try {
+                    const { error } = await window.supabase.auth.updateUser({
+                        password: newPassword
+                    });
 
-            setTimeout(() => {
-                newToast.remove()
-            }, 4325)
-        }
+                    if (error) throw error;
+
+                    showToast("success", "Password updated!", "fas fa-check-circle");
+                } catch (e) {
+                    showToast("error", e.message, "fas fa-times-circle");
+                }
+            }
+
+            setInterval(async () => {
+                const user = await getUser();
+                if (user) {
+                    const stats = JSON.parse(localStorage.getItem(`breeze_stats_${user.id}`)) || { timeSpent: 0, sitesVisited: 0, activity: [] };
+                    stats.timeSpent += 1;
+                    console.log("Time updated: " + stats.timeSpent)
+                    console.log("Minutes total: " + Math.floor(stats.timeSpent % 3600 / 60))
+                    localStorage.setItem(`breeze_stats_${user.id}`, JSON.stringify(stats));
+                }
+            }, 1000);
+
+            const homesearch = document.getElementById("homesearch");
+
+                function rSearch(input) {
+                    let url = input;
+                    if (!url.includes(".") || url.includes(" ")) {
+                        url = "https://search.brave.com/search?q=" + url;
+                    } else {
+                        if (!url.startsWith("http://") && !url.startsWith("https://")) {
+                            url = "https://" + url;
+                        }
+                    }
+
+                    const b = document.querySelector(".browser-container")
+                    const frames = document.querySelectorAll(".viewframe")
+
+                    b.style.opacity = 1
+                    b.style.pointerEvents = "all"
+
+                    frames.forEach(frame => {
+                        frame.style.opacity = 1
+                        frame.style.pointerEvents = "all"
+                    })
+
+                    console.log("rSearch")
+                    newTab()
+                    nav(url)
+                    switchTab(aTab)
+                }
+
+                homesearch.addEventListener("keydown", (e) => {
+                    if (e.key === "Enter") {
+                        rSearch(homesearch?.value.trim());
+                        console.log("rsearching")
+                    }
+                    console.log("check")
+                });
+
     </script>
-</body>
-
-</html>

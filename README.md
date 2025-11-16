@@ -7,7 +7,8 @@ an indev ubg project, made to be clean and easy to use
 - [x] proxy
 - [x] movies
 - [ ] chatroom
-- [ ] accounts
+- [x] accounts
+- [ ] account activity
 - [ ] friends
 - [ ] game overlay
 - [ ] friend game activity
@@ -78,6 +79,8 @@ follow the steps in the cli and deploy!
 
 ## if you fork...
 please star the project :P
+
+but the database probably won't work
 
 also make sure you dont do the following:
 - modify the agpl license

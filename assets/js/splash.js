@@ -8,7 +8,8 @@ const splashes = [
     "penguins :thumbs-up:",
     "plz star",
     "sock",
-    "sdakjlfhaskdfg"
+    "sdakjlfhaskdfg",
+    "AAAAAAAAAA AUTH WORKS OMD AYYAYAYAYA"
 ]
 
 const randomSplashN = Math.floor(Math.random() * splashes.length)

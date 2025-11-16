@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <link rel="icon" type="image/svg+xml" href="/assets/fav.png">
+    <title>breeze | profile</title>
+    <link rel="preconnect" href="https://fdn.fontcdn.ir">
+    <link rel="preconnect" href="https://v1.fontapi.ir">
+    <link href="https://v1.fontapi.ir/css/SFProDisplay" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="/uv/uv.bundle.js"></script>
+    <script src="/uv/uv.config.js"></script>
+    <script src="/baremux/index.js"></script>
+    <link rel="stylesheet" href="/styles/index.css">
+    <link rel="stylesheet" href="/fa/css/all-pro.css">
+</head>
+<style>
+    .dashboard-container {
+    background: rgb(10 10 10);
+    width: 700px;
+    max-height: 85vh;
+    overflow-y: auto;
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 50;
+    transition: 0.25s;
+    border-radius: 25px;
+    transform-origin: center center;
+    filter: drop-shadow(0 0 15px black);
+}
+
+.dashboard-content {
+    padding: 30px;
+}
+
+.dashboard-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 30px;
+}
+
+.profile-section {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+.pfp-wrapper {
+    position: relative;
+}
+
+.pfp-wrapper img {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #2d2d2d;
+}
+
+.pfp-edit-btn {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: rgb(40 40 40);
+    border: 2px solid rgb(10 10 10);
+    color: white;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: 0.2s;
+}
+
+.pfp-edit-btn:hover {
+    background: rgb(50 50 50);
+}
+
+.user-info h1 {
+    font-size: 24px;
+    margin: 0;
+    color: white;
+}
+
+.user-info p {
+    font-size: 14px;
+    color: #888;
+    margin: 5px 0 0 0;
+}
+
+.close-dashboard {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    background: rgb(40 40 40);
+    border: none;
+    color: white;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.close-dashboard:hover {
+    background: rgb(60 20 20);
+}
+
+.dashboard-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    margin-bottom: 30px;
+}
+
+.stat-card {
+    background: #1d1d1d;
+    padding: 20px;
+    border-radius: 15px;
+    display: flex;
+    gap: 15px;
+    align-items: center;
+}
+
+.stat-card i {
+    font-size: 24px;
+    color: white;
+}
+
+.stat-card h3 {
+    font-size: 20px;
+    margin: 0;
+    color: white;
+}
+
+.stat-card p {
+    font-size: 12px;
+    color: #888;
+    margin: 5px 0 0 0;
+}
+
+.dashboard-section {
+    margin-bottom: 25px;
+}
+
+.dashboard-section h2 {
+    font-size: 18px;
+    color: white;
+    margin-bottom: 15px;
+}
+
+.activity-list {
+    background: #1d1d1d;
+    border-radius: 15px;
+    padding: 20px;
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+.activity-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0;
+    border-bottom: 1px solid #2d2d2d;
+}
+
+.activity-item:last-child {
+    border-bottom: none;
+}
+
+.activity-item p {
+    margin: 0;
+    color: white;
+    font-size: 14px;
+}
+
+.activity-item span {
+    color: #888;
+    font-size: 12px;
+}
+
+.empty-state {
+    color: #888;
+    text-align: center;
+    margin: 0;
+}
+
+.settings-list {
+    background: #1d1d1d;
+    border-radius: 15px;
+    padding: 20px;
+}
+
+.setting-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 0;
+    border-bottom: 1px solid #2d2d2d;
+}
+
+.setting-item:last-child {
+    border-bottom: none;
+}
+
+.setting-item h3 {
+    font-size: 14px;
+    margin: 0;
+    color: white;
+}
+
+.setting-item p {
+    font-size: 12px;
+    color: #888;
+    margin: 5px 0 0 0;
+}
+
+.setting-item button {
+    padding: 8px 16px;
+    background: rgb(40 40 40);
+    border: none;
+    border-radius: 8px;
+    color: white;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.setting-item button:hover {
+    background: rgb(50 50 50);
+}
+</style>
+<body>
+
+<div class="dashboard-container settings-hidden">
+    <div class="dashboard-content">
+        <div class="dashboard-header">
+            <div class="profile-section">
+                <div class="pfp-wrapper">
+                    <img id="dashboard-pfp" src="/assets/fav.png" alt="Profile Picture">
+                    <button class="pfp-edit-btn" onclick="document.getElementById('pfp-upload').click()">
+                        <i class="fas fa-camera"></i>
+                    </button>
+                </div>
+                <div class="user-info">
+                    <h1 id="dashboard-username">Username</h1>
+                    <p id="dashboard-email">email@x8r.dev</p>
+                </div>
+            </div>
+            <button class="close-dashboard" onclick="toggleDashboard()">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+
+        <div class="dashboard-stats">
+            <div class="stat-card">
+                <i class="fas fa-clock"></i>
+                <div>
+                    <h3 id="time-spent">0h 0m</h3>
+                    <p>Time Browsing</p>
+                </div>
+            </div>
+            <div class="stat-card">
+                <i class="fas fa-link"></i>
+                <div>
+                    <h3 id="sites-visited">0</h3>
+                    <p>Sites Visited</p>
+                </div>
+            </div>
+            <div class="stat-card">
+                <i class="fas fa-calendar"></i>
+                <div>
+                    <h3 id="account-age">0d</h3>
+                    <p>Account Age</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="dashboard-section">
+            <h2>Recent Activity</h2>
+            <div id="recent-activity" class="activity-list">
+                <p class="empty-state">No recent activity</p>
+            </div>
+        </div>
+
+        <div class="dashboard-section">
+            <h2>Settings</h2>
+            <div class="settings-list">
+                <div class="setting-item">
+                    <div>
+                        <h3>Username</h3>
+                        <p>Change your display name</p>
+                    </div>
+                    <button onclick="changeUsername()">Edit</button>
+                </div>
+                <div class="setting-item">
+                    <div>
+                        <h3>Password</h3>
+                        <p>Update your password</p>
+                    </div>
+                    <button onclick="changePassword()">Change</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<input type="file" id="pfp-upload" accept="image/*" style="display: none;">
+    
+
+    <div class="grid"></div>
+
+    <div class="toast-container fixed right-4 top-4 w-1/4">
+    </div>
+    <!-- DEV TOAST BUTTONS
+    <div class="fixed flex justify-center left-1/2 bottom-5 translate-x-[-50%] h-fit w-1/2">
+        <button class="w-fit m-1 h-fit p-4 text-white font-bold rounded-full bg-slate-900 border border-white/10" onclick="toast('success', 'Successful toast')">Success Toast</button>
+        <button class="w-fit m-1 h-fit p-4 text-white font-bold rounded-full bg-slate-900 border border-white/10"
+            onclick="toast('info', 'Info toast')">Info Toast</button>
+        <button class="w-fit m-1 h-fit p-4 text-white font-bold rounded-full bg-slate-900 border border-white/10"
+            onclick="toast('error', 'Error toast')">Error Toast</button>
+        <button class="w-fit m-1 h-fit p-4 text-white font-bold rounded-full bg-slate-900 border border-white/10"
+            onclick="toast('warn', 'Warning toast')">Warning Toast</button>
+    </div> 
+    -->
+
+    <script>
+        async function registerSW() {
+            if ("serviceWorker" in navigator) {
+                await navigator.serviceWorker.register("/uv/sw.js").then(() => {
+                    console.log(
+                        "%cbreeze." + "%c uv sw registered!",
+                        "color: white; background: linear-gradient(to bottom right, #040c16, #000000); border-radius: 5px; font-weight: bold; padding: 6px; font-family: sans-serif;",
+                        "color: white; background: transparent; border-radius: 0px; padding: 0px;"
+                    );
+                });
+
+                await navigator.serviceWorker.register("/sw.js").then(() => {
+                    console.log(
+                        "%cbreeze." + "%c sj sw registered!",
+                        "color: white; background: linear-gradient(to bottom right, #040c16, #000000); border-radius: 5px; font-weight: bold; padding: 6px; font-family: sans-serif;",
+                        "color: white; background: transparent; border-radius: 0px; padding: 0px;"
+                    );
+                });
+            }
+        }
+
+        window.addEventListener("load", () => {
+            registerSW();
+            lucide.createIcons();
+        });
+
+        const contentFrame = document.getElementById('contentFrame');
+        const homeContent = document.getElementById('homeContent');
+        const navLinks = document.querySelectorAll('nav a[data-page]');
+
+        function navTo(l) {
+            if (l === "home") {
+                contentFrame.style.display = "none"
+                homeContent.style.display = "block"
+            } else {
+                homeContent.style.display = "none"
+                contentFrame.style.display = "block"
+                contentFrame.src = `/pages/${l}.html`
+            }
+        }
+
+        const homesearch = document.getElementById("homesearch");
+
+        function rSearch(input) {
+            let url = input;
+            if (!url.includes(".") || url.includes(" ")) {
+                url = "https://search.brave.com/search?q=" + url;
+            } else {
+                if (!url.startsWith("http://") && !url.startsWith("https://")) {
+                    url = "https://" + url;
+                }
+            }
+
+            homeContent.classList.add('hidden');
+            contentFrame.classList.add('active');
+            contentFrame.src = "/pages/ultraviolet.html?i=" + url;
+            location.href = "#?i=" + url
+        }
+
+        homesearch?.addEventListener("keydown", (e) => {
+            if (e.key === "Enter") {
+                rSearch(homesearch?.value.trim());
+            }
+        });
+
+        document.addEventListener("keydown", (e) => {
+            if (!contentFrame.classList.contains('active')) {
+                homesearch?.focus();
+            }
+        });
+
+        function toast(icon, msg) {
+            const container = document.querySelector(".toast-container")
+            const newToast = document.createElement("div")
+            const newToastIcon = document.createElement("i")
+            newToastIcon.classList.add("toast-icon", "lucide", "far", "fa-icon-lol")
+            const newToastMsg = document.createElement("span")
+            newToastMsg.classList.add("toast-msg")
+            newToast.classList.add("toast", "bg-slate-900", "transition-all", "relative", "duration-300", "shadow-black/30", "shadow-lg", "p-4", "h-fit", "w-1/1", "flex", "rounded-full", "m-3", "border", "border-white/10")
+            newToast.style.right = "-120%"
+            container.appendChild(newToast)
+            newToast.appendChild(newToastIcon)
+            newToast.appendChild(newToastMsg)
+
+            switch (icon) {
+                case "success":
+                    if (newToastIcon && newToastMsg) {
+                        newToastIcon.classList.add("fa-circle-check")
+                        newToastMsg.textContent = msg
+                    }
+                    break
+                case "info":
+                    newToastIcon.classList.add("fa-circle-info")
+                    newToastMsg.textContent = msg
+                    break;
+                case "error":
+                    newToastIcon.classList.add("fa-circle-x")
+                    newToastMsg.textContent = msg
+                case "warn":
+                    newToastIcon.classList.add("fa-circle-exclamation")
+                    newToastMsg.textContent = msg
+            }
+
+            setTimeout(() => {
+                newToast.style.right = "4%"
+            }, 25)
+
+            setTimeout(() => {
+                newToast.style.right = "-120%"
+            }, 4000)
+
+            setTimeout(() => {
+                newToast.remove()
+            }, 4325)
+        }
+    </script>
+</body>
+
+</html>
