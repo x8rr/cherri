@@ -1,0 +1,60 @@
+{"frames": {
+
+"MMob01_arrest_0001":
+{
+	"frame": {"x":1,"y":1,"w":305,"h":191},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":16,"y":69,"w":305,"h":191},
+	"sourceSize": {"w":604,"h":604}
+},
+"MMob01_arrest_0002":
+{
+	"frame": {"x":308,"y":1,"w":299,"h":183},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":22,"y":87,"w":299,"h":183},
+	"sourceSize": {"w":604,"h":604}
+},
+"MMob01_arrest_0003":
+{
+	"frame": {"x":605,"y":186,"w":295,"h":177},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":26,"y":99,"w":295,"h":177},
+	"sourceSize": {"w":604,"h":604}
+},
+"MMob01_arrest_0004":
+{
+	"frame": {"x":1,"y":194,"w":293,"h":175},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":28,"y":102,"w":293,"h":175},
+	"sourceSize": {"w":604,"h":604}
+},
+"MMob01_arrest_0005":
+{
+	"frame": {"x":609,"y":1,"w":294,"h":178},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":27,"y":98,"w":294,"h":178},
+	"sourceSize": {"w":604,"h":604}
+},
+"MMob01_arrest_0006":
+{
+	"frame": {"x":308,"y":186,"w":295,"h":179},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":26,"y":96,"w":295,"h":179},
+	"sourceSize": {"w":604,"h":604}
+}},
+"meta": {
+	"app": "https://www.codeandweb.com/texturepacker",
+	"version": "1.0",
+	"image": "MMob01_arrest.png",
+	"format": "RGBA8888",
+	"size": {"w":904,"h":370},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:40147739d3a7c2cf7fbe997af35b9b58:2d96fdd7b11d9b159e20f1333da170da:970b91b76bc584eb6fe21a884d32353a$"
+}
+}

@@ -1,0 +1,92 @@
+{"frames": {
+
+"MButlerBadTors_001":
+{
+	"frame": {"x":581,"y":897,"w":288,"h":291},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":14,"y":6,"w":288,"h":291},
+	"sourceSize": {"w":352,"h":324}
+},
+"MButlerBadTors_004":
+{
+	"frame": {"x":291,"y":1,"w":288,"h":316},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":14,"y":3,"w":288,"h":316},
+	"sourceSize": {"w":352,"h":324}
+},
+"MButlerBadTors_007":
+{
+	"frame": {"x":1,"y":1,"w":288,"h":321},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":14,"y":1,"w":288,"h":321},
+	"sourceSize": {"w":352,"h":324}
+},
+"MButlerBadTors_010":
+{
+	"frame": {"x":291,"y":319,"w":288,"h":301},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":14,"y":0,"w":288,"h":301},
+	"sourceSize": {"w":352,"h":324}
+},
+"MButlerBadTors_013":
+{
+	"frame": {"x":581,"y":301,"w":288,"h":297},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":14,"y":2,"w":288,"h":297},
+	"sourceSize": {"w":352,"h":324}
+},
+"MButlerBadTors_016":
+{
+	"frame": {"x":581,"y":1,"w":288,"h":298},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":14,"y":6,"w":288,"h":298},
+	"sourceSize": {"w":352,"h":324}
+},
+"MButlerBadTors_019":
+{
+	"frame": {"x":1,"y":324,"w":288,"h":320},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":14,"y":3,"w":288,"h":320},
+	"sourceSize": {"w":352,"h":324}
+},
+"MButlerBadTors_022":
+{
+	"frame": {"x":1,"y":646,"w":288,"h":320},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":14,"y":1,"w":288,"h":320},
+	"sourceSize": {"w":352,"h":324}
+},
+"MButlerBadTors_025":
+{
+	"frame": {"x":291,"y":622,"w":288,"h":299},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":14,"y":0,"w":288,"h":299},
+	"sourceSize": {"w":352,"h":324}
+},
+"MButlerBadTors_028":
+{
+	"frame": {"x":581,"y":600,"w":288,"h":295},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":14,"y":2,"w":288,"h":295},
+	"sourceSize": {"w":352,"h":324}
+}},
+"meta": {
+	"app": "https://www.codeandweb.com/texturepacker",
+	"version": "1.0",
+	"image": "MButlerBadWalk.png",
+	"format": "RGBA8888",
+	"size": {"w":870,"h":1189},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:e4ff3c35397499fe758b0f363264693a:fe69f6ac292436a7563f3562860d0efe:9089f29e62f88814b9b9b7e730010c45$"
+}
+}

@@ -584,6 +584,20 @@ p a:hover {
     filter: drop-shadow(0 0 15px black);
 }
 
+.dashboard-container.settings-hidden {
+    transform: translate(-50%, -50%) scale(.9);
+    opacity: 0;
+    pointer-events: none;
+    transform-origin: center center;
+}
+
+.dashboard-container.settings-shown {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+    pointer-events: all;
+    transform-origin: center center;
+}
+
 .dashboard-content {
     padding: 30px;
 }
@@ -874,4 +888,18 @@ p a:hover {
 
 .signout-button:hover {
     background: rgb(80 30 30);
+}
+
+.auth-container.settings-hidden {
+    transform: translate(-50%, -50%) scale(.9);
+    opacity: 0;
+    pointer-events: none;
+    transform-origin: center center;
+}
+
+.auth-container.settings-shown {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+    pointer-events: all;
+    transform-origin: center center;
 }

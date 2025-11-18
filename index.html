@@ -21,7 +21,7 @@
     <link rel="stylesheet" href="/fa/css/all-pro.css">
     <link rel="stylesheet" href="/assets/css/t.css">
     <link rel="stylesheet" href="/assets/css/dropdown.css">
-    <script src="https://cdn.jsdelivr.net/npm/eruda@3.4.3/eruda.min.js"></script>
+
     <script src="/assets/js/splash.js" defer></script>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script>
@@ -34,11 +34,88 @@
                 auth: {
                     autoRefreshToken: true,
                     persistSession: true,
-                    detectSessionInUrl: true
+                    detectSessionInUrl: true,
+                    storage: window.localStorage,
+                    storageKey: 'breeze-auth-token'
                 }
             }
         );
 
+        let isRefreshing = false;
+
+        window.supabase.auth.onAuthStateChange(async (event, session) => {
+            console.log('Auth event:', event, session ? 'Session active' : 'No session');
+
+            if (event === 'TOKEN_REFRESHED') {
+                console.log('✅ Token refreshed successfully at', new Date().toLocaleTimeString());
+            }
+
+            if (event === 'SIGNED_OUT') {
+                const preserve = {};
+                Object.keys(localStorage).forEach(key => {
+                    if (key.startsWith('breeze_') && !key.includes('auth')) {
+                        preserve[key] = localStorage.getItem(key);
+                    }
+                });
+
+                localStorage.clear();
+
+                Object.keys(preserve).forEach(key => {
+                    localStorage.setItem(key, preserve[key]);
+                });
+
+                setTimeout(() => window.location.reload(), 100);
+            }
+
+            if (event === 'SIGNED_IN') {
+                setTimeout(() => checkAuth(), 100);
+            }
+        });
+
+        setInterval(() => {
+            window.supabase.auth.getSession().then(({ data: { session } }) => {
+                if (!session) {
+                    console.warn('⚠️ Session lost, reloading...');
+                    window.location.reload();
+                }
+            });
+        }, 60000);
+
+        async function ensureValidSession() {
+            try {
+                const { data: { session }, error } = await window.supabase.auth.getSession();
+
+                if (error) throw error;
+
+                if (!session) {
+                    console.warn('No session found');
+                    return null;
+                }
+
+                const expiresAt = session.expires_at * 1000;
+                const now = Date.now();
+                const timeUntilExpiry = expiresAt - now;
+
+                if (timeUntilExpiry < 5 * 60 * 1000 && !isRefreshing) {
+                    console.log('⚠️ Token expiring soon, refreshing...');
+                    isRefreshing = true;
+                    const { data, error: refreshError } = await window.supabase.auth.refreshSession();
+
+                    if (refreshError) {
+                        console.error('Failed to refresh:', refreshError);
+                        await signOut();
+                        return null;
+                    }
+
+                    return data.session;
+                }
+
+                return session;
+            } catch (error) {
+                console.error('Session check error:', error);
+                return null;
+            }
+        }
     </script>
     <script>
         async function signUp(u, p) {
@@ -46,11 +123,19 @@
                 const { data, error } = await window.supabase.auth.signUp({
                     email: `${u}@breezeaccounts.lol`,
                     password: p,
+                    options: {
+                        data: {
+                            username: u,
+                            sitesVisited: 0,
+                            timeSpentBrowsing: 0
+                        }
+                    }
                 });
+
                 if (error) throw error;
                 return data;
             } catch (error) {
-                console.error('Sign up error:', error);
+                console.error('Signup error:', error);
                 throw error;
             }
         }
@@ -61,37 +146,39 @@
                     email: `${u}@breezeaccounts.lol`,
                     password: p,
                 });
+
                 if (error) throw error;
                 return data;
             } catch (error) {
-                console.error('Sign in error:', error);
+                console.error('Signin error:', error);
                 throw error;
             }
         }
 
         async function signOut() {
             try {
-                const { error } = await window.supabase.auth.signOut();
+                const { error } = await window.supabase.auth.signOut({ scope: 'local' });
                 if (error) throw error;
             } catch (error) {
-                console.error('Sign out error:', error);
+                console.error('Signout error:', error);
                 throw error;
             }
         }
 
         async function getUser() {
             try {
-                const { data: { session }, error } = await window.supabase.auth.getSession();
+                const session = await ensureValidSession();
+                if (!session) return null;
+
+                const { data: { user }, error } = await window.supabase.auth.getUser();
+
                 if (error) throw error;
-                return session?.user || null;
+                return user;
             } catch (error) {
                 console.error('Get user error:', error);
                 return null;
             }
         }
-    </script>
-    <script>
-        newTab()
     </script>
     <script>
 
@@ -150,7 +237,8 @@
     </script>
 
     <script>
-        let authMode = "signin";
+
+        let authMode = "signin"
 
         async function checkAuth() {
             try {
@@ -214,7 +302,6 @@
                     await signIn(username, password);
                     showToast("success", "Logged in!", "fas fa-check-circle");
                     toggleAuth();
-                    await checkAuth();
                     document.getElementById("auth-username").value = "";
                     document.getElementById("auth-password").value = "";
                 }
@@ -230,16 +317,12 @@
         async function handleSignOut() {
             try {
                 await signOut();
-                showToast("success", "Signed out. Reloading...", "fas fa-check-circle");
+                showToast("success", "Signed out successfully", "fas fa-check-circle");
                 document.querySelector("#auth-section i").classList.replace("fa-user-check", "fa-user");
                 document.getElementById("signout-btn").style.display = "none";
 
                 const authBtn = document.querySelector("#auth-section a");
                 authBtn.setAttribute("onclick", "toggleAuth()");
-
-                setTimeout(() => {
-                    window.location.reload();
-                }, 1000);
             } catch (error) {
                 showToast("error", "Sign out failed", "fas fa-times-circle");
             }
@@ -248,13 +331,6 @@
         window.addEventListener("load", async () => {
             await new Promise(resolve => setTimeout(resolve, 500));
             await checkAuth();
-        });
-
-        window.supabase.auth.onAuthStateChange((event, session) => {
-            console.log('Auth state changed:', event, session);
-            if (event === 'SIGNED_IN') {
-                checkAuth();
-            }
         });
     </script>
     </body>
@@ -339,7 +415,6 @@
             <p onclick="toggleAuthMode()" class="auth-toggle-text">
                 <span id="auth-toggle">Need an account? Sign up</span>
             </p>
-            <p>There is a bug where a new account will break after 1-2 hours. We are actively trying to fix the bug.</p>
             <button onclick="handleSignOut()" id="signout-btn" class="auth-button signout-button">Sign Out</button>
         </div>
     </div>
@@ -595,7 +670,7 @@
                     const newTitle = document.createElement("h1")
 
                     newAppContainer.classList.add("app")
-                    newAppContainer.setAttribute("onclick", `rSearch(${item.url})`)
+                    newAppContainer.setAttribute("onclick", `rSearch('${item.url}')`)
                     newTitle.textContent = item.name
                     newImage.src = item.img
 
@@ -677,16 +752,8 @@
     </script>
     <script>
         let aTab = 0
-        let tabCounter = 1
-        let bTabs = [
-            {
-                id: 0,
-                title: "New Tab",
-                url: "",
-                history: [],
-                historyIndex: -1,
-            },
-        ]
+        let tabCounter = 0
+        let bTabs = []
         const tabCont = document.querySelector(".tabs")
         let tabFrame
         let fUrl
@@ -1025,14 +1092,14 @@
         async function updTime() {
             try {
                 const user = await getUser()
-                if (!user) return 
+                if (!user) return
 
                 const currentTime = user.user_metadata?.timeSpentBrowsing ?? 0
-                
+
                 console.log("Time spent: " + currentTime)
 
                 const { error } = await window.supabase.auth.updateUser({
-                    data: { timeSpentBrowsing: currentTime + 5 }
+                    data: { timeSpentBrowsing: currentTime + 300 }
                 })
 
                 if (error) throw error
@@ -1041,7 +1108,7 @@
             }
         }
 
-        setInterval(updTime, 5000)
+        setInterval(updTime, 300000)
 
         async function updateTimeBrowsing() {
             const user = await getUser()
@@ -1325,6 +1392,10 @@
         const homesearch = document.getElementById("homesearch");
 
         function rSearch(input) {
+            if (document.querySelector(".apps-wrapper").classList.contains("settings-shown")) {
+                toggleApps()
+            }
+
             let url = input;
             if (!url.includes(".") || url.includes(" ")) {
                 url = "https://search.brave.com/search?q=" + url;

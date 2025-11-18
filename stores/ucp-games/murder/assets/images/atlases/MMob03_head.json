@@ -1,0 +1,92 @@
+{"frames": {
+
+"MMob03_head_0001":
+{
+	"frame": {"x":1,"y":1,"w":135,"h":120},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":36,"y":14,"w":135,"h":120},
+	"sourceSize": {"w":203,"h":203}
+},
+"MMob03_head_0002":
+{
+	"frame": {"x":138,"y":1,"w":135,"h":120},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":36,"y":14,"w":135,"h":120},
+	"sourceSize": {"w":203,"h":203}
+},
+"MMob03_head_0003":
+{
+	"frame": {"x":275,"y":1,"w":135,"h":120},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":36,"y":14,"w":135,"h":120},
+	"sourceSize": {"w":203,"h":203}
+},
+"MMob03_head_0004":
+{
+	"frame": {"x":1,"y":123,"w":135,"h":120},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":36,"y":14,"w":135,"h":120},
+	"sourceSize": {"w":203,"h":203}
+},
+"MMob03_head_0005":
+{
+	"frame": {"x":138,"y":123,"w":135,"h":120},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":36,"y":14,"w":135,"h":120},
+	"sourceSize": {"w":203,"h":203}
+},
+"MMob03_head_0006":
+{
+	"frame": {"x":138,"y":123,"w":135,"h":120},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":36,"y":14,"w":135,"h":120},
+	"sourceSize": {"w":203,"h":203}
+},
+"MMob03_head_0007":
+{
+	"frame": {"x":275,"y":123,"w":135,"h":120},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":36,"y":14,"w":135,"h":120},
+	"sourceSize": {"w":203,"h":203}
+},
+"MMob03_head_0008":
+{
+	"frame": {"x":1,"y":245,"w":135,"h":120},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":36,"y":14,"w":135,"h":120},
+	"sourceSize": {"w":203,"h":203}
+},
+"MMob03_head_0009":
+{
+	"frame": {"x":138,"y":245,"w":135,"h":120},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":36,"y":14,"w":135,"h":120},
+	"sourceSize": {"w":203,"h":203}
+},
+"MMob_hand":
+{
+	"frame": {"x":275,"y":245,"w":129,"h":152},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":182,"y":95,"w":129,"h":152},
+	"sourceSize": {"w":321,"h":321}
+}},
+"meta": {
+	"app": "https://www.codeandweb.com/texturepacker",
+	"version": "1.0",
+	"image": "MMob03_head.png",
+	"format": "RGBA8888",
+	"size": {"w":411,"h":398},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:50624eb301fc2d214df3fdea3528970b:b85292082ea64e4d121a7806b947765b:cff1aa538a025c8607958001f2356777$"
+}
+}

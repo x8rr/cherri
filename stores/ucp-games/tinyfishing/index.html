@@ -1,0 +1,46 @@
+<html lang="en">
+
+<head>
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="pragma" content="no-cache">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta charset="utf-8">
+
+    <!-- <script src="/poki-sdk.js"></script> -->
+
+    <!-- Set the title bar of the page -->
+    <title id="title">Tiny Fishing</title>
+    <meta name="description"
+        content="Tiny Fishing is a fishing game where you have to upgrade your gear to get bigger fish.">
+    <meta name="robots" content="noindex,nofollow" />
+    <script type="text/javascript" src="/cloak.js"></script>
+    <!-- Set the background colour of the document -->
+    <link rel="stylesheet" href="style.css">
+    <script>
+        if (!Number.isNaN && window.isNaN) Number.isNaN = isNaN;
+        //if (typeof Math.sign === 'undefined') { Math.sign = function (x) { return x > 0 ? 1 : x < 0 ? -1 : x; } }
+    </script>
+</head>
+
+<body style="overflow: hidden;">
+    <div class="gm4html5_div_class" id="gm4html5_div_id" style="padding-top: 20px; position: absolute; height: 488px;">
+        <canvas id="canvas" width="640" height="360"
+            style="position: absolute; left: 0px; top: 0px; width: 640px; height: 360px;">
+            <p>Your browser doesn't support HTML5 canvas.</p>
+        </canvas>
+    </div>
+    <!-- Run the game code -->
+    <script type="text/javascript" src="html5game/TinyFishing.js"></script>
+    <script>
+
+        if (!window.AudioContext && !window.webkitAudioContext) g_WebAudioContext = {};
+        GameMaker_Init();
+        if (!window.AudioContext && !window.webkitAudioContext) g_WebAudioContext = null;
+
+    </script>
+</body>
+
+</html>
