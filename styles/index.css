@@ -203,7 +203,8 @@ nav ul li.disabled {
     flex-direction: row;
 }
 
-.settings-container, .chat-container {
+.settings-container,
+.chat-container {
     background: var(--bg);
     border-radius: 25px;
     color: white;
@@ -344,14 +345,20 @@ p a:hover {
     transform-origin: center center;
 }
 
-.apps-wrapper.settings-hidden, .games-wrapper.settings-hidden {
+.apps-wrapper.settings-hidden,
+.games-wrapper.settings-hidden,
+.partners-wrapper.settings-hidden,
+.download-wrapper.settings-hidden {
     transform: translate(-50%, -50%) scale(.9);
     opacity: 0;
     pointer-events: none;
     transform-origin: center center;
 }
 
-.apps-wrapper.settings-shown, .games-wrapper.settings-shown {
+.apps-wrapper.settings-shown,
+.games-wrapper.settings-shown,
+.partners-wrapper.settings-shown,
+.download-wrapper.settings-shown {
     transform: translate(-50%, -50%) scale(1);
     opacity: 1;
     pointer-events: all;
@@ -531,7 +538,8 @@ p a:hover {
     background: var(--bg-3);
 }
 
-.apps-wrapper, .games-wrapper {
+.apps-wrapper,
+.games-wrapper {
     position: fixed;
     height: 70vh;
     width: 1000px;
@@ -546,11 +554,48 @@ p a:hover {
     transform-origin: center center;
 }
 
-.apps-container, .games-container {
+.partners-wrapper {
+    position: fixed;
+    height: 60vh;
+    width: 500px;
+    padding: 15px;
+    background: var(--bg);
+    border-radius: 25px;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 6;
+    transition: 0.2s;
+    transform-origin: center center;
+}
+
+.download-wrapper {
+    position: fixed;
+    height: 27vh;
+    width: 500px;
+    padding: 15px;
+    background: var(--bg);
+    border-radius: 25px;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 6;
+    transition: 0.2s;
+    transform-origin: center center;
+}
+
+.partner-container {
+    height: 43vh;
+    overflow-y: auto;
+}
+
+.apps-container,
+.games-container {
     width: 975px;
 }
 
-.apps-container::-webkit-scrollbar, .games-container::-webkit-scrollbar {
+.apps-container::-webkit-scrollbar,
+.games-container::-webkit-scrollbar {
     scrollbar-width: thin;
 }
 
@@ -666,6 +711,21 @@ p a:hover {
     border-radius: 50%;
     object-fit: cover;
     border: 3px solid #2d2d2d;
+}
+
+button.button {
+    padding: 8px 16px;
+    background: var(--bg-2);
+    border: none;
+    border-radius: 15px;
+    color: white;
+    cursor: pointer;
+    transition: 0.2s;
+    margin: 3px;
+}
+
+button.button:hover {
+    background: var(--bg-3);
 }
 
 .pfp-edit-btn {
