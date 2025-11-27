@@ -207,7 +207,7 @@ nav ul li.disabled {
 .chat-container {
     background: var(--bg);
     border-radius: 25px;
-    color: white;
+    color: var(--text);
     width: 625px;
     height: 50vh;
     position: fixed;
@@ -722,7 +722,7 @@ button.button {
     background: var(--bg-2);
     border: none;
     border-radius: 15px;
-    color: white;
+    color: var(--text);
     cursor: pointer;
     transition: 0.2s;
     margin: 3px;
@@ -1207,4 +1207,18 @@ button.button:hover {
     left: calc(100% - var(--circle-diameter) - var(--switch-offset));
     -webkit-box-shadow: var(--circle-checked-shadow);
     box-shadow: var(--circle-checked-shadow);
+}
+
+#reset-theme {
+    background: red;
+    font-size: 40px;
+    color: white;
+    border-radius: 25px;
+    padding: 10px;
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 329486238475324869;
+    cursor: pointer;
 }

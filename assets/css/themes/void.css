@@ -13,3 +13,7 @@
     --accent: #ffffff;
     --accent-2: #adadad;
 }
+
+#reset-theme {
+    display: none !important;
+}

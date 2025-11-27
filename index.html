@@ -176,7 +176,7 @@
                     <br>
                     <br>
                     <h2>Game Library</h2>
-                    <p>The set of games that the whole site uses! Refresh to see changes.</p>
+                    <p>The set of games that the whole site uses! This will automatically reload the games.</p>
                     <div class="store-selector">
                         <div class="store-selected"></div>
                         <div class="store-options">
@@ -384,6 +384,8 @@
     <br>
     </div>
 
+    <button id="reset-theme" onclick="resetTheme()">CLICK HERE TO RESET YOUR THEME!</button>
+
     <!-- site version -->
     <cherriattr version="b2.4"></cherriattr>
 
@@ -442,6 +444,14 @@
 
         load("apps", "apps", "Apps", "rSearch", "")
         load(selectedStore.toLowerCase(), "games", "Games", "navTo", "play.html?launch=")
+
+        document.addEventListener("storeUpdated", (e) => {
+            const newStore = e.detail.toLowerCase()
+            const container = document.querySelector(".games-container")
+
+            container.innerHTML = ''
+            load(newStore, "games", "Games", "navTo", "play.html?launch=")
+        })
 
         function searchApps(term) {
             const apps = document.querySelectorAll(".app")
@@ -798,5 +808,10 @@
                 localStorage.setItem("cherri_siteVersion", siteVersion)
             }
         })
+
+        function resetTheme() {
+            localStorage.setItem("cherri_theme", "default")
+            window.location.reload()
+        }
     </script>
 </body>

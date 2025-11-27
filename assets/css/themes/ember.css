@@ -13,3 +13,7 @@
     --accent: #e25858;
     --accent-2: #c4674a;
 }
+
+#reset-theme {
+    display: none !important;
+}
