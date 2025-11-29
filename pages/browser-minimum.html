@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>cherri | browser</title>
+    <title>cherri | mini browser</title>
     <link rel="shortcut icon" href="/assets/img/fav.png" type="image/x-icon" id="tabIcon">
     <link rel="stylesheet" href="/assets/css/colors.css" id="css-theme-link">
     <link rel="stylesheet" href="/assets/css/elements.css">
@@ -32,22 +32,9 @@
             swium();
         });
     </script>
-    <script src="/assets/js/browserfunctions.js"></script>
 </head>
 
 <body>
-    <div class="nav-logo">
-        <img src="/assets/img/fav.png" alt="" onclick="
-            ul.classList.add('active');
-            const blurr = document.createElement('div')
-            blurr.classList.add('bluroverlay')
-            document.body.append(blurr)
-            blurr.addEventListener('click', () => {
-                ul.classList.remove('active')
-                blurr.remove()
-            })
-        ">
-    </div>
 
     <style>
         .browser-container {
@@ -63,12 +50,12 @@
 
         .browser-frame {
             width: 99.25%;
-            height: calc(100vh - 125px);
+            height: 84vh;
             position: fixed;
-            top: 119px;
+            top: 60px;
             left: 50%;
             transform: translateX(-50%);
-            border-radius: 12px;
+            border-radius: 22px;
             border: 1px solid var(--border-3);
             display: none;
             z-index: 1000;
@@ -91,7 +78,7 @@
         }
 
         .tabs {
-            display: flex;
+            display: none;
             align-items: center;
             gap: 5px;
             margin-left: 0px;
@@ -144,10 +131,10 @@
             border-radius: 10px;
             height: 40px;
             padding: 0 20px;
-            flex: 1;
+            flex: 0.95;
             transition: 0.2s;
             color: var(--bright-text);
-            font-family: Inter;
+            font-family: Arial;
             outline: none;
             font-size: 14px;
         }
@@ -226,6 +213,51 @@
             background: var(--bg-3);
             color: var(--bright-text);
         }
+
+        .browser-loading {
+            background: var(--bg-2);
+            height: 3px;
+            width: 200px;
+            position: relative;
+            transform: translate(-50%, -50%);
+            left: 50%;
+            top: 55%;
+            border-radius: 100px;
+        }
+
+        .browser-loading::after {
+            content: "";
+            position: absolute;
+            height: 100%;
+            background: var(--accent);
+            left: 0;
+            border-radius: 100px;
+            bottom: 0;
+            width: 100%;
+            animation: browser-loading-lol .75s infinite ease;
+        }
+
+        @keyframes browser-loading-lol {
+            0% {
+                transform-origin: left;
+                transform: scaleX(0);
+            }
+
+            50% {
+                transform-origin: left;
+                transform: scaleX(1);
+            }
+
+            50.01% {
+                transform-origin: right;
+                transform: scaleX(1);
+            }
+
+            100% {
+                transform-origin: right;
+                transform: scaleX(0);
+            }
+        }
     </style>
 
     <div class="browser-container">
@@ -250,51 +282,50 @@
                     <button onclick="full()">
                         <i class="ri-fullscreen-line ri"></i>
                     </button>
-                    <button onclick="eruda.init(); this.querySelector('i').style.color='var(--accent)';">
-                        <i class="ri-code-line ri"></i>
-                    </button>
-                    <button onclick="location.href = '/'">
-                        <i class="ri-home-4-line ri"></i>
-                    </button>
                 </div>
             </div>
         </div>
         <div class="browser-loading"></div>
     </div>
-
-    <script defer>
-        const ul = document.getElementById("nav-ul")
-
-        document.querySelectorAll("li a").forEach(link => {
-            link.addEventListener("click", function () {
-                document.querySelectorAll("li a").forEach(l => l.classList.remove("active"));
-                this.classList.add("active");
-            });
-        });
-
-        window.addEventListener("keydown", (e) => {
-            if (e.ctrlKey && e.key === "m") {
-                console.log("Key pressed")
-                e.preventDefault()
-                if (!ul.classList.contains("active")) {
-                    ul.classList.add("active")
-                    const blurr = document.createElement("div")
-                    blurr.classList.add("bluroverlay")
-                    document.body.append(blurr)
-                    blurr.addEventListener("click", () => {
-                        blurr.remove()
-                        ul.classList.remove("active")
-                    })
-                } else {
-                    ul.classList.remove("active")
-                    const blurr = document.querySelector(".bluroverlay")
-                    blurr.remove()
-                }
-            }
-        })
-    </script>
+    <script src="/assets/js/browserfunctions.js"></script>
     <script defer>
         newTab()
+
+        function rSearch(input) {
+            let url = input;
+            if (!url.includes(".") || url.includes(" ")) {
+                url = "https://search.brave.com/search?q=" + url;
+            } else {
+                if (!url.startsWith("http://") && !url.startsWith("https://")) {
+                    url = "https://" + url;
+                }
+            }
+
+            const b = document.querySelector(".browser-container")
+            const frames = document.querySelectorAll(".viewframe")
+
+            b.style.opacity = 1
+            b.style.pointerEvents = "all"
+
+            frames.forEach(frame => {
+                frame.style.opacity = 1
+                frame.style.pointerEvents = "all"
+            })
+
+            console.log("rSearch")
+            nav(url)
+        }
+        const homesearch = document.getElementById("searchbar");
+
+        homesearch.addEventListener("keydown", (e) => {
+            console.log("askjdfaskhjlgdf")
+            if (e.key === "Enter") {
+                rSearch(homesearch?.value.trim());
+                console.log("rsearching")
+            }
+            console.log("check")
+        });
     </script>
-    </body>
+</body>
+
 </html>

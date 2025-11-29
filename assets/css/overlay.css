@@ -1,0 +1,93 @@
+#gameOverlay {
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    left: 0;
+    top: 0;
+    background: rgba(0, 0, 0, .5);
+    transition: 0.2s;
+    opacity: 0;
+    pointer-events: none;
+}
+
+#gameOverlay.active {
+    opacity: 1;
+    pointer-events: all;
+}
+
+.record-widget {
+    background: var(--bg);
+    border: 1px solid var(--border-4);
+    border-radius: 25px;
+    height: 100px;
+    width: 111px;
+    position: absolute;
+    left: 10px;
+    top: 10px;
+    padding: 15px;
+}
+
+.record-widget h1 {
+    font-size: 24px;
+    margin: 5px;
+    margin-left: 0;
+    margin-bottom: 7px;
+}
+
+.record-widget button {
+    height: 50px;
+    width: 50px;
+    padding: 10px;
+    border-radius: 15px;
+    aspect-ratio: 1;
+    background: var(--bg-2);
+    border: 1px solid var(--border-4);
+    transition: 0.2s;
+    color: var(--text);
+    cursor: pointer;
+    font-size: 20px;
+    margin: 3px;
+}
+
+.record-widget button:hover {
+    background: var(--bg-3);
+}
+
+.cherri-info {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: max-content;
+    height: 20px;
+    background: var(--bg);
+    top: 10px;
+    border-radius: 25px;
+    border: 1px solid var(--border-4);
+    padding: 15px;
+    text-align: center;
+    transition: 0.2s;
+}
+
+.cherri-info .divider {
+    display: inline-block;
+    background: var(--bg-2);
+    width: 2px;
+    border-radius: 324986px;
+    height: 25px;
+    z-index: 234879623847521;
+    vertical-align: middle;
+    margin-top: 0px;
+    position: relative;
+    top: -2px;
+    margin: 0 5px;
+}
+
+.proxy-widget {
+    height: 400px;
+    width: 550px;
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    border-radius: 25px;
+    border: 1px solid var(--bg-4);
+}

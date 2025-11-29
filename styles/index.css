@@ -52,6 +52,7 @@ nav ul {
     overflow: hidden;
     background: transparent;
     display: flex;
+    transition: 0.2s;
 }
 
 nav ul li {

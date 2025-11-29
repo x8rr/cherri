@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="/assets/icons/fonts/remixicon.css">
     <script src="/assets/js/lib/particles.js"></script>
     <script src="/assets/js/colors.js"></script>
+    <link rel="stylesheet" href="/assets/css/overlay.css">
 </head>
 
 <body style="background: none !important;">
@@ -96,7 +97,7 @@
         ::-webkit-scrollbar {
             scrollbar-width: none;
         }
-        
+
         #gameframe {
             width: 95vw;
             height: 80vh;
@@ -156,10 +157,25 @@
             font-style: italic;
             opacity: .5;
         }
+
+        .overlay-notice {
+            background: var(--bg-5);
+            color: var(--text);
+            padding: 10px;
+            border: 1px solid var(--border-4);
+            border-radius: 15px;
+            position: fixed;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            opacity: 0;
+            transition: 0.4s;
+            z-index: 3298746986;
+        }
     </style>
 
     <div id="particles-container"></div>
-    
+
     <div class="gamestuff">
         <iframe frameborder="0" id="gameframe" allowfullscreen></iframe>
         <div class="gamecontrols">
@@ -173,6 +189,30 @@
                 <i class="ri-external-link-line"></i>
             </button>
         </div>
+    </div>
+
+    <div class="overlay-notice">
+        Press Alt + G to open the Game Overlay
+    </div>
+
+    <div id="gameOverlay" class="">
+        <div class="cherri-info">
+            <span id="currentTime">Loading time...</span>
+            <span class="divider"></span>
+            <span id="temperature">Loading temp...</span>
+            <span class="divider"></span>
+            <span id="sessionTime">Loading session time...</span>
+        </div>
+        <div class="record-widget">
+            <h1>Record</h1>
+            <button style="margin-left: 0;" onclick="startRecording()">
+                <i class="ri-record-circle-line"></i>
+            </button>
+            <button id="stopRecording" style="margin-right: 0;" onclick="stopRecording()">
+                <i class="ri-stop-fill"></i>
+            </button>
+        </div>
+        <iframe src="/pages/browser-minimum.html" frameborder="0" class="proxy-widget"></iframe>
     </div>
 
     <p id="bottom-tip">If a game doesn't work, try popping it out!</p>
@@ -225,6 +265,21 @@
         if (gameurl) {
             gameframe.src = decodeURIComponent(gameurl);
             gameframe.focus()
+            gameframe.onload = () => {
+                const doc = gameframe.contentDocument
+                const head = doc.head
+
+                const script = doc.createElement("script");
+                script.textContent = `
+                    window.addEventListener("keydown", (e) => {
+                        if (e.altKey && e.code === "KeyG") {
+                            parent.postMessage({ type: "alt-g" }, "*");
+                        }
+                    });
+                `
+
+                head.appendChild(script)
+            }
         }
 
         function refreshGame() {
@@ -235,9 +290,9 @@
         function fullscreenGame() {
             if (gameframe.requestFullscreen) {
                 gameframe.requestFullscreen();
-            } else if (gameframe.mozRequestFullScreen) { 
+            } else if (gameframe.mozRequestFullScreen) {
                 gameframe.mozRequestFullScreen();
-            } else if (gameframe.webkitRequestFullscreen) { 
+            } else if (gameframe.webkitRequestFullscreen) {
                 gameframe.webkitRequestFullscreen();
             } else if (gameframe.msRequestFullscreen) {
                 gameframe.msRequestFullscreen();
@@ -249,6 +304,148 @@
             window.open(gameframe.src, '_blank');
             gameframe.focus();
         }
+
+        const useOverlay = localStorage.getItem("cherri_useOverlay") ?? "yes"
+
+        if (useOverlay === "yes") {
+            initOverlay()
+        }
+
+        function initOverlay() {
+            const controls = document.querySelector(".gamecontrols")
+            const frame = document.querySelector("#gameframe")
+            const overlay = document.getElementById("gameOverlay")
+            const overlayNotice = document.querySelector(".overlay-notice")
+            controls.style.display = "none"
+            document.querySelector("#bottom-tip").style.display = "none"
+            frame.style.height = "100vh"
+            frame.style.width = "100vw"
+            frame.style.border = "none"
+            frame.style.borderRadius = "0"
+            setTimeout(() => {
+                overlayNotice.style.opacity = 1
+            }, 500)
+            setTimeout(() => {
+                overlayNotice.style.opacity = 0
+            }, 1000)
+            window.addEventListener("message", (ev) => {
+                if (ev.data.type === "alt-g") {
+                    if (overlay.classList.contains("active")) {
+                        overlay.classList.remove("active")
+                    } else {
+                        overlay.classList.add("active")
+                    }
+                }
+            });
+            document.addEventListener("keydown", (e) => {
+                if (e.altKey && e.key === "g") {
+                    if (overlay.classList.contains("active")) {
+                        overlay.classList.remove("active")
+                    } else {
+                        overlay.classList.add("active")
+                    }
+                }
+            })
+        }
+
+        async function getTemp() {
+            const loc = await fetch("https://ipapi.co/json/").then(r => r.json());
+            const url = `https://api.open-meteo.com/v1/forecast?latitude=${loc.latitude}&longitude=${loc.longitude}&current_weather=true`;
+            const weather = await fetch(url).then(r => r.json());
+            return weather.current_weather.temperature;
+        }
+
+        getTemp().then(t => {
+            document.getElementById("temperature").textContent = Math.trunc((t * 1.8) + 32) + "°F";
+        });
+
+        function getOSTime() {
+            const now = new Date();
+            return now.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
+        }
+
+        document.getElementById("currentTime").textContent = getOSTime()
+
+        let recorder;
+        let chunks = [];
+
+        async function startRecording() {
+            try {
+                const stream = await navigator.mediaDevices.getDisplayMedia({
+                    video: {
+                        width: { ideal: 1920 },
+                        height: { ideal: 1080 },
+                        frameRate: { ideal: 60 }
+                    },
+                    audio: true
+                });
+
+                recorder = new MediaRecorder(stream);
+
+                recorder.ondataavailable = e => chunks.push(e.data);
+
+                recorder.onstop = async () => {
+                    const blob = new Blob(chunks, { type: "video/webm" });
+                    chunks = [];
+
+                    stream.getTracks().forEach(track => track.stop());
+
+                    try {
+                        const handle = await window.showSaveFilePicker({
+                            suggestedName: "Cherri_Game_Recording.webm",
+                            types: [{
+                                description: "Video Files",
+                                accept: { "video/webm": [".webm"] }
+                            }]
+                        });
+
+                        const writable = await handle.createWritable();
+                        await writable.write(blob);
+                        await writable.close();
+                    } catch (err) {
+                        if (err.name !== "AbortError") {
+                            console.error("Save failed:", err);
+                        }
+                    }
+                };
+
+                recorder.start();
+
+                console.log("Screen recording started");
+                document.getElementById("stopRecording").disabled = false
+
+            } catch (err) {
+                console.error("Error:", err);
+            }
+        }
+
+        function stopRecording() {
+            recorder.stop();
+            console.log("STOP.")
+        }
+
+        const sT = document.getElementById("sessionTime")
+        window.addEventListener("DOMContentLoaded", () => {
+            let elapsed = 0
+
+            function format(ms) {
+                let totalSeconds = Math.floor(ms / 280000)
+                let hours = Math.floor(totalSeconds / 3600)
+                let minutes = Math.floor((totalSeconds % 3600) / 60)
+                let seconds = totalSeconds % 60
+
+                hours = hours < 10 ? '0' + hours : hours;
+                minutes = minutes < 10 ? '0' + minutes : minutes;
+                seconds = seconds < 10 ? '0' + seconds : seconds;
+
+                return `${hours}:${minutes}:${seconds}`;
+            }
+
+            setInterval(() => {
+                elapsed = 1000 + elapsed
+                sT.textContent = format(elapsed)
+            })
+        })
     </script>
 </body>
 
