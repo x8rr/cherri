@@ -1,0 +1,100 @@
+{"frames": {
+
+"mob_ending_0001":
+{
+	"frame": {"x":1,"y":1,"w":1182,"h":665},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":1182,"h":665},
+	"sourceSize": {"w":1182,"h":665}
+},
+"mob_ending_0002":
+{
+	"frame": {"x":1,"y":668,"w":499,"h":290},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":160,"y":88,"w":499,"h":290},
+	"sourceSize": {"w":1182,"h":665}
+},
+"mob_ending_0003":
+{
+	"frame": {"x":502,"y":668,"w":499,"h":290},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":160,"y":88,"w":499,"h":290},
+	"sourceSize": {"w":1182,"h":665}
+},
+"mob_ending_0004":
+{
+	"frame": {"x":1003,"y":679,"w":499,"h":290},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":160,"y":88,"w":499,"h":290},
+	"sourceSize": {"w":1182,"h":665}
+},
+"mob_ending_0005":
+{
+	"frame": {"x":1,"y":960,"w":499,"h":290},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":160,"y":88,"w":499,"h":290},
+	"sourceSize": {"w":1182,"h":665}
+},
+"mob_ending_0006":
+{
+	"frame": {"x":502,"y":960,"w":499,"h":290},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":160,"y":88,"w":499,"h":290},
+	"sourceSize": {"w":1182,"h":665}
+},
+"rioters_0001":
+{
+	"frame": {"x":1504,"y":679,"w":431,"h":335},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":59,"y":84,"w":431,"h":335},
+	"sourceSize": {"w":552,"h":552}
+},
+"rioters_0002":
+{
+	"frame": {"x":1185,"y":359,"w":426,"h":318},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":69,"y":98,"w":426,"h":318},
+	"sourceSize": {"w":552,"h":552}
+},
+"rioters_0003":
+{
+	"frame": {"x":1613,"y":338,"w":413,"h":304},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":71,"y":108,"w":413,"h":304},
+	"sourceSize": {"w":552,"h":552}
+},
+"rioters_0004":
+{
+	"frame": {"x":1613,"y":1,"w":413,"h":335},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":71,"y":77,"w":413,"h":335},
+	"sourceSize": {"w":552,"h":552}
+},
+"rioters_0005":
+{
+	"frame": {"x":1185,"y":1,"w":426,"h":356},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":69,"y":60,"w":426,"h":356},
+	"sourceSize": {"w":552,"h":552}
+}},
+"meta": {
+	"app": "https://www.codeandweb.com/texturepacker",
+	"version": "1.0",
+	"image": "MobEnd.png",
+	"format": "RGBA8888",
+	"size": {"w":2027,"h":1251},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:56e938b4d772f8a43ffb495631c7df71:15cd3b6573db3ae5de4392b3c280e43a:f887440d675daa09c0bcec78b77e41d4$"
+}
+}

@@ -1,0 +1,487 @@
+[
+  {
+    "name": "Crazy Cattle",
+    "url": "/stores/ucp-games/cc3d/",
+    "img": "/assets/img/games/cc3d.png"
+  },
+  {
+    "name": "Tube Jumpers",
+    "url": "/stores/ucp-games/tubejumpers/",
+    "img": "/stores/ucp-games/tubejumpers/img/icon.jpg"
+  },
+  {
+    "name": "Minecraft 1.8",
+    "url": "/stores/ucp-games/eag/1.8/",
+    "img": "/assets/img/games/mc.png"
+  },
+  {
+    "name": "Dadish 3",
+    "url": "/stores/ucp-games/dadish3/",
+    "img": "/assets/img/games/dadish3.png"
+  },
+  {
+    "name": "Super Mario 64",
+    "url": "/stores/ucp-games/supermario64/",
+    "img": "/assets/img/games/mario64.png"
+  },
+  {
+    "name": "Retro Bowl",
+    "url": "/stores/ucp-games/retro-bowl/",
+    "img": "/assets/img/games/retro-bowl.png"
+  },
+  {
+    "name": "RB College",
+    "url": "/stores/ucp-games/rb-college/",
+    "img": "/assets/img/games/rb-college.png"
+  },
+  {
+    "name": "Football Bros",
+    "url": "/stores/ucp-games/football-bros/",
+    "img": "/assets/img/games/footballbros.png"
+  },
+  {
+    "name": "Polytrack 4",
+    "url": "/stores/ucp-games/polytrack/",
+    "img": "/assets/img/games/polytrack.png"
+  },
+  {
+    "name": "Slope",
+    "url": "/stores/ucp-games/slope/",
+    "img": "/assets/img/games/slope.png"
+  },
+  {
+    "name": "Amazing Rope Police",
+    "url": "/stores/ucp-games/amazing-rope-police/",
+    "img": "/assets/img/games/gta.png"
+  },
+  {
+    "name": "Dadish 2",
+    "url": "/stores/ucp-games/dadish-2/",
+    "img": "/assets/img/games/dadish2.png"
+  },
+  {
+    "name": "Dadish",
+    "url": "/stores/ucp-games/dadish/",
+    "img": "/assets/img/games/dadish.png"
+  },
+  {
+    "name": "Sandboxels",
+    "url": "/stores/ucp-games/sandboxels/",
+    "img": "/assets/img/games/sandboxels.png"
+  },
+  {
+    "name": "Sandtrix",
+    "url": "/stores/ucp-games/sandtris/",
+    "img": "/assets/img/games/sandtrix.png"
+  },
+  {
+    "name": "Snow Rider 3D",
+    "url": "/stores/ucp-games/snowrider/",
+    "img": "/assets/img/games/snowrider.png"
+  },
+  {
+    "name": "A Small World Cup 2023",
+    "url": "/stores/ucp-games/asmallworldcup/",
+    "img": "/assets/img/games/aswc2023.png"
+  },
+  {
+    "name": "1v1 LOL",
+    "url": "/stores/ucp-games/1v1lol/",
+    "img": "/assets/img/games/1v1lol.png"
+  },
+  {
+    "name": "OvO",
+    "url": "/stores/ucp-games/ovo/",
+    "img": "/assets/img/games/ovo.png"
+  },
+  {
+    "name": "Basket Bros",
+    "url": "/stores/ucp-games/basketbros/",
+    "img": "/assets/img/games/basketbros.png"
+  },
+  {
+    "name": "Drift Boss",
+    "url": "/stores/ucp-games/driftboss/",
+    "img": "/assets/img/games/driftboss.png"
+  },
+  {
+    "name": "Geometry Dash",
+    "url": "/stores/ucp-games/html/gd.html",
+    "img": "/assets/img/games/gd.png"
+  },
+  {
+    "name": "FNAF",
+    "url": "/stores/ucp-games/fnaf/",
+    "img": "/assets/img/games/fnaf.png"
+  },
+  {
+    "name": "FNAF 2",
+    "url": "/stores/ucp-games/fnaf2/",
+    "img": "/assets/img/games/fnaf2.png"
+  },
+  {
+    "name": "FNAF 3",
+    "url": "/stores/ucp-games/fnaf3/",
+    "img": "/assets/img/games/fnaf3.png"
+  },
+  {
+    "name": "FNAF 4",
+    "url": "/stores/ucp-games/fnaf4/",
+    "img": "/assets/img/games/fnaf4.png"
+  },
+  {
+    "name": "One Way Ticket",
+    "url": "/stores/ucp-games/owt1/",
+    "img": "/assets/img/games/owt1.png"
+  },
+  {
+    "name": "One Way Ticket 2",
+    "url": "/stores/ucp-games/owt2/",
+    "img": "/assets/img/games/owt2.png"
+  },
+  {
+    "name": "territorial.io",
+    "url": "/stores/ucp-games/html/territorial.html",
+    "img": "/assets/img/games/territorial.png"
+  },
+  {
+    "name": "World's Hardest Game",
+    "url": "/stores/ucp-games/worldshardestgame/",
+    "img": "/assets/img/games/whg.png"
+  },
+  {
+    "name": "Tic Tac Toe",
+    "url": "/stores/ucp-games/tic-tac-toe/",
+    "img": "/assets/img/games/ttt.png"
+  },
+  {
+    "name": "2048",
+    "url": "/stores/ucp-games/2048/",
+    "img": "/assets/img/games/2048.png"
+  },
+  {
+    "name": "Chess",
+    "url": "/stores/ucp-games/atlas-games/chess/",
+    "img": "/assets/img/games/chess.png"
+  },
+  {
+    "name": "Cookie Clicker",
+    "url": "#",
+    "img": "/assets/img/games/cookieclicker.png"
+  },
+  {
+    "name": "Block Blast",
+    "url": "/stores/ucp-games/blockblast/",
+    "img": "/assets/img/games/blockblast.png"
+  },
+  {
+    "name": "House of Hazards",
+    "url": "/stores/ucp-games/houseofhazards/",
+    "img": "/assets/img/games/hoh.png"
+  },
+  {
+    "name": "8 Ball",
+    "url": "/stores/ucp-games/8ball/",
+    "img": "/assets/img/games/8ball.png"
+  },
+  {
+    "name": "Basketball Stars",
+    "url": "/stores/ucp-games/basketballstars/",
+    "img": "/assets/img/games/bballstars.png"
+  },
+  {
+    "name": "Big Tower Tiny Square",
+    "url": "/stores/ucp-games/btts/",
+    "img": "/assets/img/games/btts.png"
+  },
+  {
+    "name": "Alien Shooter",
+    "url": "/stores/ucp-games/html/alienshooter.html",
+    "img": "/assets/img/games/alienshooter.png"
+  },
+  {
+    "name": "Basket Random",
+    "url": "/stores/ucp-games/basketrandom/",
+    "img": "/assets/img/games/basketrandom.png"
+  },
+  {
+    "name": "Bitlife",
+    "url": "/stores/ucp-games/bitlife/",
+    "img": "/assets/img/games/bitlife.png"
+  },
+  {
+    "name": "Boxing Random",
+    "url": "/stores/ucp-games/boxingrandom/",
+    "img": "/assets/img/games/boxingrandom.png"
+  },
+  {
+    "name": "Cluster Rush",
+    "url": "/stores/ucp-games/clusterrush/",
+    "img": "/assets/img/games/clusterrush.png"
+  },
+  {
+    "name": "Eggy Car",
+    "url": "/stores/ucp-games/eggycar/",
+    "img": "/assets/img/games/eggycar.png"
+  },
+  {
+    "name": "Moto X3M",
+    "url": "/stores/ucp-games/atlas-games/motox3m/",
+    "img": "/assets/img/games/motox3m.png"
+  },
+  {
+    "name": "Moto X3M Winter",
+    "url": "/stores/ucp-games/atlas-games/motox3m-winter/",
+    "img": "/assets/img/games/moto2.png"
+  },
+  {
+    "name": "Moto X3M Pool",
+    "url": "/stores/ucp-games/atlas-games/motox3m-pool/",
+    "img": "/assets/img/games/moto3.png"
+  },
+  {
+    "name": "Moto X3M Spooky",
+    "url": "/stores/ucp-games/atlas-games/motox3m-spooky/",
+    "img": "/assets/img/games/moto3.png"
+  },
+  {
+    "name": "MURDER 🗡️",
+    "url": "/stores/ucp-games/murder/",
+    "img": "/assets/img/games/murder.png"
+  },
+  {
+    "name": "paper.io 2",
+    "url": "/stores/ucp-games/paperio2/",
+    "img": "/assets/img/games/paperio.png"
+  },
+  {
+    "name": "Soccer Random",
+    "url": "/stores/ucp-games/soccerrandom/",
+    "img": "/assets/img/games/soccerrandom.png"
+  },
+  {
+    "name": "SUPERHOT",
+    "url": "/stores/ucp-games/superhot/",
+    "img": "/assets/img/games/superhot.png"
+  },
+  {
+    "name": "Time Shooter 3",
+    "url": "/stores/ucp-games/timeshooter3/",
+    "img": "/assets/img/games/ts3.png"
+  },
+  {
+    "name": "Tiny Fishing",
+    "url": "/stores/ucp-games/tinyfishing/",
+    "img": "/assets/img/games/tinyfishing.png"
+  },
+  {
+    "name": "Volley Random",
+    "url": "/stores/ucp-games/volleyrandom/",
+    "img": "/assets/img/games/volleyrandom.png"
+  },
+  {
+    "name": "Gladihoppers",
+    "url": "/stores/ucp-games/atlas-games/gladihoppers/",
+    "img": "/assets/img/games/gladihoppers.png"
+  },
+  {
+    "name": "2048 Cupcakes",
+    "url": "/stores/ucp-games/atlas-games/2048-cupcakes/",
+    "img": "/assets/img/games/2048-cupcakes.png"
+  },
+  {
+    "name": "1 on 1 Soccer",
+    "url": "/stores/ucp-games/atlas-games/1on1soccer/",
+    "img": "/assets/img/games/1on1soccer.png"
+  },
+  {
+    "name": "Rocket League 2D",
+    "url": "/stores/ucp-games/atlas-games/2drocketleague/",
+    "img": "/assets/img/games/rl.png"
+  },
+  {
+    "name": "Achievement Unlocked",
+    "url": "/stores/ucp-games/atlas-games/achieveunlocked/",
+    "img": "/assets/img/games/au.png"
+  },
+  {
+    "name": "Achievement Unlocked 2",
+    "url": "/stores/ucp-games/atlas-games/achieveunlocked2/",
+    "img": "/assets/img/games/au2.png"
+  },
+  {
+    "name": "Age of War",
+    "url": "/stores/ucp-games/atlas-games/ageofwar/",
+    "img": "/assets/img/games/ageofwar.png"
+  },
+  {
+    "name": "amogus",
+    "url": "/stores/ucp-games/atlas-games/amongus/",
+    "img": "/assets/img/games/amongus.png"
+  },
+  {
+    "name": "Awesome Tanks",
+    "url": "/stores/ucp-games/atlas-games/awesometanks/",
+    "img": "/assets/img/games/at.png"
+  },
+  {
+    "name": "Awesome Tanks 2",
+    "url": "/stores/ucp-games/atlas-games/awesometanks2/",
+    "img": "/assets/img/games/at2.png"
+  },
+  {
+    "name": "Bit Planes",
+    "url": "/stores/ucp-games/atlas-games/bit-planes/",
+    "img": "/assets/img/games/bitplanes.png"
+  },
+  {
+    "name": "Boxing Physics 2",
+    "url": "/stores/ucp-games/atlas-games/boxingphysics2/",
+    "img": "/assets/img/games/boxingphysics2.png"
+  },
+  {
+    "name": "Bloon's TD",
+    "url": "/stores/ucp-games/atlas-games/btd/",
+    "img": "/assets/img/games/btd.png"
+  },
+  {
+    "name": "Bloon's TD 2",
+    "url": "/stores/ucp-games/atlas-games/btd2/",
+    "img": "/assets/img/games/btd2.png"
+  },
+  {
+    "name": "Bloon's TD 3",
+    "url": "/stores/ucp-games/atlas-games/btd3/",
+    "img": "/assets/img/games/btd3.png"
+  },
+  {
+    "name": "Bloon's TD 4",
+    "url": "/stores/ucp-games/atlas-games/btd4/",
+    "img": "/assets/img/games/btd4.png"
+  },
+  {
+    "name": "Bloon's TD 5",
+    "url": "/stores/ucp-games/atlas-games/btd5/",
+    "img": "/assets/img/games/btd5.png"
+  },
+  {
+    "name": "Burrito Bison",
+    "url": "/stores/ucp-games/atlas-games/burritobison/",
+    "img": "/assets/img/games/burritobison.png"
+  },
+  {
+    "name": "Cube Field",
+    "url": "/stores/ucp-games/atlas-games/cubefield/",
+    "img": "/assets/img/games/cubefield.png"
+  },
+  {
+    "name": "Death Run 3d",
+    "url": "/stores/ucp-games/atlas-games/death-run-3d/",
+    "img": "/assets/img/games/dr3d.png"
+  },
+  {
+    "name": "Drivemad",
+    "url": "/stores/ucp-games/atlas-games/drivemad/",
+    "img": "/assets/img/games/drivemad.png"
+  },
+  {
+    "name": "Funny Shooter",
+    "url": "/stores/ucp-games/atlas-games/funnyshooter/",
+    "img": "/assets/img/games/funnyshooter.png"
+  },
+  {
+    "name": "Getaway Shooter",
+    "url": "/stores/ucp-games/atlas-games/getawayshooter/",
+    "img": "/assets/img/games/getawayshooter.png"
+  },
+  {
+    "name": "Gun Mayhem",
+    "url": "/stores/ucp-games/atlas-games/gunmayhem/",
+    "img": "/assets/img/games/gunmayhem.png"
+  },
+  {
+    "name": "Gun Mayhem 2",
+    "url": "/stores/ucp-games/atlas-games/gunmayhem2/",
+    "img": "/assets/img/games/gm2.png"
+  },
+  {
+    "name": "Monkey Mart",
+    "url": "/stores/ucp-games/atlas-games/monkeymart/",
+    "img": "/assets/img/games/monkeymart.png"
+  },
+  {
+    "name": "paper.io",
+    "url": "/stores/ucp-games/atlas-games/paperio/",
+    "img": "/assets/img/games/paperio1.png"
+  },
+  {
+    "name": "Papery Planes",
+    "url": "/stores/ucp-games/atlas-games/papery-planes/",
+    "img": "/assets/img/games/paperyplanes.png"
+  },
+  {
+    "name": "Pokemon",
+    "url": "/stores/ucp-games/atlas-games/pokemon/",
+    "img": "/assets/img/games/pokemon.png"
+  },
+  {
+    "name": "Rocket League",
+    "url": "/stores/ucp-games/atlas-games/rocketleague/",
+    "img": "/assets/img/games/rl.png"
+  },
+  {
+    "name": "Rooftop Snipers",
+    "url": "/stores/ucp-games/atlas-games/rooftopsnipers/",
+    "img": "/assets/img/games/rooftopsniper.png"
+  },
+  {
+    "name": "Rooftop Snipers 2",
+    "url": "/stores/ucp-games/atlas-games/rooftopsnipers2/",
+    "img": "/assets/img/games/rs2.png"
+  },
+  {
+    "name": "skibidi toilet?",
+    "url": "/stores/ucp-games/atlas-games/skibiditoilet/",
+    "img": "/assets/img/games/skbd.png"
+  },
+  {
+    "name": "Timeshooter 1",
+    "url": "/stores/ucp-games/atlas-games/timeshooter1/",
+    "img": "/assets/img/games/ts1.png"
+  },
+  {
+    "name": "Timeshooter 2",
+    "url": "/stores/ucp-games/atlas-games/timeshooter2/",
+    "img": "/assets/img/games/ts2.png"
+  },
+  {
+    "name": "VEX",
+    "url": "/stores/ucp-games/atlas-games/vex/",
+    "img": "/assets/img/games/vex.png"
+  },
+  {
+    "name": "VEX 2",
+    "url": "/stores/ucp-games/atlas-games/vex2/",
+    "img": "/assets/img/games/vex2.png"
+  },
+  {
+    "name": "VEX 6",
+    "url": "/stores/ucp-games/atlas-games/vex6/",
+    "img": "/assets/img/games/vex6.png"
+  },
+  {
+    "name": "Wordle",
+    "url": "/stores/ucp-games/atlas-games/wordle/",
+    "img": "/assets/img/games/wordle.png"
+  },
+  {
+    "name": "yohoho.io",
+    "url": "/stores/ucp-games/atlas-games/yohoho/",
+    "img": "/assets/img/games/yohoho.png"
+  },
+  {
+    "name": "SmashKarts",
+    "url": "/stores/ucp-games/smashkarts/",
+    "img": "/assets/img/games/sk.png"
+  }
+]

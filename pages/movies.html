@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>cherri | movies</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/alpinejs/3.10.3/cdn.min.js" defer></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="preconnect" href="https://fdn.fontcdn.ir">
+    <link rel="preconnect" href="https://v1.fontapi.ir">
+    <link href="https://v1.fontapi.ir/css/SFProDisplay" rel="stylesheet">
+    <link rel="shortcut icon" href="/assets/img/fav.png" type="image/x-icon">
+    <link rel="stylesheet" href="/assets/css/colors.css" id="css-theme-link">
+    <script src="/assets/js/colors.js"></script>
+    <link rel="stylesheet" href="/assets/css/font.css">
+</head>
+
+<style>
+
+    button {
+        font-family: arial !important;
+    }
+
+    body, html {
+        background: none;
+    }
+
+    input {
+        background: var(--bg-2) !important;
+        font-size: 14px !important;
+        font-family: Arial !important;
+        padding: 10px 20px !important;
+    }
+
+    input:focus {
+        outline: none;
+        background: var(--bg-3) !important;
+    }
+
+    .switcher {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        font-family: arial;
+    }
+
+    ::-webkit-scrollbar {
+        scrollbar-width: thin;
+    }
+</style>
+
+<body class="text-[var(--text)] min-h-screen p-8" x-data="app()">
+    <div class="container mx-auto">
+        <br><br>
+        <h1 class="text-center text-4xl">cherri | movies</h1>
+        <br>
+        <div class="mb-8 flex flex-col md:flex-row gap-4 transition-all duration-200 items-center justify-between">
+                <input type="text" x-model="searchQuery" @input="searchContent()" placeholder="what are we watching today?"
+                    class="transition-all w-1/2  left-1/2 translate-x-[25%] text-[var(--text)] rounded-2xl px-4 py-2">
+        </div>
+
+        <div class="switcher">
+            <button @click="currentTab = 'movies'" :class="currentTab === 'movies' ? 'bg-[var(--accent)] text-[var(--text)]' : 'bg-[var(--bg-2)]'"
+                class="px-4 py-2 rounded-2xl transition-all">
+                movies
+            </button>
+            <button @click="currentTab = 'shows'" :class="currentTab === 'shows' ? 'bg-[var(--accent)] text-[var(--text)]' : 'bg-[var(--bg-2)]'"
+                class="px-4 py-2 rounded-2xl transition-all">
+                tv and shows
+            </button>
+        </div>
+
+        <br><br><br>
+
+        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 gap-4">
+            <template x-for="item in content" :key="item.id">
+                <a :href="'watch.html?id=' + item.id + '&type=' + (currentTab === 'movies' ? 'movie' : 'tv')"
+                    class="bg-gray-800 rounded-3xl overflow-hidden hover:scale-[102%] transition-transform block relative group">
+                    <img :src="'https://image.tmdb.org/t/p/w500' + item.poster_path" :alt="item.title || item.name"
+                        class="w-full aspect-[3/2] object-cover transition-all duration-200">
+                    <div
+                        class="absolute inset-0 bg-black/0 group-hover:bg-black/50 hover:backdrop-blur-[2px] transition-all duration-200 flex items-end p-3 opacity-0 group-hover:opacity-100">
+                        <h3 class="text-sm font-semibold text-[var(--text)]" x-text="item.title || item.name"></h3>
+                    </div>
+                </a>
+            </template>
+        </div>
+
+        <div class="mt-8 flex justify-center space-x-4">
+            <button @click="currentPage > 1 && changePage(currentPage - 1)" :disabled="currentPage === 1"
+                class="bg-[var(--bg-2)] px-6 py-2 rounded-2xl disabled:opacity-50">
+                Previous
+            </button>
+            <span class="px-6 py-2" style="font-family: arial;">Page <span x-text="currentPage" style="font-family: arial;"></span></span>
+            <button @click="changePage(currentPage + 1)" class="rounded-2xl bg-[var(--bg-2)] px-6 py-2 rounded">
+                Next
+            </button>
+        </div>
+        <br><br>
+    </div>
+
+    <script>
+        function app() {
+            return {
+                apiKey: 'fb7bb23f03b6994dafc674c074d01761',
+                content: [],
+                currentTab: 'movies',
+                currentPage: 1,
+                searchQuery: '',
+
+                async init() {
+                    await this.fetchContent();
+
+                    this.$watch('currentTab', async () => {
+                        this.currentPage = 1;
+                        this.searchQuery = '';
+                        await this.fetchContent();
+                    });
+                },
+
+                async searchContent() {
+                    if (!this.searchQuery.trim()) {
+                        await this.fetchContent();
+                        return;
+                    }
+
+                    const baseUrl = 'https://api.tmdb.org/3';
+                    const endpoint = this.currentTab === 'movies' ? 'movie' : 'tv';
+                    const url = `${baseUrl}/search/${endpoint}?api_key=${this.apiKey}&query=${encodeURIComponent(this.searchQuery)}&page=${this.currentPage}`;
+
+                    try {
+                        const response = await fetch(url, {
+                            method: 'GET',
+                            headers: {
+                                'Accept': 'application/json',
+                            }
+                        });
+
+                        if (!response.ok) {
+                            throw new Error(`HTTP error! status: ${response.status}`);
+                        }
+
+                        const data = await response.json();
+                        this.content = data.results;
+                    } catch (error) {
+                        console.error('Error searching content:', error);
+                    }
+                },
+
+                async fetchContent() {
+                    const baseUrl = 'https://api.tmdb.org/3';
+                    const endpoint = this.currentTab === 'movies' ? 'movie/popular' : 'tv/popular';
+                    const url = `${baseUrl}/${endpoint}?api_key=${this.apiKey}&page=${this.currentPage}`;
+
+                    try {
+                        const response = await fetch(url, {
+                            method: 'GET',
+                            headers: {
+                                'Accept': 'application/json',
+                            }
+                        });
+
+                        if (!response.ok) {
+                            throw new Error(`HTTP error! status: ${response.status}`);
+                        }
+
+                        const data = await response.json();
+                        this.content = data.results;
+                    } catch (error) {
+                        console.error('Error fetching content:', error);
+                        alert('Failed to load movies. TMDB API may be blocked by CORS. Try running this on a local server or use a CORS proxy.');
+                    }
+                },
+
+                async changePage(page) {
+                    this.currentPage = page;
+                    if (this.searchQuery.trim()) {
+                        await this.searchContent();
+                    } else {
+                        await this.fetchContent();
+                    }
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                }
+            }
+        }
+    </script>
+    <div id="cursor-thank-you-zxs"
+        style="position: fixed; top: 0px; left: 0px; width: 16px; height: 16px; border-radius: 50%; background: color-mix(in srgb, var(--accent) 70%, white 30%); pointer-events: none; z-index: 9999; transform: translate(748px, 592px); transition: width 0.15s, height 0.15s, opacity 0.15s; mix-blend-mode: difference; opacity: 0;">
+    </div>
+    <script src="/assets/js/cursor.js"></script>
+</body>
+
+</html>

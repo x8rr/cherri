@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>cherri | browser</title>
+    <link rel="shortcut icon" href="/assets/img/fav.png" type="image/x-icon" id="tabIcon">
+    <link rel="stylesheet" href="/assets/css/colors.css" id="css-theme-link">
+    <link rel="stylesheet" href="/assets/css/elements.css">
+    <link rel="stylesheet" href="/assets/css/font.css">
+    <link rel="stylesheet" href="/assets/icons/fonts/remixicon.css">
+    <script src="/assets/js/lib/particles.js"></script>
+    <script src="/baremux/index.js"></script>
+    <script src="/assets/js/colors.js"></script>
+    <script src="/homework/math.all.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/eruda@3.4.3/eruda.min.js"></script>
+    <script>
+        async function swium() {
+            await navigator.serviceWorker.register("/sw.js").then(() => {
+                console.log(
+                    "%ccherri" + "%c SJ sw registered!",
+                    "color: white; background: linear-gradient(to bottom right, #e2588d, #dbd7d7); border-radius: 5px; font-weight: bold; padding: 6px; font-family: monospace;",
+                    "color: white; background: transparent; border-radius: 0px; padding: 0px;"
+                );
+            }).catch(e => {
+                console.log("Error registering service worker (SJ): " + e)
+            });
+        }
+
+        window.addEventListener("load", () => {
+            swium();
+        });
+    </script>
+    <script src="/assets/js/browserfunctions.js"></script>
+</head>
+
+<body>
+    <div class="nav-logo">
+        <img src="/assets/img/fav.png" alt="" onclick="
+            ul.classList.add('active');
+            const blurr = document.createElement('div')
+            blurr.classList.add('bluroverlay')
+            document.body.append(blurr)
+            blurr.addEventListener('click', () => {
+                ul.classList.remove('active')
+                blurr.remove()
+            })
+        ">
+    </div>
+
+    <style>
+        .browser-container {
+            background: var(--bg);
+            width: 100%;
+            height: 100vh;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 6;
+            transition: 0.2s;
+        }
+
+        .browser-frame {
+            width: 99.25%;
+            height: calc(100vh - 125px);
+            position: fixed;
+            top: 119px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 12px;
+            border: 1px solid var(--border-3);
+            display: none;
+            z-index: 1000;
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .browser-frame.active {
+            display: block;
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .browser-controls {
+            position: fixed;
+            width: 100%;
+            left: 0;
+            top: 0;
+            padding: 15px;
+        }
+
+        .tabs {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            margin-left: 0px;
+            margin-bottom: 10px;
+        }
+
+        .browser-buttons {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+        }
+
+        .browser-buttons .hcontainer {
+            display: flex;
+            position: absolute;
+            left: 50%;
+            transform: translateX(-51%);
+            margin-top: 35px;
+            gap: 05px;
+            width: 95%;
+        }
+
+        .browser-buttons button {
+            height: 40px;
+            width: 40px;
+            flex-shrink: 0;
+            padding: 0;
+            font-size: 16px;
+            border-radius: 10px;
+            transition: 0.2s;
+            cursor: pointer;
+            background: var(--bg-2);
+            border: 1px solid var(--border-4);
+            color: var(--bright-text);
+        }
+
+        .browser-buttons button:hover {
+            background: var(--bg-3);
+            color: var(--bright-text);
+        }
+
+        .ri {
+            font-size: 20px;
+        }
+
+        .browser-buttons input {
+            background: var(--bg-3);
+            border: 1px solid var(--border-4);
+            border-radius: 10px;
+            height: 40px;
+            padding: 0 20px;
+            flex: 1;
+            transition: 0.2s;
+            color: var(--bright-text);
+            font-family: Inter;
+            outline: none;
+            font-size: 14px;
+        }
+
+        .browser-buttons input:focus {
+            outline: none;
+            border: 1px solid var(--accent);
+        }
+
+        .browser-buttons input::placeholder {
+            color: var(--text);
+        }
+
+        .tab {
+            background: var(--bg-2);
+            max-width: 200px;
+            min-width: 25px;
+            padding: 10px 15px;
+            border-radius: 10px;
+            transition: 0.2s;
+            border: 1px solid var(--border-4);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+        }
+
+        .tab span {
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            flex: 1;
+            color: var(--text);
+        }
+
+        .tab:hover {
+            background: var(--bg-3);
+        }
+
+        .tab.active {
+            background: var(--bg-3);
+            border: 1px solid var(--border-3);
+        }
+
+        .tab img {
+            width: 20px;
+            height: 20px;
+            flex-shrink: 0;
+        }
+
+        .tab .close-btn {
+            font-size: 20px;
+            cursor: pointer;
+            transition: 0.2s;
+            color: var(--bright-text);
+            flex-shrink: 0;
+        }
+
+        .tab .close-btn:hover {
+            color: var(--accent);
+        }
+
+        .newtab {
+            background: var(--bg-2);
+            height: 40px;
+            width: 40px;
+            border-radius: 10px;
+            transition: 0.2s;
+            cursor: pointer;
+            border: 1px solid var(--border-4);
+            color: var(--bright-text);
+            flex-shrink: 0;
+        }
+
+        .newtab:hover {
+            background: var(--bg-3);
+            color: var(--bright-text);
+        }
+    </style>
+
+    <div class="browser-container">
+        <div class="browser-controls">
+            <div class="tabs">
+                <button class="newtab" onclick="newTab()">
+                    <i class="ri-add-line ri"></i>
+                </button>
+            </div>
+            <div class="browser-buttons">
+                <div class="hcontainer">
+                    <button onclick="b()">
+                        <i class="ri-arrow-left-line ri"></i>
+                    </button>
+                    <button onclick="f()">
+                        <i class="ri-arrow-right-line ri"></i>
+                    </button>
+                    <button onclick="r()">
+                        <i class="ri-restart-line ri"></i>
+                    </button>
+                    <input type="text" id="searchbar" placeholder="Search for anything or enter a URL...">
+                    <button onclick="full()">
+                        <i class="ri-fullscreen-line ri"></i>
+                    </button>
+                    <button onclick="eruda.init(); this.querySelector('i').style.color='var(--accent)';">
+                        <i class="ri-code-line ri"></i>
+                    </button>
+                    <button onclick="location.href = '/'">
+                        <i class="ri-home-4-line ri"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="browser-loading"></div>
+    </div>
+
+    <script defer>
+        const ul = document.getElementById("nav-ul")
+
+        document.querySelectorAll("li a").forEach(link => {
+            link.addEventListener("click", function () {
+                document.querySelectorAll("li a").forEach(l => l.classList.remove("active"));
+                this.classList.add("active");
+            });
+        });
+
+        window.addEventListener("keydown", (e) => {
+            if (e.ctrlKey && e.key === "m") {
+                console.log("Key pressed")
+                e.preventDefault()
+                if (!ul.classList.contains("active")) {
+                    ul.classList.add("active")
+                    const blurr = document.createElement("div")
+                    blurr.classList.add("bluroverlay")
+                    document.body.append(blurr)
+                    blurr.addEventListener("click", () => {
+                        blurr.remove()
+                        ul.classList.remove("active")
+                    })
+                } else {
+                    ul.classList.remove("active")
+                    const blurr = document.querySelector(".bluroverlay")
+                    blurr.remove()
+                }
+            }
+        })
+    </script>
+    <script defer>
+        newTab()
+    </script>
+    <div id="cursor-thank-you-zxs"
+        style="position: fixed; top: 0px; left: 0px; width: 16px; height: 16px; border-radius: 50%; background: color-mix(in srgb, var(--accent) 70%, white 30%); pointer-events: none; z-index: 9999; transform: translate(748px, 592px); transition: width 0.15s, height 0.15s, opacity 0.15s; mix-blend-mode: difference; opacity: 0;">
+    </div>
+    <script src="/assets/js/cursor.js"></script>
+    </body>
+</html>

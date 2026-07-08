@@ -1,0 +1,19 @@
+:root {
+    --bg: #220f17;
+    --bg-2: #3f1e2b;
+    --bg-3: #57293c;
+    --bg-4: #85415d8c;
+    --bg-5: #1a0b11;
+    --border: #ebd5ddc7;
+    --border-2: #ebd5dd70;
+    --border-3: #ebd5dd30;
+    --border-4: #ebd5dd1a;
+    --text: #c0c0c0;
+    --bright-text: #ffffff;
+    --accent: #e2588d;
+    --accent-2: #c44ac4;
+}
+
+#reset-theme {
+    display: none !important;
+}

@@ -1,0 +1,71 @@
+{
+    "name": "Basket Bros Basketball",
+    "short_name": "Basket Bros Basketball",
+    "start_url": "index.php?ms=1",
+    "id": "com.bluewizard.basketbros",
+    "description": "Fun, fast-paced 1 on 1 basketball game with lots of action. Pick from a variety of characters and let the play begin.  Go for crazy dunks, hit the stepback 3, or maybe even punch out your opponent! The controls are very simple: Use either the arrow keys or wasd to control your baller.  Jump by pressing the up arrow, and jump again to shoot.  Enter/Space will attack if you are on defense.",
+    "background": {
+      "service_worker": "sw.js"
+    },
+    "scope": "./",
+    "icons": [
+      {
+        "src": "icon.png",
+        "sizes": "512x512",
+        "type": "image/png",
+        "purpose": "any"
+      },
+      {
+        "src": "splash.png",
+        "sizes": "1920x1080",
+        "type": "image/png",
+        "purpose": "any"
+      }
+    ],
+    "images": [
+      {
+        "src": "splash.png",
+        "sizes": "1920x1080",
+        "type": "image/png",
+        "purpose": "any"
+      }
+    ],
+    "theme_color": "#FFDC09",
+    "background_color": "#686868",
+    "display": "standalone",
+    "ms_start_compatible": true,
+    "screenshots": [
+      {
+        "src": "/ss1.jpg",
+        "type": "image/jpg",
+        "sizes": "1920x1080",
+        "form_factor": "wide"
+      },
+      {
+        "src": "/ss2.jpg",
+        "type": "image/jpg",
+        "sizes": "1920x1080",
+        "form_factor": "wide"
+      }
+    ],
+    "display_override": [
+      "standalone",
+      "fullscreen",
+      "browser",
+      "minimal-ui",
+      "window-controls-overlay"
+    ],
+    "categories": [
+      "games"
+    ],
+    "lang": "en",
+    "dir": "auto",
+    "orientation": "landscape",
+    "edge_side_panel": {
+      "preferred_width": 0
+    },
+    "handle_links": "preferred",
+    "launch_handler": {
+      "client_mode": ["focus-existing", "auto"]
+    }
+  }

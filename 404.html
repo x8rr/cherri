@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <link rel="icon" type="image/svg+xml" href="/assets/fav.png">
+    <title>404 | cherri</title>
+    <link rel="preconnect" href="https://fdn.fontcdn.ir">
+    <link rel="preconnect" href="https://v1.fontapi.ir">
+    <link href="https://v1.fontapi.ir/css/SFProDisplay" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="/uv/uv.bundle.js"></script>
+    <script src="/uv/uv.config.js"></script>
+    <script src="/baremux/index.js"></script>
+    <link rel="stylesheet" href="/styles/index.css">
+    <link rel="stylesheet" href="/assets/css/colors.css">
+    <script src="/assets/js/colors.js"></script>
+    <link rel="stylesheet" href="/fa/css/all-pro.css">
+</head>
+
+<body>
+    
+
+    <div id="homeContent">
+        <h1 class="text-8xl text-[var(--bright-text)] font-bold">404</h1>
+        <p class="text-[var(--text)]">not found.</p>
+        <br>
+        <a href="/" class="text-[var(--text)] opacity-50 underline underline-offset-3 hover:opacity-100 transition-all">back home</a>
+    </div>
+
+    
+
+    <div class="toast-container fixed right-4 top-4 w-1/4">
+    </div>
+
+    <p class="fixed left-1/2 bottom-2 translate-x-[-50%] text-sm text-white/25"><i><i class="fas fa-lightbulb"></i>&nbsp;&nbsp;this page might be in the works!</i></p>
+
+    <!-- DEV TOAST BUTTONS
+    <div class="fixed flex justify-center left-1/2 bottom-5 translate-x-[-50%] h-fit w-1/2">
+        <button class="w-fit m-1 h-fit p-4 text-white font-bold rounded-full bg-slate-900 border border-white/10" onclick="toast('success', 'Successful toast')">Success Toast</button>
+        <button class="w-fit m-1 h-fit p-4 text-white font-bold rounded-full bg-slate-900 border border-white/10"
+            onclick="toast('info', 'Info toast')">Info Toast</button>
+        <button class="w-fit m-1 h-fit p-4 text-white font-bold rounded-full bg-slate-900 border border-white/10"
+            onclick="toast('error', 'Error toast')">Error Toast</button>
+        <button class="w-fit m-1 h-fit p-4 text-white font-bold rounded-full bg-slate-900 border border-white/10"
+            onclick="toast('warn', 'Warning toast')">Warning Toast</button>
+    </div> 
+    -->
+
+    <iframe id="contentFrame"></iframe>
+
+    <script>
+        async function registerSW() {
+            if ("serviceWorker" in navigator) {
+                await navigator.serviceWorker.register("/uv/sw.js").then(() => {
+                    console.log(
+                        "%cbreeze." + "%c uv sw registered!",
+                        "color: white; background: linear-gradient(to bottom right, #040c16, #000000); border-radius: 5px; font-weight: bold; padding: 6px; font-family: sans-serif;",
+                        "color: white; background: transparent; border-radius: 0px; padding: 0px;"
+                    );
+                });
+
+                await navigator.serviceWorker.register("/sw.js").then(() => {
+                    console.log(
+                        "%cbreeze." + "%c sj sw registered!",
+                        "color: white; background: linear-gradient(to bottom right, #040c16, #000000); border-radius: 5px; font-weight: bold; padding: 6px; font-family: sans-serif;",
+                        "color: white; background: transparent; border-radius: 0px; padding: 0px;"
+                    );
+                });
+            }
+        }
+
+        window.addEventListener("load", () => {
+            registerSW();
+            lucide.createIcons();
+        });
+
+        const contentFrame = document.getElementById('contentFrame');
+        const homeContent = document.getElementById('homeContent');
+        const navLinks = document.querySelectorAll('nav a[data-page]');
+
+        function navTo(l) {
+            if (l === "home") {
+                contentFrame.style.display = "none"
+                homeContent.style.display = "block"
+            } else {
+                homeContent.style.display = "none"
+                contentFrame.style.display = "block"
+                contentFrame.src = `/pages/${l}.html`
+            }
+        }
+
+        const homesearch = document.getElementById("homesearch");
+
+        function rSearch(input) {
+            let url = input;
+            if (!url.includes(".") || url.includes(" ")) {
+                url = "https://search.brave.com/search?q=" + url;
+            } else {
+                if (!url.startsWith("http://") && !url.startsWith("https://")) {
+                    url = "https://" + url;
+                }
+            }
+
+            homeContent.classList.add('hidden');
+            contentFrame.classList.add('active');
+            contentFrame.src = "/pages/ultraviolet.html?i=" + url;
+            location.href = "#?i=" + url
+        }
+
+        homesearch?.addEventListener("keydown", (e) => {
+            if (e.key === "Enter") {
+                rSearch(homesearch?.value.trim());
+            }
+        });
+
+        document.addEventListener("keydown", (e) => {
+            if (!contentFrame.classList.contains('active')) {
+                homesearch?.focus();
+            }
+        });
+
+        function toast(icon, msg) {
+            const container = document.querySelector(".toast-container")
+            const newToast = document.createElement("div")
+            const newToastIcon = document.createElement("i")
+            newToastIcon.classList.add("toast-icon", "lucide", "far", "fa-icon-lol")
+            const newToastMsg = document.createElement("span")
+            newToastMsg.classList.add("toast-msg")
+            newToast.classList.add("toast", "bg-slate-900", "transition-all", "relative", "duration-300", "shadow-black/30", "shadow-lg", "p-4", "h-fit", "w-1/1", "flex", "rounded-full", "m-3", "border", "border-white/10")
+            newToast.style.right = "-120%"
+            container.appendChild(newToast)
+            newToast.appendChild(newToastIcon)
+            newToast.appendChild(newToastMsg)
+
+            switch (icon) {
+                case "success":
+                    if (newToastIcon && newToastMsg) {
+                        newToastIcon.classList.add("fa-circle-check")
+                        newToastMsg.textContent = msg
+                    }
+                    break
+                case "info":
+                    newToastIcon.classList.add("fa-circle-info")
+                    newToastMsg.textContent = msg
+                    break;
+                case "error":
+                    newToastIcon.classList.add("fa-circle-x")
+                    newToastMsg.textContent = msg
+                case "warn":
+                    newToastIcon.classList.add("fa-circle-exclamation")
+                    newToastMsg.textContent = msg
+            }
+
+            setTimeout(() => {
+                newToast.style.right = "4%"
+            }, 25)
+
+            setTimeout(() => {
+                newToast.style.right = "-120%"
+            }, 4000)
+
+            setTimeout(() => {
+                newToast.remove()
+            }, 4325)
+        }
+    </script>
+</body>
+
+</html>

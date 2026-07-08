@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gambling</title>
+    <script src="https://cdn.jsdelivr.net/npm/party-js@latest/bundle/party.min.js"></script>
+</head>
+
+<style>
+    .container {
+        display: flex;
+        justify-content: center;
+    }
+
+    * {
+        font-family: monospace;
+        color: white;
+    }
+
+    body,
+    html {
+        background: #0d0d0d;
+    }
+
+    h1 {
+        text-align: center;
+    }
+
+    p#n1,
+    p#n2,
+    p#n3 {
+        background: #1d1d1d;
+        border-radius: 0px;
+        padding: 25px;
+        aspect-ratio: 1/1;
+        width: 25px;
+        height: 25px;
+        font-size: 27px;
+        font-weight: bold;
+        margin: 4px;
+        text-align: center;
+        overflow-y: hidden;
+        mask-image: linear-gradient(to bottom, transparent 0%, black 40%, black 60%, transparent 100%);
+    }
+
+    @keyframes spinning {
+        0% {
+            top: -35%;
+        }
+
+        100% {
+            top: -735%;
+        }
+    }
+
+    p#n1 span,
+    p#n2 span,
+    p#n3 span {
+        line-height: 50px;
+        position: relative;
+        top: -35%;
+        transition: 0.2s;
+        animation: none;
+    }
+
+    .statustext {
+        background: #1d1d1d;
+        text-align: center;
+        padding: 5px 10px;
+        border-radius: 10px;
+        width: 220px;
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        height: 15px;
+    }
+
+    button {
+        background: #1d1d1d;
+        padding: 15px;
+        border-radius: 15px;
+        text-align: center;
+        border: none;
+        font-weight: bold;
+        font-size: 25px;
+        width: 240px;
+        margin-top: -7.5px;
+        transition: 0.2s;
+        cursor: pointer;
+    }
+
+    button:hover {
+        scale: 1.2;
+        background: #3d3d3d;
+    }
+
+    .centerc {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+</style>
+
+<body>
+    <br><br><br><br>
+
+    <h1>cherri slots (super buggy edition)</h1>
+
+    <div class="container">
+        <p id="n1"><span>0 1 2 3 4 5 6 7 8 9</span></p>
+        <p id="n2"><span>0 1 2 3 4 5 6 7 8 9</span></p>
+        <p id="n3"><span>0 1 2 3 4 5 6 7 8 9</span></p>
+    </div>
+
+    <p class="statustext"><span id="status">Click Go!</span></p>
+    <br><br><br><br>
+    <div class="centerc">
+        <button onclick="go()">Go!</button>
+    </div>
+    <br><br><br><br><br><br>
+    <div class="centerc" style="font-weight: bold; font-size:2rem;">
+        Cash: $<span id="cash-counter">10</span>
+    </div>
+
+    <script>
+        const n1 = document.getElementById("n1")
+        const n2 = document.getElementById("n2")
+        const n3 = document.getElementById("n3")
+        const cc = document.getElementById("cash-counter")
+        let cash = localStorage.getItem("GMBL_cash") ?? 10;
+        const partycontainer = document.querySelector("html")
+
+        function updateC(value) {
+            cash = value + cash
+            cash = Math.trunc(cash * 100) / 100
+            cc.textContent = cash;
+            localStorage.setItem("GMBL_cash", cash)
+
+            if (cash === 0) {
+                alert("You lost! Clear your localstorage and try again!")
+            }
+        };
+
+        function go() {
+            const i = "0 1 2 3 4 5 6 7 8 9"
+
+            n1.querySelector("span").textContent = i
+            n2.querySelector("span").textContent = i
+            n3.querySelector("span").textContent = i
+
+            n1.querySelector("span").style.animation = "spinning 0.1s infinite linear normal"
+            n2.querySelector("span").style.animation = "spinning 0.1s infinite linear normal"
+            n3.querySelector("span").style.animation = "spinning 0.1s infinite linear normal"
+
+            document.getElementById("status").textContent = "Spinning..."
+
+            const r1 = Math.floor(Math.random() * 10)
+            const r2 = Math.floor(Math.random() * 10)
+            const r3 = Math.floor(Math.random() * 10)
+
+            setTimeout(() => {
+                n1.querySelector("span").textContent = r1
+                n1.querySelector("span").style.top = "-35%"
+                n1.querySelector("span").style.animation = "none"
+            }, 500)
+
+            setTimeout(() => {
+                n2.querySelector("span").textContent = r2
+                n2.querySelector("span").style.top = "-35%"
+                n2.querySelector("span").style.animation = "none"
+            }, 1000)
+
+            setTimeout(() => {
+                n3.querySelector("span").textContent = r3
+                n3.querySelector("span").style.top = "-35%"
+                n3.querySelector("span").style.animation = "none"
+            }, 1500)
+
+            setTimeout(() => {
+                if (r1 === r2 && r1 === r3 && r2 === r3 && r3 === r2) {
+                    document.getElementById("status").textContent = "You Won the Jackpot!"
+                    updateC(cash * 2)
+                    party.confetti(partycontainer, {
+                        count: party.variation.range(50, 100),
+                        size: party.variation.range(1, 0.5),
+                    });
+                } else if (r1 === r2 || r1 === r3 || r2 === r3) {
+                    document.getElementById("status").textContent = "You Won!"
+                    updateC(cash * 0.25)
+                } else if (r1 === 7 && r2 === 7 && r3 === 7) {
+                    document.getElementById("status").textContent = "You Won the Megapot!"
+                    updateC(cash * 100)
+                    party.confetti(partycontainer, {
+                        count: party.variation.range(100, 200),
+                        size: party.variation.range(1.8, 2.2),
+                    });
+                } else {
+                    document.getElementById("status").textContent = "You Lost!"
+                    updateC(cash * -0.2)
+                }
+            }, 2000)
+        }
+
+        cc.textContent = cash
+    </script>
+    <div id="cursor-thank-you-zxs"
+        style="position: fixed; top: 0px; left: 0px; width: 16px; height: 16px; border-radius: 50%; background: color-mix(in srgb, var(--accent) 70%, white 30%); pointer-events: none; z-index: 9999; transform: translate(748px, 592px); transition: width 0.15s, height 0.15s, opacity 0.15s; mix-blend-mode: difference; opacity: 0;">
+    </div>
+    <script src="/assets/js/cursor.js"></script>
+</body>
+
+</html>

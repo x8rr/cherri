@@ -1,0 +1,74 @@
+<html><head>
+	<title id="title">ClassiCube</title>
+    <meta name="viewport" content="width=device-width">
+    <link href="css/style.css" rel="stylesheet">
+    <script src="js/jquery.js"></script>
+    <script src="/assets/js/geoblocker.js"></script>
+	<script src="/assets/js/settings.js"></script>
+  </head>
+  <body>
+<div id="body">
+<div class="sec">
+  <div class="row">
+    <canvas id="canvas" style="display:block; box-sizing:border-box; border-width:0px; padding:0; margin:0 auto; background-color: black; width:100%; height:auto;" oncontextmenu="event.preventDefault()" tabindex="-1" width="1000" height="562"></canvas>
+    <span id="logmsg" style="font-size:18px;color:#F67;"></span>
+  </div>
+</div>
+<script type="text/javascript">
+  function resizeGameCanvas() {
+    var cc_canv = $('canvas#canvas');
+
+     cc_canv[0].width  = window.innerWidth;
+     cc_canv[0].height = window.innerHeight;
+	 
+	 cc_canv.focus();
+  }
+  
+  function setFocusOnClick() {
+    // Set focus on the canvas when the iframe is clicked
+    var cc_canv = $('canvas#canvas');
+    cc_canv.focus();
+  }
+  document.getElementById('canvas').addEventListener('click', setFocusOnClick);
+  
+  window.addEventListener('load', function() {
+    document.getElementById('canvas').focus();
+  });
+  
+
+  var Module = {
+    preRun: [ resizeGameCanvas ],
+    postRun: [],
+    arguments: ['Singleplayer'],
+    print: function(text) {
+      if (arguments.length > 1) text = Array.prototype.slice.call(arguments).join(' ');
+      console.log(text);
+    },
+    printErr: function(text) {
+      if (arguments.length > 1) text = Array.prototype.slice.call(arguments).join(' ');
+      console.error(text);
+    },
+    canvas: (function() { return document.getElementById('canvas'); })(),
+    setStatus: function(text) {
+      console.log(text);
+      document.getElementById('logmsg').innerHTML = text;
+    },
+    totalDependencies: 0,
+    monitorRunDependencies: function(left) {
+      this.totalDependencies = Math.max(this.totalDependencies, left);
+      Module.setStatus(left ? 'Preparing... (' + (this.totalDependencies-left) + '/' + this.totalDependencies + ')' : 'All downloads complete.');
+    }
+  };
+  Module.setStatus('Downloading...');
+  window.onerror = function(msg) {
+    // TODO: do not warn on ok events like simulating an infinite loop or exitStatus
+    Module.setStatus('Exception thrown, see JavaScript console (' + msg + ')');
+    Module.setStatus = function(text) {
+      if (text) Module.printErr('[post-exception status] ' + text);
+    };
+  };
+</script>
+<script async="" type="text/javascript" src="js/ClassiCube.js"></script>
+        </div>
+    
+</body></html>

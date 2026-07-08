@@ -1,0 +1,138 @@
+.transport-selector,
+.search-engine-selector,
+.backend-selector,
+.decoy-selector,
+.cloak-link-selector,
+.wisp-selector,
+.theme-selector,
+.store-selector {
+    position: relative;
+    width: 98%;
+    max-width: 300px;
+    margin-bottom: 15px;
+}
+
+.transport-selected,
+.search-engine-selected,
+.backend-selected,
+.decoy-selected,
+.cloak-link-selected,
+.wisp-selected,
+.theme-selected,
+.store-selected {
+    background-color: color-mix(in srgb, var(--bg) 30%, transparent 70%);
+    border: 2px solid var(--bg-2);
+    color: #e0e0e0;
+    padding: 10px;
+    border-radius: 15px;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: all 0.1s ease;
+}
+
+.transport-selected:hover,
+.search-engine-selected:hover,
+.backend-selected:hover,
+.decoy-selected:hover,
+.cloak-link-selected:hover,
+.wisp-selected:hover,
+.theme-selected:hover,
+.store-selected:hover {
+    background-color: var(--bg-3);
+}
+
+.transport-selected::after,
+.search-engine-selected::after,
+.backend-selected::after,
+.decoy-selected::after,
+.cloak-link-selected::after,
+.wisp-selected::after,
+.theme-selected::after,
+.store-selected::after {
+    content: "\f107";
+    font-family: "Font Awesome 6 Pro";
+    font-weight: 900;
+    font-size: 0.8em;
+    transition: all 0.3s ease;
+}
+
+.transport-selected.transport-arrow-active::after,
+.search-engine-selected.search-engine-arrow-active::after,
+.backend-selected.backend-arrow-active::after,
+.decoy-selected.decoy-arrow-active::after,
+.cloak-link-selected.cloak-link-arrow-active::after,
+.wisp-selected.wisp-arrow-active::after,
+.theme-selected.theme-arrow-active::after,
+.store-selected.store-arrow-active::after {
+    transform: rotate(180deg);
+}
+
+.transport-options,
+.search-engine-options,
+.backend-options,
+.decoy-options,
+.cloak-link-options,
+.wisp-options,
+.theme-options,
+.store-options {
+    position: absolute;
+    top: 100%;
+    margin-top: 5px;
+    left: 0;
+    right: 0;
+    color: #9b9b9b;
+    background-color: color-mix(in srgb, var(--bg) 90%, transparent 10%);
+    backdrop-filter: blur(20px);
+    border: 2px solid var(--bg-2);
+    border-radius: 15px;
+    max-height: 0;
+    text-align: left;
+    overflow-x: hidden;
+    overflow-y: auto;
+    transition: all 0.3s ease;
+    opacity: 0;
+    z-index: 10;
+    padding: 3px 0;
+}
+
+.transport-options.transport-show,
+.search-engine-options.search-engine-show,
+.backend-options.backend-show,
+.decoy-options.decoy-show,
+.cloak-link-options.cloak-link-show,
+.wisp-options.wisp-show,
+.theme-options.theme-show,
+.store-options.store-show {
+    max-height: 400px;
+    opacity: 1;
+}
+
+.transport-options div,
+.search-engine-options div,
+.backend-options div,
+.decoy-options div,
+.cloak-link-options div,
+.wisp-options div,
+.theme-options div,
+.store-options div {
+    padding: 8px;
+    border-radius: 10px;
+    cursor: pointer;
+    width: 98%;
+    margin: 0 auto;
+    transition: all 0.1s ease;
+}
+
+.transport-options div:hover,
+.search-engine-options div:hover,
+.backend-options div:hover,
+.decoy-options div:hover,
+.cloak-link-options div:hover,
+.wisp-options div:hover,
+.theme-options div:hover,
+.store-options div:hover {
+    background-color: var(--bg-3);
+    color: var(--text);
+}

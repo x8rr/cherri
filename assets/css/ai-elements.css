@@ -1,0 +1,33 @@
+.ai-message ol,
+.ai-message li {
+    white-space: normal;
+    word-break: break-word;
+    overflow-wrap: break-word;
+    margin-left: -20px;
+}
+
+.ai-message li {
+    margin-bottom: 10px;
+}
+
+.ai-message code {
+    background: var(--bg-5);
+    font-family: monospace;
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+    border-radius: 20px;
+    padding: 15px;
+    white-space: pre-wrap;
+    word-break: break-word;
+}
+
+.ai-message:has(img) {
+    padding: 0;
+}
+
+.ai-message img {
+    height: 100%;
+    width: 100%;
+    border-radius: 20px 20px 20px 10px !important;
+}

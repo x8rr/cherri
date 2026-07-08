@@ -1,0 +1,152 @@
+[
+  {
+    "name": "Google",
+    "url": "https://google.com",
+    "img": "/assets/img/apps/google.png"
+  },
+  {
+    "name": "ChatGPT",
+    "url": "https://chatgpt.com",
+    "img": "/assets/img/apps/chatgpt.png"
+  },
+  {
+    "name": "duck.ai",
+    "url": "https://duck.ai",
+    "img": "/assets/img/apps/duckduckgo.png"
+  },
+  {
+    "name": "Amazon",
+    "url": "https://amazon.com",
+    "img": "/assets/img/apps/amazon.png"
+  },
+  {
+    "name": "chess.com",
+    "url": "https://chess.com",
+    "img": "/assets/img/apps/chess.png"
+  },
+  {
+    "name": "Cool Math Games",
+    "url": "https://coolmathgames.com",
+    "img": "/assets/img/apps/coolmath.png"
+  },
+  {
+    "name": "Crazygames",
+    "url": "https://crazygames.com",
+    "img": "/assets/img/apps/crazygames.png"
+  },
+  {
+    "name": "Discord",
+    "url": "https://discord.com",
+    "img": "/assets/img/apps/discord.jpg"
+  },
+  {
+    "name": "ESPN",
+    "url": "https://espn.com",
+    "img": "/assets/img/apps/espn.webp"
+  },
+  {
+    "name": "GeForce NOW",
+    "url": "https://play.geforcenow.com/mall/",
+    "img": "/assets/img/apps/geforce-now.png"
+  },
+  {
+    "name": "Github",
+    "url": "https://github.com",
+    "img": "/assets/img/apps/github.png"
+  },
+  {
+    "name": "Gemini",
+    "url": "https://gemini.google.com",
+    "img": "/assets/img/apps/gemini.webp"
+  },
+  {
+    "name": "Netflix",
+    "url": "https://netflix.com",
+    "img": "/assets/img/apps/netflix.png"
+  },
+  {
+    "name": "now.gg",
+    "url": "https://now.gg",
+    "img": "/assets/img/apps/nowgg.png"
+  },
+  {
+    "name": "Pinterest",
+    "url": "https://pinterest.com",
+    "img": "/assets/img/apps/pinterest.png"
+  },
+  {
+    "name": "Poki",
+    "url": "https://poki.com",
+    "img": "/assets/img/apps/poki.png"
+  },
+  {
+    "name": "Reddit",
+    "url": "https://reddit.com",
+    "img": "/assets/img/apps/reddit.png"
+  },
+  {
+    "name": "Roblox",
+    "url": "https://roblox.com",
+    "img": "data:image/jpeg;base64,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"
+  },
+  {
+    "name": "Easyfun.gg",
+    "url": "https://easyfun.gg",
+    "img": "/assets/img/apps/efgg.png"
+  },
+  {
+    "name": "Cloudmoon Web",
+    "url": "https://web.cloudmoonapp.com",
+    "img": "/assets/img/apps/cmw.png"
+  },
+  {
+    "name": "Scratch",
+    "url": "https://scratch.mit.edu",
+    "img": "/assets/img/apps/scratch.webp"
+  },
+  {
+    "name": "Snapchat",
+    "url": "https://snapchat.com",
+    "img": "/assets/img/apps/snapchat.png"
+  },
+  {
+    "name": "Soundcloud",
+    "url": "https://soundcloud.com",
+    "img": "/assets/img/apps/soundcloud.jpg"
+  },
+  {
+    "name": "Spotify",
+    "url": "https://spotify.com",
+    "img": "/assets/img/apps/spotify.png"
+  },
+  {
+    "name": "TikTok",
+    "url": "https://tiktok.com",
+    "img": "/assets/img/apps/tiktok.png"
+  },
+  {
+    "name": "Twitch",
+    "url": "https://twitch.tv",
+    "img": "/assets/img/apps/twitch-tv.png"
+  },
+  {
+    "name": "Twitter (X)",
+    "url": "https://x.com",
+    "img": "/assets/img/apps/twitter.png"
+  },
+  {
+    "name": "VS Code",
+    "url": "https://vscode.dev",
+    "img": "/assets/img/apps/vscode.png"
+  },
+  {
+    "name": "Youtube",
+    "url": "https://youtube.com",
+    "img": "/assets/img/apps/yt.png"
+  },
+  {
+    "name": "Fandom",
+    "url": "https://fandom.com",
+    "img": "/assets/img/apps/fandom.png"
+  }
+]

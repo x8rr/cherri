@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>cherri | vms</title>
+    <link rel="shortcut icon" href="/assets/img/fav.png" type="image/x-icon" id="tabIcon">
+    <link rel="stylesheet" href="/assets/css/colors.css" id="css-theme-link">
+    <link rel="stylesheet" href="/assets/css/elements.css">
+    <link rel="stylesheet" href="/assets/css/font.css">
+    <link rel="stylesheet" href="/assets/icons/fonts/remixicon.css">
+    <script src="/assets/js/lib/particles.js"></script>
+    <script src="/assets/js/colors.js"></script>
+    <link rel="stylesheet" href="/assets/css/overlay.css">
+    <script src="/assets/js/t.js"></script>
+    <link rel="stylesheet" href="/assets/css/t.css">
+</head>
+
+<body>
+    <style>
+        html {
+            background: none;
+            overflow: hidden;
+        }
+
+        #particles-container {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: -1;
+            opacity: 0.5;
+        }
+
+        .container {
+            display: flex;
+        }
+
+        .centerc {
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            position: absolute;
+        }
+
+        h1 {
+            color: var(--bright-text);
+            font-size: 2.5rem;
+        }
+
+        .hcenter {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1000;
+        }
+
+        button {
+            backdrop-filter: blur(10px);
+    background: color-mix(in srgb, var(--bg-2) 30%, transparent 70%);
+    border: 2px solid transparent;
+    box-shadow: 0 0 0 .5px rgba(255, 255, 255, 0.15),
+        0 16px 32px rgba(0, 0, 0, 0.12);
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 15px;
+            font-size: 17px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.2s;
+            margin: 2px;
+        }
+
+        button:hover {
+            scale: 1.05;
+            background: var(--bg-3);
+        }
+
+        button:active {
+            scale: .95;
+        }
+
+        iframe {
+            background: var(--bg);
+            height: 100vh;
+            border-radius: 0px;
+            border: 0px solid var(--border-4);
+            width: 100%;
+            cursor: none;
+        }
+
+        button.disabled {
+            filter: brightness(0.5);
+            cursor: not-allowed;
+            pointer-events: none;
+        }
+
+        button:disabled {
+            filter: brightness(0.5);
+            cursor: not-allowed;
+            pointer-events: none;
+        }
+
+        center p {
+            margin-bottom: -20px;
+            font-weight: 500;
+        }
+
+        .atbottom {
+            font-size: 14px;
+            opacity: .2;
+        }
+    </style>
+
+    <center>
+        <iframe src="/pages/embed.html?launch=https://browser.lol/create" frameborder="0"></iframe>
+    </center>
+
+    <script>
+        particlesJS.load('particles-container', '/assets/json/config/particles.json', function () {
+            console.log('Particles.js config loaded');
+        });
+    </script>
+
+    <script src="/assets/js/vm.js" defer></script>
+    <div id="cursor-thank-you-zxs"
+        style="position: fixed; top: 0px; left: 0px; width: 16px; height: 16px; border-radius: 50%; background: color-mix(in srgb, var(--accent) 70%, white 30%); pointer-events: none; z-index: 9999; transform: translate(748px, 592px); transition: width 0.15s, height 0.15s, opacity 0.15s; mix-blend-mode: difference; opacity: 0;">
+    </div>
+    <script src="/assets/js/cursor.js"></script>
+</body>
+
+</html>

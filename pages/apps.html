@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>cherri | apps</title>
+    <link rel="shortcut icon" href="/assets/img/fav.png" type="image/x-icon" id="tabIcon">
+    <link rel="stylesheet" href="/assets/css/colors.css" id="css-theme-link">
+    <link rel="stylesheet" href="/assets/css/elements.css">
+    <link rel="stylesheet" href="/assets/css/font.css">
+    <link rel="stylesheet" href="/assets/icons/fonts/remixicon.css">
+    <script src="/assets/js/lib/particles.js"></script>
+    <script src="/assets/js/colors.js"></script>
+</head>
+
+<body>
+
+    
+
+    <nav>
+        <ul id="nav-ul" class="">
+            <div class="container" style="display: flex; flex-direction: row;">
+                <div class="top-nav">
+                    <li>
+                        <a class="active" href="/">
+                            <i class="ri ri-home-4-line"></i>
+                            Home
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/pages/games.html">
+                            <i class="ri ri-gamepad-line"></i>
+                            Games
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/pages/apps.html">
+                            <i class="ri ri-apps-line"></i>
+                            Apps
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/pages/browser.html">
+                            <i class="ri ri-seo-line"></i>
+                            Browser
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/pages/movieframe.html">
+                            <i class="ri ri-film-line"></i>
+                            Movies
+                        </a>
+                    </li>
+                </div>
+                <div>
+                    <li>
+                        <a style="cursor: pointer;" onclick="window.open('https://discord.gg/hUYzETaQ9U', '_blank')">
+                            <i class="ri ri-discord-fill"></i>
+                            Discord
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/pages/partners.html">
+                            <i class="ri ri-shake-hands-fill"></i>
+                            Partners
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/pages/settings.html">
+                            <i class="ri ri-settings-3-line"></i>
+                            Settings
+                        </a>
+                    </li>
+                    <li>
+                        <a style="cursor: pointer;" onclick="window.open('https://github.com/x8rr/cherri/releases/latest', '_blank')">
+                            <i class="ri ri-github-fill"></i>
+                            Beta 2.2
+                        </a>
+                    </li>
+                </div>
+            </div>
+        </ul>
+    </nav>
+
+    <div class="nav-logo">
+        <img src="/assets/img/fav.png" alt="" onclick="
+            ul.classList.add('active');
+            const blurr = document.createElement('div')
+            blurr.classList.add('bluroverlay')
+            document.body.append(blurr)
+            blurr.addEventListener('click', () => {
+                ul.classList.remove('active')
+                blurr.remove()
+            })
+        ">
+    </div>
+
+    <style>
+        #particles-container {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: -1;
+            opacity: 0.5;
+        }
+
+        .container {
+            display: flex;
+        }
+
+        .centerc {
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            position: absolute;
+        }
+
+        h1 {
+            color: var(--bright-text);
+            font-size: 2.5rem;
+        }
+
+        .hcenter {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1000;
+        }
+
+        .app {
+            width: 280px;
+            height: 170px;
+            border-radius: 15px;
+            overflow: hidden;
+            border: 1px solid var(--border-4);
+            margin: 10px;
+            transition: 0.3s;
+            border: 0px solid white;
+            position: relative;
+            z-index: 1;
+        }
+
+        .app-img {
+            background-size: cover !important;
+            background-position: center !important;
+            background-repeat: no-repeat !important;
+            position: relative;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            transition: 0.3s;
+        }
+
+
+        .title {
+            z-index: 31;
+            transition: 0.2s;
+            position: absolute !important;
+            left: 15px;
+            bottom: -15px;
+            opacity: 0;
+        }
+
+        .app:hover {
+            cursor: pointer;
+            outline-offset: 0px;
+            scale: 1.05;
+        }
+
+        .app:hover .app-img {
+            filter: brightness(0.3);
+        }
+
+        .app:hover .title {
+            bottom: 5px;
+            opacity: 1;
+        }
+
+        .app h2 {
+            color: var(--bright-text);
+            position: relative;
+            top: 0%;
+            transform: translateY(30%);
+            font-size: 20px;
+        }
+
+        .apps-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            width: 90%;
+            z-index: 0;
+        }
+
+        ::-webkit-scrollbar {
+            scrollbar-width: none;
+        }
+
+        .bottom-glow {
+            content: "";
+            position: fixed;
+            width: 100%;
+            height: 35%;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: -1;
+            opacity: 0.3;
+            background: radial-gradient(at bottom, var(--bg-3) 30%, transparent 70%);
+        }
+
+        .top-glow {
+            content: "";
+            position: fixed;
+            width: 100%;
+            height: 35%;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: -1;
+            opacity: 0.3;
+            background: radial-gradient(at top, var(--bg-3) 30%, transparent 70%);
+        }
+    </style>
+
+
+    <div id="particles-container"></div>
+
+    <div class="hcenter">
+        <h1 style="text-align: center;">Apps</h1>
+        <input type="text" placeholder="Search for an app..." onkeyup="searchApps(this.value)">
+    </div>
+
+    <div class="apps-container hcenter" style="top: 200px;">
+
+    </div>
+
+    <script defer>
+        const ul = document.getElementById("nav-ul")
+
+        document.querySelectorAll("li a").forEach(link => {
+            link.addEventListener("click", function () {
+                document.querySelectorAll("li a").forEach(l => l.classList.remove("active"));
+                this.classList.add("active");
+            });
+        });
+
+        window.addEventListener("keydown", (e) => {
+            if (e.ctrlKey && e.key === "m") {
+                console.log("Key pressed")
+                e.preventDefault()
+                if (!ul.classList.contains("active")) {
+                    ul.classList.add("active")
+                    const blurr = document.createElement("div")
+                    blurr.classList.add("bluroverlay")
+                    document.body.append(blurr)
+                    blurr.addEventListener("click", () => {
+                        blurr.remove()
+                        ul.classList.remove("active")
+                    })
+                } else {
+                    ul.classList.remove("active")
+                    const blurr = document.querySelector(".bluroverlay")
+                    blurr.remove()
+                }
+            }
+        })
+
+        const acont = document.querySelector('.apps-container');
+
+        let data
+        let res
+
+        async function getJson() {
+            res = await fetch('/assets/json/apps.json');
+            data = await res.json();
+        }
+
+        function loadApps() {
+            getJson().then(() => {
+                data.forEach(app => {
+                    const appDiv = document.createElement('div');
+                    appDiv.classList.add('app');
+
+                    appDiv.innerHTML = `
+                    <div class="app-img" style="background: url('${app.img}');" onclick="window.location.href = '/pages/browser.html?launch=${app.url}'"></div>
+                        <div class="title">
+                        <h2 class="h2-title">${app.name}</h2>
+                    </div>
+                    `;
+
+                    acont.appendChild(appDiv);
+                });
+            })
+        }
+
+        loadApps()
+
+        function searchApps(q) {
+            const apps = document.querySelectorAll('.app');
+            apps.forEach(app => {
+                const title = app.querySelector('.h2-title').innerText.toLowerCase();
+                if (title.includes(q.toLowerCase())) {
+                    app.style.display = 'block';
+                } else {
+                    app.style.display = 'none';
+                }
+            });
+        }
+    </script>
+</body>
+
+</html>

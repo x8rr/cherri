@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>cherri | movies</title>
+    <link rel="shortcut icon" href="/assets/img/fav.png" type="image/x-icon">
+    <link rel="stylesheet" href="/assets/css/colors.css">
+    <link rel="stylesheet" href="/assets/css/elements.css">
+    <link rel="stylesheet" href="/assets/css/font.css">
+    <link rel="stylesheet" href="/assets/icons/fonts/remixicon.css">
+</head>
+<body style="margin: 0;">
+    <style>
+         ::-webkit-scrollbar { scrollbar-width: none !important; }
+    </style>
+
+    
+
+    <iframe src="/pages/movies.html" style="width: 100vw; height: 100vh; margin: 0;" frameborder="0"></iframe>
+    <nav>
+        <ul id="nav-ul" class="">
+            <div class="container" style="display: flex; flex-direction: row;">
+                <div class="top-nav">
+                    <li>
+                        <a class="active" href="/">
+                            <i class="ri ri-home-4-line"></i>
+                            Home
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/pages/games.html">
+                            <i class="ri ri-gamepad-line"></i>
+                            Games
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/pages/apps.html">
+                            <i class="ri ri-apps-line"></i>
+                            Apps
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/pages/browser.html">
+                            <i class="ri ri-seo-line"></i>
+                            Browser
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/pages/movieframe.html">
+                            <i class="ri ri-film-line"></i>
+                            Movies
+                        </a>
+                    </li>
+                </div>
+                <!--
+                                <li>
+                                    <a href="javascript:nav('yt')">
+                                        <i class="ri ri-video-line"></i>
+                                        Youtube UB
+                                    </a>
+                                </li>
+                                -->
+                <div>
+                    <li>
+                        <a style="cursor: pointer;" onclick="window.open('https://discord.gg/hUYzETaQ9U', '_blank')">
+                            <i class="ri ri-discord-fill"></i>
+                            Discord
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/pages/partners.html">
+                            <i class="ri ri-shake-hands-fill"></i>
+                            Partners
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/pages/settings.html">
+                            <i class="ri ri-settings-3-line"></i>
+                            Settings
+                        </a>
+                    </li>
+                    <li>
+                        <a style="cursor: pointer;"
+                            onclick="window.open('https://github.com/x8rr/cherri/releases/latest', '_blank')">
+                            <i class="ri ri-github-fill"></i>
+                            Beta 2.2
+                        </a>
+                    </li>
+                    <!--
+                        <li>
+                            <a href="javascript:collapseNav()">
+                                <i class="ri ri-arrow-left-s-line" style="display: inline-block;" id="cBtn"></i>
+                                Collapse
+                            </a>
+                        </li>
+                        -->
+                </div>
+            </div>
+        </ul>
+    </nav>
+
+    <script defer>
+        const ul = document.getElementById("nav-ul")
+
+        document.querySelectorAll("li a").forEach(link => {
+            link.addEventListener("click", function () {
+                document.querySelectorAll("li a").forEach(l => l.classList.remove("active"));
+                this.classList.add("active");
+            });
+        });
+
+        window.addEventListener("keydown", (e) => {
+            if (e.ctrlKey && e.key === "m") {
+                console.log("Key pressed")
+                e.preventDefault()
+                if (!ul.classList.contains("active")) {
+                    ul.classList.add("active")
+                    const blurr = document.createElement("div")
+                    blurr.classList.add("bluroverlay")
+                    document.body.append(blurr)
+                    blurr.addEventListener("click", () => {
+                        blurr.remove()
+                        ul.classList.remove("active")
+                    })
+                } else {
+                    ul.classList.remove("active")
+                    const blurr = document.querySelector(".bluroverlay")
+                    blurr.remove()
+                }
+            }
+        })
+    </script>
+
+    <div class="nav-logo">
+        <img src="/assets/img/fav.png" alt="" onclick="
+                    ul.classList.add('active');
+                    const blurr = document.createElement('div')
+                    blurr.classList.add('bluroverlay')
+                    document.body.append(blurr)
+                    blurr.addEventListener('click', () => {
+                        ul.classList.remove('active')
+                        blurr.remove()
+                    })
+                ">
+    </div>
+</body>
+</html>

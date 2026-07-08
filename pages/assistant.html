@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>cherri | ai</title>
+    <link rel="shortcut icon" href="/assets/img/fav.png" type="image/x-icon" id="tabIcon">
+    <link rel="stylesheet" href="/assets/css/colors.css" id="css-theme-link">
+    <link rel="stylesheet" href="/assets/css/elements.css">
+    <link rel="stylesheet" href="/assets/css/font.css">
+    <link rel="stylesheet" href="/assets/icons/fonts/remixicon.css">
+    <script src="/assets/js/lib/particles.js"></script>
+    <script src="/assets/js/colors.js"></script>
+    <link rel="stylesheet" href="/assets/css/overlay.css">
+    <script src="/assets/js/t.js"></script>
+    <link rel="stylesheet" href="/assets/css/t.css">
+    <link rel="stylesheet" href="/assets/css/ai-elements.css">
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/highlight.js@11.8.0/lib/highlight.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.8.0/styles/atom-one-dark.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"></script>
+</head>
+
+<body>
+    <style>
+        html {
+            background: none;
+            overflow: hidden;
+        }
+
+        #particles-container {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: -1;
+            opacity: 0.5;
+        }
+
+        .container {
+            display: flex;
+        }
+
+        .centerc {
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            position: absolute;
+        }
+
+        h1 {
+            color: var(--bright-text);
+            font-size: 2.5rem;
+        }
+
+        .hcenter {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1000;
+        }
+
+        button {
+            backdrop-filter: blur(10px);
+            background: color-mix(in srgb, var(--bg-2) 30%, transparent 70%);
+            border: 2px solid transparent;
+            box-shadow: 0 0 0 .5px rgba(255, 255, 255, 0.15),
+                0 16px 32px rgba(0, 0, 0, 0.12);
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 20px;
+            font-size: 25px;
+            font-weight: 200;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.2s;
+            margin: 2px;
+            bottom: 20px;
+            position: relative;
+            bottom: 0px;
+            left: 5px;
+        }
+
+        button:hover {
+            scale: 1.05;
+            background: var(--bg-3);
+        }
+
+        button:active {
+            scale: .95;
+        }
+
+        iframe {
+            background: var(--bg);
+            height: 100vh;
+            border-radius: 0px;
+            border: 0px solid var(--border-4);
+            width: 100%;
+            cursor: none;
+        }
+
+        button.disabled {
+            filter: brightness(0.5);
+            cursor: not-allowed;
+            pointer-events: none;
+        }
+
+        button:disabled {
+            filter: brightness(0.5);
+            cursor: not-allowed;
+            pointer-events: none;
+        }
+
+        center p {
+            margin-bottom: -20px;
+            font-weight: 500;
+        }
+
+        .atbottom {
+            font-size: 14px;
+            opacity: .2;
+        }
+
+        input {
+            border-radius: 22px;
+            background: color-mix(in srgb, var(--bg) 75%, transparent 25%);
+            padding: 10px 20px;
+            outline: none;
+            backdrop-filter: blur(10px);
+            width: 480px;
+        }
+
+        input::placeholder {
+            color: color-mix(in srgb, var(--text) 50%, transparent 50%);
+        }
+
+        input:focus {
+            background: color-mix(in srgb, var(--bg-2) 60%, transparent 40%);
+        }
+
+        .messages-container {
+            height: 80vh;
+            bottom: 90px;
+            width: 50%;
+            overflow-y: auto;
+            overflow-x: hidden;
+            left: 50%;
+            transform: translateX(-50%);
+            position: absolute;
+            padding: 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+        }
+
+
+        .my-message {
+            background: color-mix(in srgb, var(--bg-2) 75%, transparent 25%);
+            padding: 15px;
+            border: 2px solid transparent;
+            box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.10), 0 16px 32px rgba(0, 0, 0, 0.12);
+            border-radius: 20px 20px 10px 20px;
+            max-width: 400px;
+            position: relative;
+            margin-bottom: 20px;
+            right: 0;
+        }
+
+        .ai-message {
+            background: color-mix(in srgb, var(--bg) 75%, transparent 25%);
+            padding: 15px;
+            border: 2px solid transparent;
+            box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.05), 0 16px 32px rgba(0, 0, 0, 0.12);
+            border-radius: 20px 20px 20px 10px;
+            margin-bottom: 20px;
+            max-width: 400px;
+            position: relative;
+            left: 0;
+            align-self: flex-start;
+            overflow-wrap: break-word !important;
+            white-space: pre-wrap !important;
+            word-break: break-word !important;
+        }
+
+        .ai-message pre {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 12px;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 8px 0;
+        }
+
+        .ai-message code {
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+        }
+
+        .ai-message pre code {
+            background: none;
+            padding: 0;
+        }
+
+        .ai-message p {
+            margin: 8px 0;
+        }
+
+        svg.loading {
+            width: 1.25em;
+            transform-origin: center;
+            animation: rotate4 1.2s linear infinite;
+            transition: 0.2s;
+            scale: 1;
+            position: absolute;
+            top: 5px;
+            left: 5px;
+        }
+
+        .loading circle {
+            fill: none;
+            stroke: var(--text);
+            stroke-width: 4;
+            stroke-dasharray: 1, 200;
+            stroke-dashoffset: 0;
+            stroke-linecap: round;
+            animation: dash4 1.5s ease-in-out infinite;
+        }
+
+        @keyframes rotate4 {
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        @keyframes dash4 {
+            0% {
+                stroke-dasharray: 1, 200;
+                stroke-dashoffset: 0;
+            }
+
+            50% {
+                stroke-dasharray: 90, 200;
+                stroke-dashoffset: -35px;
+            }
+
+            100% {
+                stroke-dashoffset: -125px;
+            }
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--bg-3);
+            border-radius: 2000px;
+        }
+
+        ::-webkit-scrollbar {
+            background: var(--bg);
+            width: 6px;
+            border-radius: 3842px;
+        }
+    </style>
+    <br><br><br><br>
+
+    <div class="container" style="position: absolute; left: 50%; bottom: 20px; transform: translateX(-50%);">
+        <button style="left:0; margin-right: 5px;" onclick="switchResponseType()">
+            <i class="ri-image-ai-line"></i>
+        </button>
+        <input type="text" placeholder="What's 2 + 2?">
+        <button onclick="sendMessage()">
+            <i class="ri-corner-down-left-line"></i>
+        </button>
+    </div>
+
+    <div class="messages-container">
+    </div>
+
+    <script>
+        particlesJS.load('particles-container', '/assets/json/config/particles.json', function () {
+            console.log('Particles.js config loaded');
+        });
+    </script>
+    <script>
+        marked.setOptions({
+            gfm: true,
+            breaks: true,
+            langPrefix: 'language-',
+            highlight: function (code, lang) {
+                if (lang && hljs.getLanguage(lang)) {
+                    try {
+                        return hljs.highlight(code, { language: lang }).value;
+                    } catch (err) { }
+                }
+                return code;
+            }
+        });
+    </script>
+    <script src="/assets/js/vm.js" defer></script>
+    <div id="cursor-thank-you-zxs"
+        style="position: fixed; top: 0px; left: 0px; width: 16px; height: 16px; border-radius: 50%; background: color-mix(in srgb, var(--accent) 70%, white 30%); pointer-events: none; z-index: 9999; transform: translate(748px, 592px); transition: width 0.15s, height 0.15s, opacity 0.15s; mix-blend-mode: difference; opacity: 0;">
+    </div>
+    <script src="/assets/js/cursor.js"></script>
+    <script>
+        const input = document.querySelector("input");
+        const placeholders = [
+            "What's 2 + 2?",
+            "How do I make a steak?",
+            "Generate me an image of...",
+            "What can you do?",
+            "What's the weather in...",
+            "What's the difference between...",
+        ];
+
+        input.placeholder = placeholders[Math.floor(Math.random() * placeholders.length)];
+
+        function renderContent(container, markdown) {
+            let processed = markdown.replace(/\\\[/g, '$$').replace(/\\\]/g, '$$');
+            processed = processed.replace(/\\\(/g, '$').replace(/\\\)/g, '$');
+
+            container.innerHTML = marked.parse(processed);
+
+            container.querySelectorAll("pre code").forEach((block) => {
+                hljs.highlightElement(block);
+            });
+
+            renderMathInElement(container, {
+                delimiters: [
+                    { left: "$$", right: "$$", display: true },
+                    { left: "$", right: "$", display: false },
+                    { left: "\\[", right: "\\]", display: true },
+                    { left: "\\(", right: "\\)", display: false }
+                ],
+                throwOnError: false
+            });
+        }
+
+        function anim(container, markdown, speed) {
+            let i = 0;
+            let buffer = "";
+
+            function step() {
+                if (i < markdown.length) {
+                    buffer += markdown[i];
+                    container.textContent = buffer;
+                    i++;
+                    setTimeout(step, speed);
+                } else {
+                    renderContent(container, markdown);
+                }
+            }
+            step();
+        }
+
+        async function askAi(prompt, type) {
+            let endpoint;
+            if (type === "text") {
+                endpoint = "https://text.pollinations.ai/";
+            } else {
+                endpoint = "https://image.pollinations.ai/prompt/";
+            }
+            const text = encodeURIComponent(prompt.trim());
+
+            const cont = document.querySelector(".messages-container");
+
+            const myMessage = document.createElement("div");
+            myMessage.classList.add("my-message");
+            myMessage.textContent = prompt;
+            cont.append(myMessage);
+
+            const div = document.createElement("div");
+            div.classList.add("ai-message");
+            cont.append(div);
+            div.innerHTML = `<svg viewBox="25 25 50 50" class="loading">
+                <circle r="20" cy="50" cx="50"></circle>
+            </svg>`;
+
+            cont.scrollTop = cont.scrollHeight;
+
+            const res = await fetch(endpoint + text);
+            if (!res.ok) {
+                div.innerHTML = "Error: There was a problem with the AI.";
+                return;
+            }
+
+            if (responseType === "text") {
+                const data = await res.text();
+                console.log("AI RESPONSE:" + data);
+
+                div.innerHTML = ``;
+                anim(div, data, 10);
+            } else {
+                const img = document.createElement("img");
+                img.src = endpoint + text;
+                img.alt = prompt;
+                img.style.maxWidth = "100%";
+                img.style.borderRadius = "25px";
+                div.innerHTML = ``;
+                div.append(img);
+            }
+
+            cont.scrollTop = cont.scrollHeight;
+        }
+
+        let responseType = "text";
+
+        function sendMessage() {
+            if (input.value.trim()) {
+                askAi(input.value, responseType);
+                input.value = "";
+            }
+        }
+
+        input.addEventListener("keydown", e => {
+            if (e.key === "Enter") {
+                sendMessage();
+            }
+        });
+
+        function switchResponseType() {
+            if (responseType === "text") {
+                responseType = "image";
+                const icon = document.querySelector(".ri-image-ai-line");
+                icon.classList.remove("ri-image-ai-line");
+                icon.classList.add("ri-ai-generate-text");
+                console.log("switched to image");
+                input.placeholder = "Describe your image...";
+            } else {
+                responseType = "text";
+                const icon = document.querySelector(".ri-ai-generate-text");
+                icon.classList.remove("ri-ai-generate-text");
+                icon.classList.add("ri-image-ai-line");
+                console.log("switched to text");
+                input.placeholder = "Ask the AI something...";
+            }
+        }
+    </script>
+</body>
+
+</html>

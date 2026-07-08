@@ -1,0 +1,1293 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <link rel="icon" type="image/svg+xml" href="/assets/fav.png">
+    <title>cherri</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script src="/uv/uv.bundle.js"></script>
+    <script src="/uv/uv.config.js"></script>
+    <script src="/baremux/index.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script src="/assets/js/t.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/@widgetbot/html-embed"></script>
+    <script src="/homework/math.all.js"></script>
+    <link rel="stylesheet" href="/styles/index.css">
+    <link rel="stylesheet" href="/assets/css/colors.css" id="css-theme-link">
+    <link rel="stylesheet" href="/fa/css/all.css">
+    <link rel="stylesheet" href="/fa/css/all.min.css">
+    <link rel="stylesheet" href="/fa/css/solid.css">
+    <link rel="stylesheet" href="/fa/css/all-pro.css">
+    <link rel="stylesheet" href="/assets/css/t.css">
+    <link rel="stylesheet" href="/assets/css/dropdown.css">
+    <script src="/assets/js/cursor.js" defer></script>
+    <script src="/assets/js/colors.js"></script>
+    <script src="/assets/js/splash.js" defer></script>
+    <script src="/assets/js/browserfunctions.js"></script>
+    <script src="/assets/js/lib/three.min.js"></script>
+    <script src="/assets/js/lib/vanta.fog.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/eruda@3.4.3/eruda.min.js"></script>
+    <script src="/assets/js/lib/particles.js"></script>
+    <script>
+        // why is there a comment here you may ask? well, i don't know. i just put it here. okay now go away this code is NOT interesting twin.
+        const params = new URLSearchParams(window.location.search)
+        if (!params.get("launch")) {
+            window.location.replace('/start.html');
+        }
+    </script>
+    <meta name="title" content="Cherri">
+    <meta name="description"
+        content="A state of the art unblocked games website. Clean, customizable, and now in pink!">
+    <meta name="keywords"
+        content="unblocked, ub, school, games, gn-math, gnmath, unblockedgames, proxy, ultraviolet, scramjet, roblox, fortnite, nowgg, movies, tv, browser, webos, ubgames, apps, discord, freemovies, vm">
+    <meta name="robots" content="index, nofollow">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta property="og:image" content="https://cherri.x8r.dev/assets/img/cover.png">
+    <meta property="twitter:image" content="https://cherri.x8r.dev/assets/img/cover.png">
+    <meta name="language" content="English">
+    <meta name="revisit-after" content="2 days">
+    <meta name="author" content="x8r and Cherri Team">
+    <script defer src="https://cloud.umami.is/script.js"
+        data-website-id="aa852720-724b-4441-be4c-6db9ef160eb9"></script>
+    <link rel="stylesheet" href="/assets/css/font.css">
+    <link rel="stylesheet" href="/assets/icons/fonts/remixicon.css">
+
+</html>
+</head>
+
+<body>
+    <button id="gohomeblock" onclick="navTo('home?launch=1')">
+        <i class="ri-home-4-line"></i>
+    </button>
+    <nav>
+        <ul>
+            <li style="width: 40px;">
+                <a onclick="navTo('home?launch=1')" style="margin-top: 7.5px; margin-left: 10px;" href="#"
+                    data-page="home">
+                    <div class="hcontainer">
+                        <img src="/assets/img/fav.png" style="height: 24px; margin-top: -1px; margin-right: -0px;"
+                            alt="">
+                    </div>
+                </a>
+            </li>
+            <li class="divider"></li>
+            <li>
+                <a onclick="toggleGames()" href="#" data-page="games">
+                    <i class="ri-gamepad-line"></i>
+                </a>
+            </li>
+            <li>
+                <a onclick="toggleApps()" href="#" data-page="apps">
+                    <i class="ri-apps-line"></i>
+                </a>
+            </li>
+            <li>
+                <a onclick="navTo('movies')" href="#" data-page="movies">
+                    <i class="ri-video-line"></i>
+                </a>
+            </li>
+            <li>
+                <a onclick="navTo('vms'); showToast('success', 'VMs are still in beta! Report bugs on the repo/Discord.', 'fas fa-exclamation-triangle')"
+                    href="#" data-page="vms">
+                    <i class="ri-computer-line"></i>
+                </a>
+            </li>
+            <li>
+                <a onclick="navTo('assistant'); showToast('success', 'AI is in beta! Report bugs on the Discord/Repo', 'fas fa-exclamation-triangle')"
+                    href="#" data-page="ai">
+                    <i class="ri-robot-2-line"></i>
+                </a>
+            </li>
+            <li>
+                <a onclick="navTo('chatrooms');" href="#" data-page="chatrooms">
+                    <i class="ri-chat-1-line"></i>
+                </a>
+            </li>
+            <li class="divider"></li>
+            <li>
+                <a onclick="togglePartners()" href="#" data-page="movies">
+                    <i class="ri-shake-hands-fill"></i>
+                </a>
+            </li>
+            <!--
+            <li>
+                <a onclick="toggleChat()" href="#" data-page="social">
+                    <i class="fas fa-messages"></i>
+                </a>
+            </li>
+            -->
+            <li>
+                <a onclick="toggleSettings()" href="#" data-page="dc">
+                    <i class="ri-settings-3-line"></i>
+                </a>
+            </li>
+            <li>
+                <a target="_blank" href="https://discord.gg/hUYzETaQ9U" data-page="settings">
+                    <i class="ri-discord-fill"></i>
+                </a>
+            </li>
+            <!--
+            <li class="divider"></li>
+            <li style="width: 85px">
+                <a onclick="navTo('gmbl'); showToast('warning', 'Cherri in NO WAY encourages gambling, betting, or any actions of the kind. This is just a joke.', 'fas fa-exclamation-triangle')"
+                    href="#" data-page="gmbl">
+                    <i class="far fa-slot-machine"
+                        style="font-size: 17px; transform: translateY(40%); left: 10px;"></i><span
+                        class="new">NEW</span>
+                </a>
+            </li>
+            -->
+        </ul>
+    </nav>
+    <div id="homeContent">
+        <h1 class="text-7xl font-medium home-gradient">
+            cherri</h1>
+        <p id="splash" class="text-medium font-light text-white/50">
+            wsp
+        </p>
+        <br>
+        <div class="searchathome">
+            <i class="fas fa-search"></i>
+            <input id="homesearch" disabled autocomplete="off" style="margin-right: -3%;" type="text"
+                placeholder="search not ready yet!" />
+            <i style="margin-right: 1%; animation: rotationlmao .45s linear infinite forwards; transition: 0.2s;"
+                class="fas fa-spinner-third"></i>
+        </div>
+        <br><br>
+        <span class="online-users"><b id="user-count">0</b> users currently online</span>
+    </div>
+
+    <div class="toast-container fixed right-4 top-4 w-1/4">
+    </div>
+
+    <div class="toast-container"></div>
+
+    <iframe id="contentFrame"></iframe>
+
+    <div class="settings-container settings-hidden">
+        <div class="container">
+            <div class="settings-sidebar vflex">
+                <div class="settings-section" style="background: var(--bg-3);" onclick="switchSettingsPage('general')"
+                    data-target="general">
+                    <i class="far fa-cog"></i>
+                    General
+                </div>
+                <div class="settings-section" onclick="switchSettingsPage('gaming')" data-target="gaming">
+                    <i class="far fa-gamepad-modern"></i>
+                    Gaming
+                </div>
+                <div class="settings-section" onclick="switchSettingsPage('cloaking')" data-target="cloaks">
+                    <i class="far fa-hood-cloak"></i>
+                    Cloaking
+                </div>
+                <div class="settings-section" onclick="switchSettingsPage('proxy')" data-target="proxy">
+                    <i class="far fa-globe"></i>
+                    Proxy
+                </div>
+                <div class="settings-section" onclick="switchSettingsPage('info')" data-target="info">
+                    <i class="far fa-info-circle"></i>
+                    Info
+                </div>
+                <div class="settings-section" onclick="switchSettingsPage('updates')" data-target="info">
+                    <i class="far fa-bell-on"></i>
+                    Updates
+                </div>
+            </div>
+
+            <div class="settings-content-container">
+                <div id="settings-general" class="settings-page settings-active">
+                    <h2>Theme</h2>
+                    <p>The color scheme used across the whole site. Some changes might not happen instantly, so refresh
+                        to see those take place.</p>
+                    <div class="theme-selector">
+                        <div class="theme-selected"></div>
+                        <div class="theme-options">
+
+                        </div>
+                    </div>
+
+                    <h2>Fog</h2>
+                    <p>Choose to enable or disable Vanta fog, which might help optimize the website.</p>
+                    <!-- From Uiverse.io by Galahhad -->
+                    <label class="switch">
+                        <input id="pjs-toggle" checked="" onchange="updatePJS()" type="checkbox">
+                        <div class="slider">
+                            <div class="circle">
+                                <svg class="cross" xml:space="preserve" style="enable-background:new 0 0 512 512"
+                                    viewBox="0 0 365.696 365.696" y="0" x="0" height="6" width="6"
+                                    xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <g>
+                                        <path data-original="#000000" fill="currentColor"
+                                            d="M243.188 182.86 356.32 69.726c12.5-12.5 12.5-32.766 0-45.247L341.238 9.398c-12.504-12.503-32.77-12.503-45.25 0L182.86 122.528 69.727 9.374c-12.5-12.5-32.766-12.5-45.247 0L9.375 24.457c-12.5 12.504-12.5 32.77 0 45.25l113.152 113.152L9.398 295.99c-12.503 12.503-12.503 32.769 0 45.25L24.48 356.32c12.5 12.5 32.766 12.5 45.247 0l113.132-113.132L295.99 356.32c12.503 12.5 32.769 12.5 45.25 0l15.081-15.082c12.5-12.504 12.5-32.77 0-45.25zm0 0">
+                                        </path>
+                                    </g>
+                                </svg>
+                                <svg class="checkmark" xml:space="preserve" style="enable-background:new 0 0 512 512"
+                                    viewBox="0 0 24 24" y="0" x="0" height="10" width="10"
+                                    xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <g>
+                                        <path class="" data-original="#000000" fill="currentColor"
+                                            d="M9.707 19.121a.997.997 0 0 1-1.414 0l-5.646-5.647a1.5 1.5 0 0 1 0-2.121l.707-.707a1.5 1.5 0 0 1 2.121 0L9 14.171l9.525-9.525a1.5 1.5 0 0 1 2.121 0l.707.707a1.5 1.5 0 0 1 0 2.121z">
+                                        </path>
+                                    </g>
+                                </svg>
+                            </div>
+                        </div>
+                    </label>
+                    <br>
+                    <br>
+                    <h2>Custom Cursor</h2>
+                    <p>Enable or disable the ZXS cursor, which could also improve performance.</p>
+                    <!-- From Uiverse.io by Galahhad -->
+                    <label class="switch">
+                        <input id="cursor-toggle" checked="" onchange="updateCur()" type="checkbox">
+                        <div class="slider">
+                            <div class="circle">
+                                <svg class="cross" xml:space="preserve" style="enable-background:new 0 0 512 512"
+                                    viewBox="0 0 365.696 365.696" y="0" x="0" height="6" width="6"
+                                    xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <g>
+                                        <path data-original="#000000" fill="currentColor"
+                                            d="M243.188 182.86 356.32 69.726c12.5-12.5 12.5-32.766 0-45.247L341.238 9.398c-12.504-12.503-32.77-12.503-45.25 0L182.86 122.528 69.727 9.374c-12.5-12.5-32.766-12.5-45.247 0L9.375 24.457c-12.5 12.504-12.5 32.77 0 45.25l113.152 113.152L9.398 295.99c-12.503 12.503-12.503 32.769 0 45.25L24.48 356.32c12.5 12.5 32.766 12.5 45.247 0l113.132-113.132L295.99 356.32c12.503 12.5 32.769 12.5 45.25 0l15.081-15.082c12.5-12.504 12.5-32.77 0-45.25zm0 0">
+                                        </path>
+                                    </g>
+                                </svg>
+                                <svg class="checkmark" xml:space="preserve" style="enable-background:new 0 0 512 512"
+                                    viewBox="0 0 24 24" y="0" x="0" height="10" width="10"
+                                    xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <g>
+                                        <path class="" data-original="#000000" fill="currentColor"
+                                            d="M9.707 19.121a.997.997 0 0 1-1.414 0l-5.646-5.647a1.5 1.5 0 0 1 0-2.121l.707-.707a1.5 1.5 0 0 1 2.121 0L9 14.171l9.525-9.525a1.5 1.5 0 0 1 2.121 0l.707.707a1.5 1.5 0 0 1 0 2.121z">
+                                        </path>
+                                    </g>
+                                </svg>
+                            </div>
+                        </div>
+                    </label>
+                    <br>
+                    <br>
+                </div>
+
+                <div id="settings-gaming" class="settings-page">
+                    <h2>Game Library</h2>
+                    <p>The set of games that the whole site uses! This will automatically reload the games.</p>
+                    <div class="store-selector">
+                        <div class="store-selected"></div>
+                        <div class="store-options">
+
+                        </div>
+                    </div>
+
+                    <h2>Game Overlay</h2>
+                    <p>Enable or disable the game overlay, which provides useful tools while gaming such as a browser,
+                        recording tools, etc. Turn off if you're experiencing performance issues.</p>
+                    <!-- From Uiverse.io by Galahhad -->
+                    <label class="switch">
+                        <input id="overlay-toggle" checked="" onchange="updateOverlaySettings()" type="checkbox">
+                        <div class="slider">
+                            <div class="circle">
+                                <svg class="cross" xml:space="preserve" style="enable-background:new 0 0 512 512"
+                                    viewBox="0 0 365.696 365.696" y="0" x="0" height="6" width="6"
+                                    xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <g>
+                                        <path data-original="#000000" fill="currentColor"
+                                            d="M243.188 182.86 356.32 69.726c12.5-12.5 12.5-32.766 0-45.247L341.238 9.398c-12.504-12.503-32.77-12.503-45.25 0L182.86 122.528 69.727 9.374c-12.5-12.5-32.766-12.5-45.247 0L9.375 24.457c-12.5 12.504-12.5 32.77 0 45.25l113.152 113.152L9.398 295.99c-12.503 12.503-12.503 32.769 0 45.25L24.48 356.32c12.5 12.5 32.766 12.5 45.247 0l113.132-113.132L295.99 356.32c12.503 12.5 32.769 12.5 45.25 0l15.081-15.082c12.5-12.504 12.5-32.77 0-45.25zm0 0">
+                                        </path>
+                                    </g>
+                                </svg>
+                                <svg class="checkmark" xml:space="preserve" style="enable-background:new 0 0 512 512"
+                                    viewBox="0 0 24 24" y="0" x="0" height="10" width="10"
+                                    xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <g>
+                                        <path class="" data-original="#000000" fill="currentColor"
+                                            d="M9.707 19.121a.997.997 0 0 1-1.414 0l-5.646-5.647a1.5 1.5 0 0 1 0-2.121l.707-.707a1.5 1.5 0 0 1 2.121 0L9 14.171l9.525-9.525a1.5 1.5 0 0 1 2.121 0l.707.707a1.5 1.5 0 0 1 0 2.121z">
+                                        </path>
+                                    </g>
+                                </svg>
+                            </div>
+                        </div>
+                    </label>
+
+                    <br><br>
+
+                    <h2>Download Games</h2>
+                    <p>Download all game stores.</p>
+                    <button class="button" style="margin-left: 0;" onclick="toggleDownloadGames()">Download</button>
+
+                    <br><br><br>
+                </div>
+
+                <div id="settings-cloaking" class="settings-page">
+                    <h2>Tab Cloak</h2>
+                    <p>How your tab will appear in history, on filtering extensions, and more.</p>
+                    <div class="decoy-selector">
+                        <div class="decoy-selected"></div>
+                        <div class="decoy-options">
+
+                        </div>
+                    </div>
+
+                    <h2>about:blank</h2>
+                    <p>Create a new about:blank tab to hide Cherri from your history and filter.</p>
+                    <button onclick="
+                        openAB()
+                    " class="button"><i class="ri-external-link-line"></i>&nbsp;Open in about:blank</button>
+                    <br><br>
+                    <h2>Auto Cloak</h2>
+                    <p>If this toggle is switched on, then as soon as the page loads, it will immediately open the
+                        about:blank cloaked page and redirect the main page to Google. Off by default.</p>
+                    <label class="switch">
+                        <input id="cloak-toggle" checked="" onchange="updateABSettings()" type="checkbox">
+                        <div class="slider">
+                            <div class="circle">
+                                <svg class="cross" xml:space="preserve" style="enable-background:new 0 0 512 512"
+                                    viewBox="0 0 365.696 365.696" y="0" x="0" height="6" width="6"
+                                    xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <g>
+                                        <path data-original="#000000" fill="currentColor"
+                                            d="M243.188 182.86 356.32 69.726c12.5-12.5 12.5-32.766 0-45.247L341.238 9.398c-12.504-12.503-32.77-12.503-45.25 0L182.86 122.528 69.727 9.374c-12.5-12.5-32.766-12.5-45.247 0L9.375 24.457c-12.5 12.504-12.5 32.77 0 45.25l113.152 113.152L9.398 295.99c-12.503 12.503-12.503 32.769 0 45.25L24.48 356.32c12.5 12.5 32.766 12.5 45.247 0l113.132-113.132L295.99 356.32c12.503 12.5 32.769 12.5 45.25 0l15.081-15.082c12.5-12.504 12.5-32.77 0-45.25zm0 0">
+                                        </path>
+                                    </g>
+                                </svg>
+                                <svg class="checkmark" xml:space="preserve" style="enable-background:new 0 0 512 512"
+                                    viewBox="0 0 24 24" y="0" x="0" height="10" width="10"
+                                    xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <g>
+                                        <path class="" data-original="#000000" fill="currentColor"
+                                            d="M9.707 19.121a.997.997 0 0 1-1.414 0l-5.646-5.647a1.5 1.5 0 0 1 0-2.121l.707-.707a1.5 1.5 0 0 1 2.121 0L9 14.171l9.525-9.525a1.5 1.5 0 0 1 2.121 0l.707.707a1.5 1.5 0 0 1 0 2.121z">
+                                        </path>
+                                    </g>
+                                </svg>
+                            </div>
+                        </div>
+                    </label>
+                    <br><br>
+                    <h2>Confirm Leave</h2>
+                    <p>This setting is useful if teachers are trying to close your tab. When the tab is closed, it will
+                        show an "Are you sure you want to leave this site?" popup to prevent tab closing.</p>
+                    <label class="switch">
+                        <input id="confirm-leave-toggle" checked="" onchange="updateCLSettings()" type="checkbox">
+                        <div class="slider">
+                            <div class="circle">
+                                <svg class="cross" xml:space="preserve" style="enable-background:new 0 0 512 512"
+                                    viewBox="0 0 365.696 365.696" y="0" x="0" height="6" width="6"
+                                    xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <g>
+                                        <path data-original="#000000" fill="currentColor"
+                                            d="M243.188 182.86 356.32 69.726c12.5-12.5 12.5-32.766 0-45.247L341.238 9.398c-12.504-12.503-32.77-12.503-45.25 0L182.86 122.528 69.727 9.374c-12.5-12.5-32.766-12.5-45.247 0L9.375 24.457c-12.5 12.504-12.5 32.77 0 45.25l113.152 113.152L9.398 295.99c-12.503 12.503-12.503 32.769 0 45.25L24.48 356.32c12.5 12.5 32.766 12.5 45.247 0l113.132-113.132L295.99 356.32c12.503 12.5 32.769 12.5 45.25 0l15.081-15.082c12.5-12.504 12.5-32.77 0-45.25zm0 0">
+                                        </path>
+                                    </g>
+                                </svg>
+                                <svg class="checkmark" xml:space="preserve" style="enable-background:new 0 0 512 512"
+                                    viewBox="0 0 24 24" y="0" x="0" height="10" width="10"
+                                    xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <g>
+                                        <path class="" data-original="#000000" fill="currentColor"
+                                            d="M9.707 19.121a.997.997 0 0 1-1.414 0l-5.646-5.647a1.5 1.5 0 0 1 0-2.121l.707-.707a1.5 1.5 0 0 1 2.121 0L9 14.171l9.525-9.525a1.5 1.5 0 0 1 2.121 0l.707.707a1.5 1.5 0 0 1 0 2.121z">
+                                        </path>
+                                    </g>
+                                </svg>
+                            </div>
+                        </div>
+                    </label>
+                    <br><br><br>
+                </div>
+
+                <div id="settings-proxy" class="settings-page">
+                    <h2>Wisp</h2>
+                    <p>Websocket all content will be transferred through. Make sure the one in use is not blocked, or
+                        else it will not function! <b>The server you use must start with ws(s):// and end with a /.</b>
+                    </p>
+                    <div class="hcontainer">
+                        <input class="wispInput" type="text" placeholder="wss://domain.tld/wisp/">
+                        <button class="button"
+                            onclick="setWisp(document.querySelector('.wispInput').value)">Set</button>
+                    </div>
+                    <br>
+                    <h2>Backend</h2>
+                    <p>The main proxy service. Scramjet is newer but more experimental, while Ultraviolet is older but
+                        less advanced.</p>
+                    <div class="backend-selector">
+                        <div class="backend-selected"></div>
+                        <div class="backend-options">
+
+                        </div>
+                    </div>
+
+                    <h2>Search Engine</h2>
+                    <p>This is the search engine that the proxy will use with search queries.</p>
+                    <div class="search-engine-selector">
+                        <div class="search-engine-selected"></div>
+                        <div class="search-engine-options">
+
+                        </div>
+                    </div>
+
+                    <br><br><br>
+                </div>
+
+                <div id="settings-info" class="settings-page">
+                    <h2>Credits</h2>
+                    <p>
+                        <b style="font-weight: 600;">GN Math</b> - all games <br>
+                        <b style="font-weight: 600;"><a href="https://waves.lat" target="_blank">Waves</a></b> - custom
+                        dropdown, styling
+                        inspiration <br>
+                        <b style="font-weight: 600;">TitaniumNetwork</b> - Ultraviolet <br>
+                        <b style="font-weight: 600;">Mercury Workshop</b> - Libcurl and Scramjet <br>
+                        <b style="font-weight: 600;"><a href="https://github.com/ambr0sial/nova"
+                                target="_blank">Nova</a></b> - movies and TV
+                        source <br>
+                        <b style="font-weight: 600;"><a href="https://zxs.one" target="_blank">ZXS</a></b> - Custom
+                        cursor <br>
+                        <b style="font-weight: 600;">RHW, Terbium, and Anura</b> - Wisp servers <br>
+                        <b style="font-weight: 600;">DevEchoX2</b> - ArrowChat <br>
+                        <b style="font-weight: 600;"><a href="https://techno.pics/" target="_blank">technonyte</a></b> -
+                        Emotional support <br>
+                    </p>
+
+                    <br>
+
+                    <h2>Thank you!</h2>
+                    <p>Thanks for using Cherri! We hope you enjoyed your stay, and maybe star us on the <a
+                            href="https://github.com/x8rr/cherri" target="_blank">repository.</a></p>
+                </div>
+
+                <div id="settings-updates" class="settings-page">
+                    <h2>What's New in Release 1.1.1</h2>
+                    <p class="update-cont">
+                        Tiny patch update.
+                        <br><br>
+                        • Custom cursor toggle <br>
+                        • Small bug fixes and optimizations <br>
+                    </p>
+                </div>
+            </div>
+
+            <p class="version-tag">cherri <a href="https://github.com/x8rr/cherri/releases/latest"
+                    target="_blank">stable v1.1.1</a></p>
+        </div>
+    </div>
+
+    <div class="browser-container">
+        <div class="browser-controls">
+            <div class="tabs">
+                <button class="newtab" onclick="newTab()">
+                    <i class="far fa-plus"></i>
+                </button>
+            </div>
+            <div class="browser-buttons">
+                <div class="hcontainer">
+                    <button onclick="b()">
+                        <i class="far fa-chevron-left"></i>
+                    </button>
+                    <button onclick="f()">
+                        <i class="far fa-chevron-right"></i>
+                    </button>
+                    <button onclick="r()">
+                        <i class="far fa-rotate-right"></i>
+                    </button>
+                    <input type="text" id="searchbar" onkeydown="((e) => {
+                        if (e.key === 'Enter' || e.key === 'enter') {
+                            console.log('hi')
+                            rSearch(this.value.trim())
+                        }
+                    })" placeholder="search anything...">
+                    <button onclick="full()">
+                        <i class="far fa-expand"></i>
+                    </button>
+                    <button onclick="launchEruda()">
+                        <i class="far fa-square-code"></i>
+                    </button>
+                    <button onclick="hideBrowser()">
+                        <i class="far fa-house"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="browser-loading"></div>
+    </div>
+
+    <!--<div id="particles-container"></div>-->
+    <div id="vanta-fog-container"></div>
+
+    <div id="cursor-thank-you-zxs"
+        style="position: fixed; top: 0px; left: 0px; width: 16px; height: 16px; border-radius: 50%; background: color-mix(in srgb, var(--accent) 70%, white 30%); pointer-events: none; z-index: 9999; transform: translate(748px, 592px); transition: width 0.15s, height 0.15s, opacity 0.15s; mix-blend-mode: difference; opacity: 0;">
+    </div>
+
+    <div class="apps-wrapper settings-hidden">
+        <input onkeyup="searchApps(this.value)" type="text" style="font-family: Arial;"
+            placeholder="search through the apps..." id="apps-search"
+            class="h-fit p-4 px-5 w-[975px] bg-[var(--bg-2)] border-none absolute left-1/2 translate-x-[-50%] rounded-2xl transition-all focus:bg-[var(--bg-3)] focus:outline-none ">
+        <br><br><br>
+        <div
+            class="apps-container h-[83%] overflow-y-scroll w-[475px] flex flex-wrap w-7/8 absolute left-1/2 translate-x-[-50%] justify-center">
+            <br>
+        </div>
+        <br>
+    </div>
+
+    <div class="download-wrapper settings-hidden">
+        <div style="text-align: center;">
+            <br>
+            <h1 style="font-size: 23px; margin-bottom: 10px;">Download Games</h1>
+        </div>
+        <div style="text-align: center;">
+            <a href="https://drive.google.com/file/d/1jenQFXTxrgbNqfLYzH7ckVEC_hskECl1/view?usp=sharing"
+                target="_blank">
+                <button class="button">Google Drive 1</button>
+            </a>
+        </div>
+        <br>
+        <p style="opacity: .5; font-size: 14px; font-style: italic; text-align: center; ">more coming before gta 6 twin
+            <br> :broken-heart: :wilted-rose: :low-battery:
+        </p>
+    </div>
+
+    <div class="games-wrapper settings-hidden">
+        <input onkeyup="searchApps(this.value)" type="text" style="font-family: Arial;"
+            placeholder="search through the games..." id="apps-search"
+            class="h-fit p-4 px-5 w-[975px] bg-[var(--bg-2)] border-none absolute left-1/2 translate-x-[-50%] rounded-2xl transition-all focus:bg-[var(--bg-3)] focus:outline-none ">
+        <br><br><br>
+        <div
+            class="games-container h-[83%] overflow-y-scroll w-[475px] flex flex-wrap w-7/8 absolute left-1/2 translate-x-[-50%] justify-center">
+            <br>
+        </div>
+        <br>
+    </div>
+
+    <div class="partners-wrapper settings-hidden">
+        <br>
+        <h1 style="text-align: center; font-size: 35px; color: var(--bright-text); font-weight: 500;">Partners</h1>
+        <br>
+        <div
+            class="partner-container h-[83%] overflow-y-scroll w-[475px] flex flex-wrap w-7/8 absolute left-1/2 translate-x-[-50%] justify-center">
+            <a href="https://prism.onl/" target="_blank" class="app partner-square">
+                <div class="bg-img" style="background: url('/assets/img/partners/prism.png');"></div>
+                <div class="app-title-cont">
+                    <h2 class="app-title-h2">Prism</h2>
+                </div>
+            </a>
+
+            <a href="https://github.com/Galaxy-Vortex/" target="_blank" class="app partner-square">
+                <div class="bg-img" style="background: url('/assets/img/partners/hydra.png');"></div>
+                <div class="app-title-cont">
+                    <h2 class="app-title-h2">Hydra Network</h2>
+                </div>
+            </a>
+        </div>
+    </div>
+
+    <button id="reset-theme" onclick="resetTheme()">CLICK HERE TO RESET YOUR THEME!</button>
+
+    <!-- site version -->
+    <cherriattr version="s1.1.1"></cherriattr>
+
+    <script src="/assets/js/dropdown.js"></script>
+    <script>
+        const pjsOn = localStorage.getItem("cherri_particlesOn") ?? "yes"
+
+        if (pjsOn === "yes") {
+            particlesJS.load("particles-container", "/assets/json/config/particles.json", () => {
+                console.log("callback - particlsjs loaded")
+            })
+        } else {
+            console.log("ParticlesJS is off!")
+        }
+    </script>
+    <script>
+        const selectedStore = localStorage.getItem("cherri_gameStore") ?? "Classplay"
+
+        let res
+        let data
+
+        async function gj(file) {
+            res = await fetch(`/assets/json/${file}.json`);
+            data = await res.json()
+        }
+
+        // welcome to my super bad json loader
+        // time wasted on this:
+        // 0.25 hour(s)
+
+        function load(file, type, functionName, toRun, additions) {
+            gj(file).then(() => {
+                console.log(
+                    "%ccherri" + "%c recieved json data!",
+                    "color: white; background: linear-gradient(to bottom right, #040c16, #000000); border-radius: 5px; font-weight: bold; padding: 6px; font-family: sans-serif;",
+                    "color: white; background: transparent; border-radius: 0px; padding: 0px;"
+                )
+            }).then(() => {
+                data.forEach(item => {
+                    const aCont = document.querySelector(`.${type}-container`)
+                    const newAppContainer = document.createElement("div")
+
+                    newAppContainer.classList.add("app")
+                    newAppContainer.setAttribute("onclick", `toggle${functionName}();${toRun}('${additions}${item.url}'); console.log("asdflkjgasdfkljhgasdfkhgasfjkhgasfjkhgsdfgjh")`)
+                    newAppContainer.innerHTML = `
+                        <div class="bg-img" data-bg="${item.img}"></div>
+                        <div class="app-title-cont">
+                            <h2 class="app-title-h2">${item.name}</h2>
+                        </div>
+                    `
+
+                    aCont.appendChild(newAppContainer)
+                })
+            }).then(() => {
+                observe()
+            })
+        }
+
+        const bgO = new IntersectionObserver(cards => {
+            cards.forEach(c => {
+                if (c.isIntersecting) {
+                    const el = c.target
+                    el.style.backgroundImage = `url('${el.dataset.bg}')`
+                    bgO.unobserve(el)
+                }
+            })
+        })
+
+        function observe() {
+            document.querySelectorAll(".bg-img[data-bg]").forEach(el => bgO.observe(el))
+        }
+
+        load("apps", "apps", "Apps", "rSearch", "")
+        load(selectedStore.toLowerCase(), "games", "Games", "navTo", "play.html?launch=")
+
+        document.addEventListener("DOMContentLoaded", observe)
+
+        document.addEventListener("storeUpdated", (e) => {
+            const newStore = e.detail.toLowerCase()
+            const container = document.querySelector(".games-container")
+
+            container.innerHTML = ''
+            load(newStore, "games", "Games", "navTo", "play.html?launch=")
+        })
+
+        function searchApps(term) {
+            const apps = document.querySelectorAll(".app")
+            apps.forEach((app) => {
+                if (!app.querySelector("h2").textContent.toLowerCase().includes(term.toLowerCase())) {
+                    app.style.display = "none"
+                } else {
+                    app.style.display = "block"
+                }
+            })
+        }
+    </script>
+    <script>
+        async function registerSW() {
+            if ("serviceWorker" in navigator) {
+                await navigator.serviceWorker.register("/uv/sw.js").then(() => {
+                    console.log(
+                        "%ccherri" + "%c UV sw registered!",
+                        "color: white; background: linear-gradient(to bottom right, #040c16, #000000); border-radius: 5px; font-weight: bold; padding: 6px; font-family: sans-serif;",
+                        "color: white; background: transparent; border-radius: 0px; padding: 0px;"
+                    );
+                    setTimeout(() => {
+                        showToast("success", "Ultraviolet worker initialized!", "fas fa-check-circle")
+                        console.log("shown toast")
+                    }, 1000)
+                }).catch(e => {
+                    console.log("Error registering service worker (UV): " + e)
+                    showToast("error", "Failed to register service worker", "fas fa-times-circle")
+                });
+
+                await navigator.serviceWorker.register("/sw.js").then(() => {
+                    console.log(
+                        "%ccherri" + "%c SJ sw registered!",
+                        "color: white; background: linear-gradient(to bottom right, #040c16, #000000); border-radius: 5px; font-weight: bold; padding: 6px; font-family: sans-serif;",
+                        "color: white; background: transparent; border-radius: 0px; padding: 0px;"
+                    );
+                    setTimeout(() => {
+                        showToast("success", "Scramjet worker initialized", "fas fa-check-circle")
+                        console.log("shown toast")
+                    }, 1000)
+                }).catch(e => {
+                    console.log("Error registering service worker (SJ): " + e)
+                    showToast("error", "Failed to register service worker", "fas fa-times-circle")
+                });
+
+                setTimeout(() => {
+                    document.querySelector(".fa-spinner-third").style.opacity = 0
+                    document.querySelector(".fa-spinner-third").style.pointerEvents = "none"
+                    document.querySelector("#homesearch").disabled = false
+                    document.querySelector("#homesearch").placeholder = "search anything..."
+                }, 1000)
+            }
+        }
+
+        window.addEventListener("load", () => {
+            registerSW();
+            lucide.createIcons();
+        });
+
+        const contentFrame = document.getElementById('contentFrame');
+        const homeContent = document.getElementById('homeContent');
+        const navLinks = document.querySelectorAll('nav a[data-page]');
+
+        function navTo(l) {
+            if (l.includes("home")) {
+                contentFrame.remove();
+                document.querySelector("nav").style.display = "block"
+                setTimeout(() => {
+                    document.querySelector("nav").style.opacity = "1"
+                }, 3)
+                homeContent.style.display = "block";
+                document.querySelector("#gohomeblock").style.display = "none"
+            } else if (l === "vms") {
+                document.querySelector("nav").style.opacity = 0
+                setTimeout(() => {
+                    document.querySelector("nav").style.display = "none"
+                }, 350)
+                document.querySelector("#gohomeblock").style.display = "block"
+                homeContent.style.display = "none";
+                contentFrame.style.display = "block";
+                contentFrame.src = `/pages/${l}.html`
+            } else {
+                if (!document.body.contains(contentFrame)) {
+                    document.body.appendChild(contentFrame);
+                }
+                const overlayOn = localStorage.getItem("cherri_useOverlay") ?? "yes"
+                if (overlayOn === "yes" && l.includes("/stores/")) {
+                    document.querySelector("nav").style.opacity = 0
+                    setTimeout(() => {
+                        document.querySelector("nav").style.display = "none"
+                    }, 350)
+                }
+                homeContent.style.display = "none";
+                contentFrame.style.display = "block";
+                contentFrame.src = l.includes("/stores/") ? `/pages/${l}` : `/pages/${l}.html`;
+            }
+        }
+    </script>
+    <script>
+        const inp = document.getElementById("searchbar")
+
+        inp.addEventListener("keydown", e => {
+            if (e.key === "Enter") {
+                nav(inp.value)
+                console.log("i")
+            }
+        })
+    </script>
+    <script defer>
+        window.addEventListener("load", () => {
+            const frames = document.querySelectorAll(".viewframe")
+            const activeFrames = document.querySelectorAll(".active")
+
+            activeFrames.forEach(frame => {
+                frame.classList.remove("active")
+            })
+        })
+    </script>
+    <script defer>
+        const settingsHolder = document.querySelector(".settings-container")
+        const settingsViewframe = document.querySelector(".settings-content-container")
+
+        const appsHolder = document.querySelector(".apps-wrapper")
+        const gamesHolder = document.querySelector(".games-wrapper")
+        const downloadHolder = document.querySelector(".download-wrapper")
+        const partnerHolder = document.querySelector(".partners-wrapper")
+
+        const general = document.querySelector("#settings-general")
+        const cloaking = document.querySelector("#settings-cloaking")
+        const proxy = document.querySelector("#settings-proxy")
+        const cookes = document.querySelector("#settings-cookies")
+        const info = document.querySelector("#settings-info")
+
+        const allPages = document.querySelectorAll(".settings-page")
+        const allButtons = document.querySelectorAll(".settings-section")
+
+        function switchSettingsPage(target) {
+            allPages.forEach(page => {
+                page?.classList.remove("settings-active")
+                document.querySelector(`#settings-${target}`)?.classList.add("settings-active")
+            })
+        }
+
+        allButtons.forEach(button => {
+            button.addEventListener("click", () => {
+                allButtons.forEach(btn => {
+                    btn.style.background = ""
+                    button.style.background = "var(--bg-3)"
+                })
+            })
+        })
+
+        function toggleSettings() {
+            if (settingsHolder.classList.contains("settings-hidden")) {
+                if (appsHolder.classList.contains("settings-shown")) {
+                    toggleApps()
+                } else if (gamesHolder.classList.contains("settings-shown")) {
+                    toggleGames()
+                } else if (partnerHolder.classList.contains("settings-shown")) {
+                    togglePartners()
+                } else if (downloadHolder.classList.contains("settings-shown")) {
+                    toggleDownloadGames()
+                }
+                const newBlurOverlay = document.createElement("div")
+                newBlurOverlay.classList.add("blurOverlay")
+                document.body.appendChild(newBlurOverlay)
+                newBlurOverlay.addEventListener("click", () => {
+                    toggleSettings()
+                })
+                settingsHolder.classList.remove("settings-hidden")
+                settingsHolder.classList.add("settings-shown")
+            } else {
+                settingsHolder.classList.remove("settings-shown")
+                settingsHolder.classList.add("settings-hidden")
+                const newBlurOverlay = document.querySelector(".blurOverlay")
+                newBlurOverlay.remove()
+            }
+        }
+        function toggleApps() {
+            if (appsHolder.classList.contains("settings-hidden")) {
+                if (settingsHolder.classList.contains("settings-shown")) {
+                    toggleSettings()
+                } else if (gamesHolder.classList.contains("settings-shown")) {
+                    toggleGames()
+                } else if (partnerHolder.classList.contains("settings-shown")) {
+                    togglePartners()
+                } else if (downloadHolder.classList.contains("settings-shown")) {
+                    toggleDownloadGames()
+                }
+                const newBlurOverlay = document.createElement("div")
+                newBlurOverlay.classList.add("blurOverlay")
+                document.body.appendChild(newBlurOverlay)
+                newBlurOverlay.addEventListener("click", () => {
+                    toggleApps()
+                })
+                appsHolder.classList.remove("settings-hidden")
+                appsHolder.classList.add("settings-shown")
+                console.log("Apps toggled.")
+            } else {
+                appsHolder.classList.remove("settings-shown")
+                appsHolder.classList.add("settings-hidden")
+                const newBlurOverlay = document.querySelector(".blurOverlay")
+                newBlurOverlay.remove()
+            }
+        }
+
+        function toggleDownloadGames() {
+            if (downloadHolder.classList.contains("settings-hidden")) {
+                if (appsHolder.classList.contains("settings-shown")) {
+                    toggleApps()
+                } else if (gamesHolder.classList.contains("settings-shown")) {
+                    toggleGames()
+                } else if (partnerHolder.classList.contains("settings-shown")) {
+                    togglePartners()
+                } else if (settingsHolder.classList.contains("settings-shown")) {
+                    toggleSettings()
+                }
+                const newBlurOverlay = document.createElement("div")
+                newBlurOverlay.classList.add("blurOverlay")
+                document.body.appendChild(newBlurOverlay)
+                newBlurOverlay.addEventListener("click", () => {
+                    toggleDownloadGames()
+                })
+                downloadHolder.classList.remove("settings-hidden")
+                downloadHolder.classList.add("settings-shown")
+                console.log("Apps toggled.")
+            } else {
+                downloadHolder.classList.remove("settings-shown")
+                downloadHolder.classList.add("settings-hidden")
+                const newBlurOverlay = document.querySelector(".blurOverlay")
+                newBlurOverlay.remove()
+            }
+        }
+
+        function toggleGames() {
+            if (gamesHolder.classList.contains("settings-hidden")) {
+                if (appsHolder.classList.contains("settings-shown")) {
+                    toggleApps()
+                } else if (settingsHolder.classList.contains("settings-shown")) {
+                    toggleSettings()
+                } else if (partnerHolder.classList.contains("settings-shown")) {
+                    togglePartners()
+                } else if (downloadHolder.classList.contains("settings-shown")) {
+                    toggleDownloadGames()
+                }
+                const newBlurOverlay = document.createElement("div")
+                newBlurOverlay.classList.add("blurOverlay")
+                document.body.appendChild(newBlurOverlay)
+                newBlurOverlay.addEventListener("click", () => {
+                    console.log("clicked")
+                    toggleGames()
+                })
+                gamesHolder.classList.remove("settings-hidden")
+                gamesHolder.classList.add("settings-shown")
+            } else {
+                gamesHolder.classList.remove("settings-shown")
+                gamesHolder.classList.add("settings-hidden")
+                const newBlurOverlay = document.querySelector(".blurOverlay")
+                newBlurOverlay.remove()
+            }
+        }
+
+        function togglePartners() {
+            if (partnerHolder.classList.contains("settings-hidden")) {
+                if (appsHolder.classList.contains("settings-shown")) {
+                    toggleApps()
+                } else if (settingsHolder.classList.contains("settings-shown")) {
+                    toggleSettings()
+                } else if (gamesHolder.classList.contains("settings-shown")) {
+                    toggleGames()
+                } else if (downloadHolder.classList.contains("settings-shown")) {
+                    toggleDownloadGames()
+                }
+                const newBlurOverlay = document.createElement("div")
+                newBlurOverlay.classList.add("blurOverlay")
+                document.body.appendChild(newBlurOverlay)
+                newBlurOverlay.addEventListener("click", () => {
+                    console.log("clicked")
+                    togglePartners()
+                })
+                partnerHolder.classList.remove("settings-hidden")
+                partnerHolder.classList.add("settings-shown")
+            } else {
+                partnerHolder.classList.remove("settings-shown")
+                partnerHolder.classList.add("settings-hidden")
+                const newBlurOverlay = document.querySelector(".blurOverlay")
+                newBlurOverlay.remove()
+            }
+        }
+
+        function rSearch(input) {
+            const aw = document.querySelector(".apps-wrapper")
+
+            if (aw.classList.contains("settings-shown")) {
+                toggleApps()
+            }
+
+            let url = input;
+            if (!url.includes(".") || url.includes(" ")) {
+                url = url;
+            } else {
+                if (!url.startsWith("http://") && !url.startsWith("https://")) {
+                    url = "https://" + url;
+                }
+            }
+
+            const b = document.querySelector(".browser-container")
+            const frames = document.querySelectorAll(".viewframe")
+
+            b.style.opacity = 1
+            b.style.pointerEvents = "all"
+
+            frames.forEach(frame => {
+                frame.style.opacity = 1
+                frame.style.pointerEvents = "all"
+            })
+
+            console.log("rSearch")
+            newTab()
+            nav(url)
+            switchTab(aTab)
+        }
+    </script>
+    <script defer>
+        window.addEventListener("DOMContentLoaded", () => {
+            console.log("cherri: dom content loaded")
+            const homesearch = document.getElementById("homesearch");
+
+            homesearch.addEventListener("keydown", (e) => {
+                console.log("askjdfaskhjlgdf")
+                if (e.key === "Enter") {
+                    rSearch(homesearch?.value.trim());
+                    console.log("rsearching")
+                }
+                console.log("check")
+            });
+        })
+    </script>
+    <script defer>
+        const pjstoggle = document.getElementById("pjs-toggle")
+        const pcont = document.getElementById("vanta-fog-container")
+        const pjsIsOn = localStorage.getItem("cherri_particlesOn") ?? "yes"
+
+        function updatePJS() {
+            if (pjstoggle.checked) {
+                console.log("checked")
+                const newpjs = document.createElement("div")
+                newpjs.setAttribute("id", "vanta-fog-container")
+                document.body.append(newpjs)
+                localStorage.setItem("cherri_particlesOn", "yes")
+                VANTA.FOG({
+                    el: "#vanta-fog-container",
+                    mouseControls: true,
+                    touchControls: true,
+                    gyroControls: false,
+                    minHeight: 200.00,
+                    minWidth: 200.00,
+                    highlightColor: hexToNumber(cssVar("--accent")),
+                    midtoneColor: hexToNumber(cssVar("--bg-2")),
+                    lowlightColor: hexToNumber(cssVar("--bg-5")),
+                    baseColor: hexToNumber(cssVar("--bg")),
+                    blurFactor: 0.90,
+                    speed: 1
+                })
+                showToast("success", "Vanta is now on!", "fas fa-check-circle")
+            } else {
+                const newpcont = document.getElementById("vanta-fog-container")
+                newpcont.remove()
+                console.log("unchecked")
+                localStorage.setItem("cherri_particlesOn", "no")
+                showToast("success", "Vanta is now off!", "fas fa-check-circle")
+            }
+        }
+
+        if (pjsIsOn === "yes") {
+            pjstoggle.checked = true
+        } else {
+            pjstoggle.checked = false
+        }
+    </script>
+    <script defer>
+        const overlayToggle = document.getElementById("overlay-toggle")
+        const overlayIsOn = localStorage.getItem("cherri_useOverlay") ?? "yes"
+
+        function updateOverlaySettings() {
+            if (overlayToggle.checked) {
+                console.log("checked")
+                showToast("success", "Game overlay is now on!", "fas fa-check-circle")
+                localStorage.setItem("cherri_useOverlay", "yes")
+            } else {
+                console.log("unchecked")
+                localStorage.setItem("cherri_useOverlay", "no")
+                showToast("success", "Game overlay is now off!", "fas fa-check-circle")
+            }
+        }
+
+        if (overlayIsOn === "yes") {
+            overlayToggle.checked = true
+        } else {
+            overlayToggle.checked = false
+        }
+    </script>
+    <script defer>
+        const cherriAttr = document.querySelector("cherriattr")
+        const siteVersion = cherriAttr.getAttribute("version")
+        const savedVer = localStorage.getItem("cherri_siteVersion") ?? ""
+
+        window.addEventListener("DOMContentLoaded", () => {
+            if (savedVer === null || !savedVer) {
+                showToast("success", "Welcome to Cherri!", "fas fa-hand-wave")
+                localStorage.setItem("cherri_siteVersion", siteVersion)
+            } else if (savedVer !== siteVersion) {
+                showToast("success", "Cherri was updated! Check settings for more info.", "fas fa-check-circle")
+                localStorage.setItem("cherri_siteVersion", siteVersion)
+            }
+        })
+
+        function resetTheme() {
+            localStorage.setItem("cherri_theme", "default")
+            window.location.reload()
+        }
+
+        function openAB() {
+            if (window.self !== window.top) return
+
+            const win = window.open()
+            const url = window.location.href
+            const iframe = win.document.createElement('iframe')
+            iframe.style.width = '100vw'
+            iframe.style.height = '100vh'
+            iframe.style.border = 'none'
+            win.document.body.style.margin = '0'
+            iframe.src = url
+            win.document.body.appendChild(iframe)
+            window.location.href = "https://google.com/"
+        }
+
+        const abToggle = document.getElementById("cloak-toggle")
+        const abOn = localStorage.getItem("cherri_autoAB") ?? "no"
+
+        function updateABSettings() {
+            if (abToggle.checked) {
+                console.log("checked")
+                showToast("success", "Auto cloaking is now on!", "fas fa-check-circle")
+                localStorage.setItem("cherri_autoAB", "yes")
+            } else {
+                console.log("unchecked")
+                localStorage.setItem("cherri_autoAB", "no")
+                showToast("success", "Auto cloaking is now off!", "fas fa-check-circle")
+            }
+        }
+
+        if (abOn === "yes") {
+            abToggle.checked = true
+        } else {
+            abToggle.checked = false
+        }
+
+        if (localStorage.getItem("cherri_autoAB") === "yes") {
+            openAB()
+        }
+
+        const confirmLeaveOn = localStorage.getItem("cherri_confirmLeave") ?? "no"
+        const confirmLeaveToggle = document.getElementById("confirm-leave-toggle")
+
+        if (confirmLeaveOn === "yes") {
+            confirmLeaveToggle.checked = true
+        } else {
+            confirmLeaveToggle.checked = false
+        }
+
+        function updateCLSettings() {
+            if (confirmLeaveToggle.checked) {
+                console.log("checked")
+                showToast("success", "Confirm leave is now on!", "fas fa-check-circle")
+                localStorage.setItem("cherri_confirmLeave", "yes")
+            } else {
+                console.log("unchecked")
+                localStorage.setItem("cherri_confirmLeave", "no")
+                showToast("success", "Confirm leave is now off!", "fas fa-check-circle")
+            }
+        }
+
+        window.addEventListener("beforeunload", function (e) {
+            if (localStorage.getItem("cherri_confirmLeave") === "yes") {
+                e.preventDefault()
+                e.returnValue = ""
+            }
+        })
+
+        const cursorOn = localStorage.getItem("cherri_customCursor") ?? "yes"
+        const cursorToggle = document.getElementById("cursor-toggle")
+
+        if (cursorOn === "yes") {
+            cursorToggle.checked = true
+        } else {
+            cursorToggle.checked = false
+        }
+
+        function updateCur() {
+            if (cursorToggle.checked) {
+                console.log("checked")
+                showToast("success", "Custom cursor is now on!", "fas fa-check-circle")
+                localStorage.setItem("cherri_customCursor", "yes")
+                cursor()
+            } else {
+                console.log("unchecked")
+                document.querySelectorAll("#cursor-thank-you-zxs").forEach(el => el.remove())
+                document.querySelectorAll("#cursor-style-zxs").forEach(el => el.remove())
+                if (animationId) cancelAnimationFrame(animationId)
+                if (mouseMoveHandler) window.removeEventListener("mousemove", mouseMoveHandler)
+                if (messageHandler) window.removeEventListener("message", messageHandler)
+                if (hideInterval) clearInterval(hideInterval)
+                localStorage.setItem("cherri_customCursor", "no")
+                showToast("success", "Custom cursor is now off!", "fas fa-check-circle")
+            }
+        }
+
+        window.addEventListener("beforeunload", function (e) {
+            if (localStorage.getItem("cherri_confirmLeave") === "yes") {
+                e.preventDefault()
+                e.returnValue = ""
+            }
+        })
+
+        window.addEventListener("DOMContentLoaded", () => {
+            const params = new URLSearchParams(window.location.search)
+            if (!params.get("launch")) {
+                window.location.href = "/start.html"
+            }
+            if (params.get("page") && params.get("launch")) {
+                navTo(params.get("page"))
+            }
+        })
+    </script>
+    <script>
+        const styles = getComputedStyle(document.documentElement)
+
+        function cssVar(name) {
+            return styles.getPropertyValue(name).trim()
+        }
+
+        function hexToNumber(hex) {
+            return parseInt(hex.replace("#", ""), 16)
+        }
+
+        const useFog = localStorage.getItem("cherri_particlesOn") ?? "yes"
+        if (useFog === "yes") {
+            VANTA.FOG({
+                el: "#vanta-fog-container",
+                mouseControls: true,
+                touchControls: true,
+                gyroControls: false,
+                minHeight: 200.00,
+                minWidth: 200.00,
+                highlightColor: hexToNumber(cssVar("--accent")),
+                midtoneColor: hexToNumber(cssVar("--bg-2")),
+                lowlightColor: hexToNumber(cssVar("--bg-5")),
+                baseColor: hexToNumber(cssVar("--bg")),
+                blurFactor: 0.90,
+                speed: 1
+            })
+        }
+
+        async function getActiveUsers() {
+            const endpoint = "https://api.x8r.dev/api/umami"
+            const res = await fetch(endpoint)
+            const data = await res.json()
+
+            console.log("CURRENT VISITORS:" + data.visitors)
+            document.getElementById("user-count").textContent = data.visitors
+        }
+
+        getActiveUsers()
+
+        setInterval(() => {
+            getActiveUsers()
+        }, 30000)
+
+        function setWisp(i) {
+            if (!i) return
+
+            console.log("Wisp update started")
+
+            if (i === "") {
+                showToast("error", "Wisp cannot be empty!", "fas fa-times-circle")
+                return
+            }
+            console.log("Wisp checks passed (1/4)")
+
+            if (!i.endsWith("/")) {
+                showToast("error", "Wisp server must end with a slash!", "fas fa-times-circle")
+                return
+            }
+            console.log("Wisp checks passed (2/4)")
+
+            if (!i.startsWith("wss://") && !i.startsWith("ws://")) {
+                showToast("error", "Wisp server must start with ws(s)://", "fas fa-times-circle")
+                return
+            }
+            console.log("Wisp checks passed (3/4)")
+
+            if (i.includes(" ")) {
+                showToast("error", "Wisp server must not contain space!", "fas fa-times-circle")
+                return
+            }
+            console.log("Wisp checks passed (4/4)")
+
+            localStorage.setItem("cherri_wispUrl", i)
+            showToast("success", "Wisp server updated! Do<b> ⌘⇧R</b>  to see changes.", "fas fa-check-circle")
+            console.log("Wisp updated", i)
+        }
+
+    </script>
+</body>

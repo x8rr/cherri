@@ -1,0 +1,28 @@
+{"frames": {
+
+"KingGhost_0001.png":
+{
+	"frame": {"x":5,"y":5,"w":335,"h":416},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":62,"y":37,"w":335,"h":416},
+	"sourceSize": {"w":488,"h":488}
+},
+"KingGhost_0002.png":
+{
+	"frame": {"x":5,"y":427,"w":335,"h":416},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":62,"y":37,"w":335,"h":416},
+	"sourceSize": {"w":488,"h":488}
+}},
+"meta": {
+	"app": "https://www.codeandweb.com/texturepacker",
+	"version": "1.0",
+	"image": "KingGhost.png",
+	"format": "RGBA8888",
+	"size": {"w":512,"h":1024},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:95ed1ff2fa55c61a6ed81f21d0c246b3:d3bd66759a799b2a6a00bc0fbd8174ec:831237c2ffe71ff9426dc4fbb143b534$"
+}
+}

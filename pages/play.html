@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>cherri | play</title>
+    <link rel="shortcut icon" href="/assets/img/fav.png" type="image/x-icon" id="tabIcon">
+    <link rel="stylesheet" href="/assets/css/colors.css" id="css-theme-link">
+    <link rel="stylesheet" href="/assets/css/elements.css">
+    <link rel="stylesheet" href="/assets/css/font.css">
+    <link rel="stylesheet" href="/assets/icons/fonts/remixicon.css">
+    <script src="/assets/js/lib/particles.js"></script>
+    <script src="/assets/js/colors.js"></script>
+    <link rel="stylesheet" href="/assets/css/overlay.css">
+</head>
+
+<body style="background: none !important;">
+
+
+
+    <style>
+        #particles-container {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: -1;
+            opacity: 0.5;
+        }
+
+        .container {
+            display: flex;
+        }
+
+        .centerc {
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            position: absolute;
+        }
+
+        h1 {
+            color: var(--bright-text);
+            font-size: 2.5rem;
+        }
+
+        .hcenter {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1000;
+        }
+
+        .app {
+            width: 280px;
+            height: 100px;
+            border-radius: 15px;
+            background: var(--bg-4);
+            border: 1px solid var(--border-4);
+            margin: 10px;
+            transition: outline 0.05s ease, background 0.1s;
+            outline: 0px solid var(--accent);
+            position: relative;
+            z-index: 1;
+        }
+
+        .app:hover {
+            background: var(--bg-3);
+            cursor: pointer;
+        }
+
+        .app img {
+            height: 70px;
+            width: 70px;
+            margin: 15px;
+            border-radius: 10px;
+        }
+
+        .app h2 {
+            color: var(--bright-text);
+            position: relative;
+            top: 0%;
+            transform: translateY(30%);
+            font-size: 20px;
+        }
+
+        .apps-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            width: 90%;
+            z-index: 0;
+        }
+
+        ::-webkit-scrollbar {
+            scrollbar-width: none;
+        }
+
+        #gameframe {
+            width: 95vw;
+            height: 80vh;
+            background: var(--bg-3);
+            border: 1px solid var(--border-4);
+            border-radius: 20px;
+            border-bottom-left-radius: 0;
+            border-bottom-right-radius: 0;
+        }
+
+        .gamecontrols {
+            background: var(--bg-2);
+            height: 60px;
+            width: 95vw;
+            position: relative;
+            top: -4px;
+            border-bottom-left-radius: 20px;
+            border-bottom-right-radius: 20px;
+            border: 1px solid var(--border-4);
+            overflow: hidden;
+        }
+
+        .gamestuff {
+            position: absolute;
+            transform: translate(-50%, -50%);
+            left: 50%;
+            top: 50%;
+            width: fit-content;
+        }
+
+        .gamestuff button {
+            width: 33.35%;
+            border-radius: 0;
+            border: 0;
+            background: transparent;
+            color: white;
+            font-size: 25px;
+            cursor: pointer;
+            text-align: center;
+            height: 100%;
+            transition: 0.2s;
+            margin-right: -2px;
+            margin-left: -2px;
+        }
+
+        .gamestuff button:hover {
+            background: var(--bg-4);
+        }
+
+        #bottom-tip {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            bottom: 5px;
+            font-size: 14px;
+            font-weight: 500;
+            font-style: italic;
+            opacity: .5;
+        }
+
+        .overlay-notice {
+            background: var(--bg-5);
+            color: var(--text);
+            padding: 10px;
+            border: 1px solid var(--border-4);
+            border-radius: 15px;
+            position: fixed;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            opacity: 0;
+            transition: 0.4s;
+            z-index: 3298746986;
+        }
+    </style>
+
+    <div id="particles-container"></div>
+
+    <div class="gamestuff">
+        <iframe frameborder="0" id="gameframe" allowfullscreen></iframe>
+        <div class="gamecontrols">
+            <button onclick="refreshGame()">
+                <i class="ri-restart-line"></i>
+            </button>
+            <button onclick="fullscreenGame()">
+                <i class="ri-fullscreen-line"></i>
+            </button>
+            <button onclick="popoutGame()">
+                <i class="ri-external-link-line"></i>
+            </button>
+        </div>
+    </div>
+
+    <div class="overlay-notice">
+        Press Alt + G to open the Game Overlay
+    </div>
+
+    <div id="gameOverlay" class="">
+        <div class="cherri-info">
+            <span id="currentTime">Loading time...</span>
+            <span class="divider"></span>
+            <span id="temperature">Loading temp...</span>
+            <span class="divider"></span>
+            <span id="sessionTime">Loading session time...</span>
+        </div>
+        <div class="record-widget">
+            <h1>Record</h1>
+            <button id="startRecording" style="margin-left: 0;" onclick="startRecording()">
+                <i class="ri-record-circle-line"></i>
+            </button>
+            <button id="stopRecording" disabled style="margin-right: 0;" onclick="stopRecording()">
+                <i class="ri-stop-fill"></i>
+            </button>
+        </div>
+        <div class="game-controls">
+            <h1>Game Controls</h1>
+            <button style="margin-left: 0;"
+                onclick="document.getElementById('gameframe').src = document.getElementById('gameframe').src">
+                <i class="ri-restart-line"></i>
+            </button>
+            <button onclick="window.open(document.getElementById('gameframe').src, '_blank')">
+                <i class="ri-external-link-line"></i>
+            </button>
+            <button onclick="downloadGame()" id="downloadBtn">
+                <i class="ri-download-line"></i>
+            </button>
+            <button style="margin-right: 0;" onclick="window.location.href = '/'">
+                <i class="ri-door-open-line"></i>
+            </button>
+        </div>
+        <iframe src="/pages/browser-minimum.html" frameborder="0" class="proxy-widget"></iframe>
+    </div>
+
+    <p id="bottom-tip">If a game doesn't work, try popping it out!</p>
+
+    <script>
+        particlesJS.load('particles-container', '/assets/json/config/particles.json', function () {
+            console.log('Particles.js config loaded');
+        });
+    </script>
+
+    <script>
+        particlesJS.load('particles-container', '/assets/json/config/particles.json', function () {
+            console.log('Particles.js config loaded');
+        });
+
+        const ul = document.getElementById("nav-ul")
+
+        document.querySelectorAll("li a").forEach(link => {
+            link.addEventListener("click", function () {
+                document.querySelectorAll("li a").forEach(l => l.classList.remove("active"));
+                this.classList.add("active");
+            });
+        });
+
+        window.addEventListener("keydown", (e) => {
+            if (e.ctrlKey && e.key === "m") {
+                console.log("Key pressed")
+                e.preventDefault()
+                if (!ul.classList.contains("active")) {
+                    ul.classList.add("active")
+                    const blurr = document.createElement("div")
+                    blurr.classList.add("bluroverlay")
+                    document.body.append(blurr)
+                    blurr.addEventListener("click", () => {
+                        blurr.remove()
+                        ul.classList.remove("active")
+                    })
+                } else {
+                    ul.classList.remove("active")
+                    const blurr = document.querySelector(".bluroverlay")
+                    blurr.remove()
+                }
+            }
+        })
+
+        const gameframe = document.getElementById('gameframe');
+        const urlParams = new URLSearchParams(window.location.search);
+        const gameurl = urlParams.get('launch');
+
+        if (gameurl) {
+            gameframe.src = decodeURIComponent(gameurl);
+            gameframe.focus()
+            gameframe.onload = () => {
+                const doc = gameframe.contentDocument
+                const head = doc.head
+
+                const script = doc.createElement("script");
+                script.textContent = `
+                    window.addEventListener("keydown", (e) => {
+                        if (e.altKey && e.code === "KeyG") {
+                            parent.postMessage({ type: "alt-g" }, "*");
+                        }
+                    });
+                `
+
+                head.appendChild(script)
+            }
+        }
+
+        function refreshGame() {
+            gameframe.src = gameframe.src;
+            gameframe.focus();
+        }
+
+        function fullscreenGame() {
+            if (gameframe.requestFullscreen) {
+                gameframe.requestFullscreen();
+            } else if (gameframe.mozRequestFullScreen) {
+                gameframe.mozRequestFullScreen();
+            } else if (gameframe.webkitRequestFullscreen) {
+                gameframe.webkitRequestFullscreen();
+            } else if (gameframe.msRequestFullscreen) {
+                gameframe.msRequestFullscreen();
+            }
+            gameframe.focus();
+        }
+
+        function popoutGame() {
+            window.open(gameframe.src, '_blank');
+            gameframe.focus();
+        }
+
+        const useOverlay = localStorage.getItem("cherri_useOverlay") ?? "yes"
+
+        if (useOverlay === "yes") {
+            initOverlay()
+        }
+
+        function initOverlay() {
+            const controls = document.querySelector(".gamecontrols")
+            const frame = document.querySelector("#gameframe")
+            const overlay = document.getElementById("gameOverlay")
+            const overlayNotice = document.querySelector(".overlay-notice")
+            controls.style.display = "none"
+            document.querySelector("#bottom-tip").style.display = "none"
+            frame.style.height = "100vh"
+            frame.style.width = "100vw"
+            frame.style.border = "none"
+            frame.style.borderRadius = "0"
+            setTimeout(() => {
+                overlayNotice.style.opacity = 1
+            }, 500)
+            setTimeout(() => {
+                overlayNotice.style.opacity = 0
+            }, 3000)
+            window.addEventListener("message", (ev) => {
+                if (ev.data.type === "alt-g") {
+                    if (overlay.classList.contains("active")) {
+                        overlay.classList.remove("active")
+                    } else {
+                        overlay.classList.add("active")
+                    }
+                }
+            });
+            document.addEventListener("keydown", (e) => {
+                if (e.altKey && e.key === "g") {
+                    if (overlay.classList.contains("active")) {
+                        overlay.classList.remove("active")
+                    } else {
+                        overlay.classList.add("active")
+                    }
+                }
+            })
+        }
+
+        async function getTemp() {
+            const loc = await fetch("https://ipapi.co/json/").then(r => r.json());
+            const url = `https://api.open-meteo.com/v1/forecast?latitude=${loc.latitude}&longitude=${loc.longitude}&current_weather=true`;
+            const weather = await fetch(url).then(r => r.json());
+            return weather.current_weather.temperature;
+        }
+
+        getTemp().then(t => {
+            document.getElementById("temperature").textContent = Math.trunc((t * 1.8) + 32) + "°F";
+        });
+
+        function getOSTime() {
+            const now = new Date();
+            return now.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
+        }
+
+        setInterval(getOSTime(), 60000)
+
+        document.getElementById("currentTime").textContent = getOSTime()
+
+        let recorder;
+        let chunks = [];
+
+        async function startRecording() {
+            try {
+                const stream = await navigator.mediaDevices.getDisplayMedia({
+                    video: {
+                        width: { ideal: 1920 },
+                        height: { ideal: 1080 },
+                        frameRate: { ideal: 60 }
+                    },
+                    audio: true
+                });
+                document.getElementById("stopRecording").disabled = false
+                document.getElementById("startRecording").style.background = "var(--accent)"
+
+                recorder = new MediaRecorder(stream);
+
+                recorder.ondataavailable = e => chunks.push(e.data);
+
+                recorder.onstop = async () => {
+                    const blob = new Blob(chunks, { type: "video/mp4" });
+                    chunks = [];
+
+                    stream.getTracks().forEach(track => track.stop());
+
+                    try {
+                        const handle = await window.showSaveFilePicker({
+                            suggestedName: "Cherri_Game_Recording" + Date.now() + ".mp4",
+                            types: [{
+                                description: "Video Files",
+                                accept: { "video/mp4": [".mp4"] }
+                            }]
+                        });
+
+                        const writable = await handle.createWritable();
+                        await writable.write(blob);
+                        await writable.close();
+
+                    } catch (err) {
+                        if (err.name !== "AbortError") {
+                            console.error("Save failed:", err);
+                        }
+                    }
+                };
+
+                recorder.start();
+
+                console.log("Screen recording started");
+                document.getElementById("stopRecording").disabled = false
+                document.getElementById("startRecording").style.pointerEvents = "none"
+
+
+            } catch (err) {
+                console.error("Error:", err);
+            }
+        }
+
+        function stopRecording() {
+            recorder.stop();
+            console.log("STOP.")
+            document.getElementById("stopRecording").disabled = true
+            document.getElementById("startRecording").style.background = "var(--bg-2)"
+            document.getElementById("startRecording").style.pointerEvents = "auto"
+        }
+
+        const sT = document.getElementById("sessionTime")
+        window.addEventListener("DOMContentLoaded", () => {
+            let elapsed = 0
+
+            function format(ms) {
+                let totalSeconds = Math.floor(ms / 1000)
+                let hours = Math.floor(totalSeconds / 3600)
+                let minutes = Math.floor((totalSeconds % 3600) / 60)
+                let seconds = totalSeconds % 60
+
+                hours = hours < 10 ? '0' + hours : hours;
+                minutes = minutes < 10 ? '0' + minutes : minutes;
+                seconds = seconds < 10 ? '0' + seconds : seconds;
+
+                return `${hours}:${minutes}:${seconds}`;
+            }
+
+            setInterval(() => {
+                elapsed = 1000 + elapsed
+                sT.textContent = format(elapsed)
+            }, 1000)
+        })
+
+
+        if (!document.getElementById("gameframe").src.includes("gn-math")) {
+            document.getElementById("downloadBtn").style.display = "none"
+        }
+
+        function downloadGame() {
+            const src = document.getElementById("gameframe").src
+            const download = document.createElement("a")
+            download.href = src
+            download.download = src.replace(`${window.location.origin}/stores/gn-math/`, "")
+            document.body.append(download)
+            download.click()
+            download.remove()
+        }
+    </script>
+    <div id="cursor-thank-you-zxs"
+        style="position: fixed; top: 0px; left: 0px; width: 16px; height: 16px; border-radius: 50%; background: color-mix(in srgb, var(--accent) 70%, white 30%); pointer-events: none; z-index: 9999; transform: translate(748px, 592px); transition: width 0.15s, height 0.15s, opacity 0.15s; mix-blend-mode: difference; opacity: 0;">
+    </div>
+    <script src="/assets/js/cursor.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,60 @@
+{"frames": {
+
+"MRichard_arrest_0001":
+{
+	"frame": {"x":1,"y":1,"w":412,"h":270},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":22,"y":57,"w":412,"h":270},
+	"sourceSize": {"w":755,"h":755}
+},
+"MRichard_arrest_0002":
+{
+	"frame": {"x":1,"y":273,"w":404,"h":250},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":30,"y":76,"w":404,"h":250},
+	"sourceSize": {"w":755,"h":755}
+},
+"MRichard_arrest_0003":
+{
+	"frame": {"x":1,"y":770,"w":398,"h":242},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":36,"y":88,"w":398,"h":242},
+	"sourceSize": {"w":755,"h":755}
+},
+"MRichard_arrest_0004":
+{
+	"frame": {"x":1,"y":1257,"w":395,"h":241},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":38,"y":91,"w":395,"h":241},
+	"sourceSize": {"w":755,"h":755}
+},
+"MRichard_arrest_0005":
+{
+	"frame": {"x":1,"y":1014,"w":398,"h":241},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":36,"y":86,"w":398,"h":241},
+	"sourceSize": {"w":755,"h":755}
+},
+"MRichard_arrest_0006":
+{
+	"frame": {"x":1,"y":525,"w":399,"h":243},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":35,"y":84,"w":399,"h":243},
+	"sourceSize": {"w":755,"h":755}
+}},
+"meta": {
+	"app": "https://www.codeandweb.com/texturepacker",
+	"version": "1.0",
+	"image": "MRichard_arrest.png",
+	"format": "RGBA8888",
+	"size": {"w":414,"h":1499},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:e2693876fd4c32c5204fa6e84d374e75:ad04b95d214960bc3a7b2ca2ef66963b:6388f53e03aba82a37b085f3d2c9dd7f$"
+}
+}

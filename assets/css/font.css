@@ -1,0 +1,152 @@
+@font-face {
+    font-family: onest;
+    src: url("/assets/fonts/onest.ttf");
+}
+
+@font-face {
+    font-family: inter;
+    src: url("/assets/fonts/inter.ttf");
+}
+
+@font-face {
+    font-family: geist;
+    src: url("/assets/fonts/geist.ttf");
+}
+
+@font-face {
+    font-family: lexend;
+    src: url("/assets/fonts/lexend.ttf");
+}
+
+@font-face {
+    font-family: figree;
+    src: url(/assets/fonts/figtree.ttf);
+}
+
+@font-face {
+    font-family: jakarta;
+    src: url(/assets/fonts/jakarta.ttf);
+}
+
+@font-face {
+    font-family: google sans;
+    src: url(/assets/fonts/googlesans.ttf);
+}
+
+@font-face {
+    font-family: gg sans;
+    src: url(/assets/fonts/gg-sans/reg.ttf);
+    font-weight: 400;
+}
+
+@font-face {
+    font-family: gg sans;
+    src: url(/assets/fonts/gg-sans/md.ttf);
+    font-weight: 500;
+}
+
+@font-face {
+    font-family: gg sans;
+    src: url(/assets/fonts/gg-sans/smb.ttf);
+    font-weight: 600;
+}
+
+@font-face {
+    font-family: gg sans;
+    src: url(/assets/fonts/gg-sans/bold.ttf);
+    font-weight: 700;
+}
+
+@font-face {
+    font-family: funnel sans;
+    src: url(/assets/fonts/funnel.ttf);
+}
+
+@font-face {
+    font-family: quicksand;
+    src: url(/assets/fonts/quicksand.ttf);
+}
+
+@font-face {
+    font-family: rubik;
+    src: url(/assets/fonts/rubik.ttf);
+}
+
+@font-face {
+    font-family: manrope;
+    src: url(/assets/fonts/manrope.ttf);
+}
+
+@font-face {
+    font-family: sora;
+    src: url(/assets/fonts/sora.ttf);
+}
+
+@font-face {
+    font-family: space grotesk;
+    src: url(/assets/fonts/spacegrotesk.ttf);
+}
+
+@font-face {
+    font-family: interotf;
+    src: url(/assets/fonts/inter.otf);
+}
+
+@font-face {
+    font-family: sfc;
+    src: url(/assets/fonts/sfc/SFCompactText-Light.otf);
+    font-weight: 300;
+}
+
+@font-face {
+    font-family: sfc;
+    src: url(/assets/fonts/sfc/SFCompactText-Regular.otf);
+    font-weight: 400;
+}
+
+@font-face {
+    font-family: sfc;
+    src: url(/assets/fonts/sfc/SFCompactText-Medium.otf);
+    font-weight: 500;
+}
+
+@font-face {
+    font-family: sfc;
+    src: url(/assets/fonts/sfc/SFCompactText-Semibold.otf);
+    font-weight: 600;
+}
+
+@font-face {
+    font-family: sfc;
+    src: url(/assets/fonts/sfc/SFCompactText-Bold.otf);
+    font-weight: 700;
+}
+
+@font-face {
+    font-family: sfc;
+    src: url(/assets/fonts/sfc/SFCompactText-Heavy.otf);
+    font-weight: 900;
+}
+
+* {
+    font-family: sfc, sans-serif;
+}
+
+/*
+:root {
+    font-feature-settings:
+        "tnum" 1,
+        "zero" 1,
+        "cv01" 1,
+        "cv09" 1,
+        "cv02" 1,
+        "cv03" 1,
+        "cv04" 1,
+        "ss08" 1,
+        "dlig" 1,
+        "cv06" 1,
+        "cv10" 1,
+        "cv11" 1,
+        "cv13" 1;
+}
+*/
